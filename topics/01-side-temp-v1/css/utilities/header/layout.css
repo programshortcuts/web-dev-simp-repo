@@ -1,0 +1,21 @@
+body {
+    /* overflow-x: hidden; */
+}
+.page-header.grid {
+    .box {
+        display: flex;
+        align-items: center;
+    }
+    .box a {
+        display: block;
+        
+    }
+}
+
+.main-container{
+    display: flex;
+}
+.main-container > .main-content-container{
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
