@@ -1,0 +1,32 @@
+/* main.css */
+
+@import url('step-txt-lesson-codeColor.css');
+@import url('responsive.css');
+@import url('dark-mode-colorCode.css');
+/* media */
+@import url('media/images.css');
+/* utilities */
+@import url('utilities/borders.css');
+@import url('utilities/codeColors.css');
+@import url('utilities/colors.css');
+@import url('utilities/display.css');
+@import url('utilities/effects.css');
+@import url('utilities/list.css');
+@import url('utilities/sizing.css');
+@import url('utilities/spacing.css');
+@import url('utilities/text.css');
+@import url('utilities/position.css');
+@import url('utilities/layout.css');
+@import url('utilities/zIndex.css');
+/* ui */
+@import url('ui/toggle-side-bar.css');
+@import url('ui/toggle-img-sizes.css');
+@import url('ui/copyCode.css');
+@import url('ui/popup-letterNav.css');
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+

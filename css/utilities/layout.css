@@ -1,0 +1,62 @@
+/* layout.css */
+.page-wrapper{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+.page-wrapper > .page-header {
+    display: flex;
+    .page-header-links{
+        display: flex;    
+        flex-basis: 80%;
+    }
+    .page-header-links > a {
+        display: inline-flex;
+        flex-basis: 33%;
+        height: 100%;
+        flex-grow: 1;
+        justify-content: center;
+        align-items: center;
+    }
+    .page-header-links>.header-links-col {
+        display: flex;
+        flex-direction: column;
+        flex-basis: 50%;
+        flex-grow: 1;
+    }
+    .page-header-links>.header-links-col a{
+        flex-basis: 50%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+
+    }
+    .tutorial-link-img-container{
+        flex-basis: 20%;
+        display: flex;
+        flex-direction: column;
+    }
+    .tutorial-link-img-container img{
+        max-height: 150px;
+        max-width: 100px;
+    }
+}
+.page-wrapper > nav.section-lesson-title {
+    display: flex;
+}
+.side-bar>.side-bar-links-container ul {
+    display: flex;
+    flex-direction: column;
+}
+main.main-container.collapsed {
+    display: static
+}
+main.main-container {
+    display: flex;    
+}
+.side-bar{
+}
+#mainTargetDiv {
+    flex-grow: 1;
+    overflow-x: visible;
+}

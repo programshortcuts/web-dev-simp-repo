@@ -1,0 +1,16 @@
+/* display.css */
+main>.side-bar::-webkit-scrollbar {
+    display: none;
+}
+
+.hide {
+    display: none;
+}
+
+.side-bar-links-container>ul code {
+    display: inline;
+}
+.side-bar ul li a{
+    display: block;
+    box-sizing: border-box;
+}

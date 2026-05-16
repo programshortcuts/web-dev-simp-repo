@@ -1,0 +1,31 @@
+/* zIndex.css */
+
+.page-header,
+.tutorial-link-img-container {
+    z-index: 10
+}
+.imgs-container img.enlarge {
+    z-index: 6;
+}
+.step-float{
+    z-index: 4;
+}
+.step-img,
+.step-img img {
+    z-index: 5;
+}
+
+.page-wrapper>nav.nav-lesson-title {
+    /* z-index: 2 */
+}
+.main-landing-page>nav#nxtPrevLessonsBtns {
+    z-index: 2;
+}
+#sideBarBtn {
+    z-index: 5;
+}
+.inject-content-btns-container{
+    z-index: 5;
+}
+
+

@@ -1,0 +1,58 @@
+/* dark-mode-colorCode.css */
+:root {
+    --bg-primary-db: #201d1d;
+    --font-primary-db: whitesmoke;
+}
+.dark-mode {
+    background-color: var(--bg-primary-db);
+    color: var(--font-primary-db)
+}
+.dark-mode .side-bar a:active, .dark-mode .side-bar a:focus,
+.dark-mode .step:active, .dark-mode .step:focus,
+.dark-mode .step-float:active, .dark-mode .step-float:focus {
+    /* font-style: bold; */
+    /* background-color: blue; */
+    /* font-weight: 800; */
+    /* color: white; */
+    background-color: rgb(0,0,0,0) !important;
+}
+.dark-mode #mainLinksContainer{
+    color: var(--font-primary-db);
+    background-color: var(--bg-primary);
+}
+.dark-mode >nav.section-lesson-title {
+    /* background-color: var(--bg-primary-db); */
+}
+.dark-mode .side-bar {background-color: var(--bg-primary);}
+.dark-mode .side-bar *{    color: var(--font-primary-db) !important;}
+.dark-mode .section-container>.section {color: var(--font-primary-db);}
+.dark-mode a {color: white;}
+/* .dark-mode, */
+h4 .dark-mode p {color: whitesmoke;}
+.dark-mode #nav-section-lesson-titles {
+    border-top: 1px solid whitesmoke;
+    border-bottom: 1px solid whitesmoke;
+    background-color: var(--bg-primary)
+
+}
+
+
+.dark-mode #sideBarBtn {
+    /* color: white; */
+}
+.dark-mode .sidebarbtn-fallback-img {
+    border: 1px solid whitesmoke !important;
+}
+
+/* .dark-mode .code-container, */
+.dark-mode .code-container>.copy-code {
+    background-color: var(--code-bg-primary);
+    /* color: white; */
+}
+.dark-mode #navTitle:active,
+.dark-mode #navTitle:focus,
+.dark-mode #sideBarBtn:active,
+.dark-mode #sideBarBtn:focus {
+    border: 2px solid black !important;
+    /* outline: ; */
+}
