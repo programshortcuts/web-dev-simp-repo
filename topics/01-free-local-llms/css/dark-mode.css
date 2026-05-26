@@ -18,10 +18,7 @@ body.dark-mode .page-header a:visited {
     color: var(--font-primary) !important;
 }
 
-.dark-mode .code-container>.copy-code {
-    border: 1px solid white !important;
-    color: rgb(20,20,20)
-}
+
 
 .dark-mode {
     background-color: var(--bg-primary);
@@ -92,4 +89,8 @@ body.dark-mode .side-bar ul li a.highlight {
 }
 body.dark-mode .highlight {
     color: black !important;
+}
+.dark-mode .code-container>.copy-code {
+    border: 1px solid white !important;
+    color: var(--bg-primary) !important;
 }
