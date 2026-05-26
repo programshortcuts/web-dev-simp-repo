@@ -67,6 +67,7 @@ allSideBarLinks.forEach((el, i) => {
         e.preventDefault();
         lastClickedSideBarLink = el;
         injectContent(el.href);
+        console.log('here',e.target)
         changeTutorialLink(e);
     });
 
@@ -76,6 +77,10 @@ allSideBarLinks.forEach((el, i) => {
 
         if (key === 'enter') {
             e.preventDefault();
+            if (lastFocusedSideBarLink == lastClickedSideBarLink){
+                mainTargetDiv.focus()
+
+            }
             lastClickedSideBarLink = el;
             injectContent(el.href);
             changeTutorialLink(e);

@@ -1,9 +1,9 @@
 :root{
-    
-    --bcolor:  rgb(115, 108, 108);
+    /* --bkgrnd: rgb(115, 108, 108); */
+    --bcolor: rgb(115, 108, 108);
 }
 body{
-    /* background-color: var(--bcolor); */
+    background-color: whitesmoke;
 }
 
 .nav-bar-lesson-title{
@@ -17,4 +17,7 @@ body{
 }
 .page-header a:visited{
     color: black !important;
+}
+.copy-code {
+    background-color: whitesmoke;
 }

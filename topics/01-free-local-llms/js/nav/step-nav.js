@@ -90,9 +90,6 @@ export function initStepNavigation({ mainTargetDiv}){
                 const step = e.target
                 const stepFloat = e.target.closest('.step-float')
                 const stepImgVid = stepFloat.querySelector('.step-img ,.step-vid')                 
-                // if(key === 'm'){
-                //     step.focus()
-                // }
                 if (key === "enter" ) {
                     changeTutorialLink(e)
                     if (!e.shiftKey){
@@ -112,14 +109,11 @@ export function initStepNavigation({ mainTargetDiv}){
                             }
                         }
                         lastStep = step
-                    }else {
+                    } else {
                         step.focus()
                         toggleSingleImage(stepImgVid)
                     }
-                    
                 }
-                // This needs to be changed because img is no long img or video
-                // adjust for step-img and step-vid
                 if (stepImgVid && stepImgVid.classList.contains('step-vid') ) {
                     let vid = stepImgVid.querySelector('video')
                     if(vid){
@@ -128,6 +122,11 @@ export function initStepNavigation({ mainTargetDiv}){
                     return
                 }
             });
+
+            step.addEventListener('click', e => {
+                changeTutorialLink(e);
+            });
+
             step.dataset.listenerAdded = "true";
         }
     });

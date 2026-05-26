@@ -20,6 +20,7 @@ body.dark-mode .page-header a:visited {
 
 .dark-mode .code-container>.copy-code {
     border: 1px solid white !important;
+    color: rgb(20,20,20)
 }
 
 .dark-mode {
