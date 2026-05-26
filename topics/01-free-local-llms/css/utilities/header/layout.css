@@ -2,13 +2,12 @@ body {
     /* overflow-x: hidden; */
 }
 .page-header.grid {
-}
-
-.box a {
-    display: block;
+    
+    .box a {
+        display: block;
+    }
     
 }
-
 .main-container{
     display: flex;
 }

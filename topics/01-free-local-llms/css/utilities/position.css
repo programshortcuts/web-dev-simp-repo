@@ -1,6 +1,9 @@
 .body{
     position: relative;
 }
+.box a {
+    height: 100%;
+}
 .box.tutorialLink-darkModeBtn-container{
     position: fixed !important;
     top: 0;
