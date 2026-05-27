@@ -59,6 +59,10 @@ export function initStepNavigation({ mainTargetDiv}){
         });
     });
     steps.forEach((step, index,arr) => {
+        if(step.hasAttribute('data-autofocus')){
+            console.log('step')
+            step.focus()
+        }
         if (!step.dataset.listenerAdded) {
             step.setAttribute("tabindex", "0");
             step.addEventListener("focus", (e) => {

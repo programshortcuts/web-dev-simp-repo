@@ -22,6 +22,7 @@ export function videoControls({ vid, e }) {
     }
 }
 function vidKeyCntrl({ vid, e, key }) {
+    console.log(e.target)
     if (!vid) return
     if (e.type == 'click') {
         

@@ -28,7 +28,7 @@ export function initDropDowns() {
         // --- Handle mouse click activation ---
         if (e.type === "click") {
             const clicked = e.target.closest(".drop-down");
-            // if (!clicked) return; // ignore clicks not on .drop-down links
+            if (!clicked) return; // ignore clicks not on .drop-down links
             e.preventDefault();
             link = clicked;
         }

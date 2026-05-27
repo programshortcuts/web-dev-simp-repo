@@ -39,13 +39,14 @@
     align-self: center;
     margin: 0 5%;
 }
-.imgs-container{
+.imgs-container {
     display: flex;
     width: 100%;
     border: 1px solid blue;
     gap: 5%;
 }
-.imgs-container > * {
+
+.imgs-container>* {
     /* flex-basis: 50%; */
     flex-grow: 1;
     width: 100%;

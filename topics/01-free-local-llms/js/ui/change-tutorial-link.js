@@ -20,9 +20,6 @@ export function changeTutorialLink(e) {
     }
 
     tutorialLink.setAttribute('href', vidHref);
-    tutorialLink.addEventListener('click', (e) => {
-        open(e.target.href,'_blank')
-        
-    });
+    
     return tutorialLink;
 }
