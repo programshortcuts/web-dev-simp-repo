@@ -6,23 +6,23 @@
     grid-auto-rows: 5vh;
     
     
-    .box.tutorialLink-darkModeBtn-container{
-        display: flex;
-        flex-direction: column;
-        /* align-items: center; */
-        /* background-color: blue; */
-        /* grid-row: 1/3; */
-        /* grid-column: 3/4; */
-        position: sticky;
-    }
-    .tutorialLink-darkModeBtn-container a#tutorialLink {
-        display: block;
-        align-self: flex-end;
-        /* justify-self: center; */
-    }
-    .tutorialLink-darkModeBtn-container button#darkModeBtn {
-        width: 50%;
-        align-self: flex-end;
-    }
     
+}
+.box.tutorialLink-darkModeBtn-container{
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    /* background-color: blue; */
+    /* grid-row: 1/3; */
+    /* grid-column: 3/4; */
+    position: sticky;
+}
+.tutorialLink-darkModeBtn-container a#tutorialLink {
+    display: block;
+    align-self: flex-end;
+    /* justify-self: center; */
+}
+.tutorialLink-darkModeBtn-container button#darkModeBtn {
+    width: 50%;
+    align-self: flex-end;
 }

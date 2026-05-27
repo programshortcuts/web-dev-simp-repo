@@ -13,3 +13,6 @@
 }
 #darkModeBtn{
 }
+.box.tutorialLink-darkModeBtn-container {
+    z-index: 9999
+}

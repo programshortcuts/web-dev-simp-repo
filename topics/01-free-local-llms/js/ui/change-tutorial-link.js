@@ -3,7 +3,7 @@
 export function changeTutorialLink(e) {
     const tutorialLink = document.querySelector('#tutorialLink');
     if (!tutorialLink) return null;
-
+    
     const eventTarget = e.target instanceof Element ? e.target : e.target?.parentElement;
     const source = eventTarget?.closest('[data-video], [data-timestamp]')
         || e.currentTarget?.closest('[data-video], [data-timestamp]');
@@ -20,5 +20,9 @@ export function changeTutorialLink(e) {
     }
 
     tutorialLink.setAttribute('href', vidHref);
+    tutorialLink.addEventListener('click', (e) => {
+        open(e.target.href,'_blank')
+        
+    });
     return tutorialLink;
 }
