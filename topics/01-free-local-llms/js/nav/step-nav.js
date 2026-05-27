@@ -49,14 +49,15 @@ export function initStepNavigation({ mainTargetDiv}){
     })
     allStepImgVids.forEach(el => {
         el.addEventListener('pointerdown', e => {
-            e.preventDefault()
-            e.stopPropagation()
-            if(el.classList.contains('step-img')){
-                
-                toggleSingleImage(el)
+            e.preventDefault();
+            if (el.classList.contains('step-img')) {
+                toggleSingleImage(el);
             }
         });
-    })
+        el.addEventListener('click', e => {
+            changeTutorialLink(e);
+        });
+    });
     steps.forEach((step, index,arr) => {
         if (!step.dataset.listenerAdded) {
             step.setAttribute("tabindex", "0");
