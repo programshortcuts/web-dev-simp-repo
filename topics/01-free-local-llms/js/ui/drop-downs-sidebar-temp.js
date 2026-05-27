@@ -3,46 +3,49 @@ export function initDropDowns() {
     document.addEventListener("click", handleToggle);
     document.addEventListener("keydown", handleToggle);
     hideTopicSnips()
-}
-export function handleToggle(e) {
-    let link;
+    function handleToggle(e) {
+        let link;
 
-    // --- Handle keyboard activation ---
-    // --- Handle keyboard activation ---
-    if (e.type === "keydown") {
+        // --- Handle keyboard activation ---
+        if (e.type === "keydown") {
 
-        if (
-            (e.key === "Enter" || e.key === " ") &&
-            document.activeElement.classList.contains("drop-down")
-        ) {
-            e.preventDefault();
-            link = document.activeElement;
+            const dropdown = e.target.closest(".drop-down");
 
-        } else {
-            return;
+            if (
+                (e.key === "Enter" || e.key === " ") &&
+                dropdown
+            ) {
+
+                e.preventDefault();
+
+                link = dropdown;
+
+            } else {
+                return;
+            }
         }
+
+        // --- Handle mouse click activation ---
+        if (e.type === "click") {
+            const clicked = e.target.closest(".drop-down");
+            // if (!clicked) return; // ignore clicks not on .drop-down links
+            e.preventDefault();
+            link = clicked;
+        }
+
+        if (!link) return;
+
+        // Find the <li> containing this .drop-down link
+        const parentLi = link.closest("li");
+        if (!parentLi) return;
+
+        // Find the nested .drop-snips *inside that li only*
+        const nestedList = parentLi.querySelector(":scope > .drop-snips");
+        if (!nestedList) return;
+
+        // Toggle visibility
+        nestedList.classList.toggle("hide");
     }
-
-    // --- Handle mouse click activation ---
-    if (e.type === "click") {
-        const clicked = e.target.closest(".drop-down");
-        if (!clicked) return; // ignore clicks not on .drop-down links
-        e.preventDefault();
-        link = clicked;
-    }
-
-    if (!link) return;
-
-    // Find the <li> containing this .drop-down link
-    const parentLi = link.closest("li");
-    if (!parentLi) return;
-
-    // Find the nested .drop-snips *inside that li only*
-    const nestedList = parentLi.querySelector(":scope > .drop-snips");
-    if (!nestedList) return;
-
-    // Toggle visibility
-    nestedList.classList.toggle("hide");
 }
 
 export function hideTopicSnips() {
