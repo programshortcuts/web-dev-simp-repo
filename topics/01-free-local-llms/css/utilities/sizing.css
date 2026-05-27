@@ -1,3 +1,6 @@
+#mainTargetDiv{
+    width: 100%;
+}
 #tutorialLink {
     display: inline-flex;
 }
