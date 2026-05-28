@@ -29,10 +29,11 @@ function vidKeyCntrl({ vid, e, key }) {
 
         switch (key) {
             case 13: // Enter
+            toggleImgSize(vid.parentElement)
+            
                 if (!e.target.classList.contains('enlarge')) {
                     playing = true;
                 }
-                toggleImgSize(vid.parentElement)
                 break;
             case 32: // Space
                 e.preventDefault();

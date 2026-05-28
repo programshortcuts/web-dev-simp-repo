@@ -99,21 +99,23 @@ export function initStepNavigation({ mainTargetDiv}){
                 const stepImgVid = stepFloat.querySelector('.step-img, .step-vid');
 
                 if (stepImgVid.classList.contains('step-vid')) {
-                    toggleSingleImage(stepImgVid);
-
+                    
                     const vid = stepImgVid.querySelector('video');
-
+                    
                     if (vid) {
-
                         videoControls({ vid, e });
+                        return
+                    }
+                    if(key === 32){
+                        return
+                        toggleSingleImage(stepImgVid)
                     }
                 }
                 if (key !== "enter") return;
 
                 e.preventDefault();
                 e.stopPropagation();
-
-
+// 
                 // =========================
                 // SHIFT + ENTER
                 // Toggle media
