@@ -22,7 +22,6 @@ export function videoControls({ vid, e }) {
     }
 }
 function vidKeyCntrl({ vid, e, key }) {
-    console.log(e)
     if (!vid) return
     if (e.type == 'click') {
         
@@ -33,6 +32,7 @@ function vidKeyCntrl({ vid, e, key }) {
                 if (!e.target.classList.contains('enlarge')) {
                     playing = true;
                 }
+                toggleImgSize(vid.parentElement)
                 break;
             case 32: // Space
                 e.preventDefault();
@@ -56,9 +56,10 @@ function vidKeyCntrl({ vid, e, key }) {
     playPauseVideo({ vid, playing });
 }
 export function toggleVideoSizeClick({ vid, e }) {
+    if(!vid) return
     const stepVid = vid.parentElement
 
-    stepVid.classList.toggle('enlarge')
+    toggleImgSize(stepVid)
 
     if (!vid) return
 
@@ -70,6 +71,11 @@ export function toggleVideoSizeClick({ vid, e }) {
     }
 
     playPauseVideo({ vid, playing })
+}
+// img or step-img / step-vid
+function toggleImgSize(stepImgVid){
+    if(!stepImgVid) return   
+    stepImgVid.classList.toggle('enlarge')
 }
 function playPauseVideo({ vid, playing }) {
     if (!vid) return

@@ -91,87 +91,42 @@ export function initStepNavigation({ mainTargetDiv}){
             step.addEventListener("focusin", () => { iSteps = index;})
             step.addEventListener("focusout", () => { denlargeAllImages(allStepImgVids) })
             step.addEventListener("keydown", e => {
-                const key = e.key.toLowerCase();
-
-                if (key !== "enter") return;
-
-                e.preventDefault();
-                e.stopPropagation();
-
-                const stepFloat = e.target.closest('.step-float');
-
-                if (!stepFloat) return;
-
-                const stepImgVid = stepFloat.querySelector('.step-img, .step-vid');
-
-                // =========================
-                // SHIFT + ENTER
-                // Toggle media
-                // Return focus to .step-float
-                // =========================
-                if (e.shiftKey) {
-
-                    if (stepImgVid) {
-
-                        // IMAGE
-                        if (stepImgVid.classList.contains('step-img')) {
-                            toggleSingleImage(stepImgVid);
-                        }
-
-                        // VIDEO
-                        if (stepImgVid.classList.contains('step-vid')) {
-                            toggleVideoSizeClick(stepImgVid);
-
-                            const vid = stepImgVid.querySelector('video');
-
-                            if (vid) {
-                                videoControls({ vid, e });
+                let key = e.key.toLowerCase();
+                const step = e.target
+                const stepFloat = e.target.closest('.step-float')
+                const stepImgVid = stepFloat.querySelector('.step-img ,.step-vid')                 
+                if (key === "enter" ) {
+                    changeTutorialLink(e)
+                    if (!e.shiftKey){
+                        updateCurrentCopyCodes({step: stepFloat})
+                        stepClicked = true
+                        toggleSingleImage(stepImgVid)
+                        const firstCopyCode = e.target.querySelector('.copy-code')
+                        if(stepImgVid){
+                            if(stepImgVid.classList.contains('enlarge') && stepClicked){
+                                if(firstCopyCode){
+                                    firstCopyCode.focus()
+                                }
+                            }
+                        } else {
+                            if (firstCopyCode) {
+                                firstCopyCode.focus()
                             }
                         }
-                    }
-
-                    // ALWAYS restore focus
-                    requestAnimationFrame(() => {
-                        stepFloat.focus();
-                    });
-
-                    return;
-                }
-
-                // =========================
-                // NORMAL ENTER
-                // =========================
-                changeTutorialLink(e);
-                updateCurrentCopyCodes({ step: stepFloat });
-                stepClicked = true;
-                if (stepImgVid) {
-                    // IMAGE
-                    if (stepImgVid.classList.contains('step-img')) {
-                        toggleSingleImage(stepImgVid);
-                    }
-                    // VIDEO
-                    if (stepImgVid.classList.contains('step-vid')) {
-                        toggleVideoSizeClick(stepImgVid);
-                        const vid = stepImgVid.querySelector('video');
-                        if (vid) {
-                            videoControls({ vid, e });
-                        }
+                        lastStep = step
+                    } else {
+                        step.focus()
+                        toggleSingleImage(stepImgVid)
+                        
                     }
                 }
-
-                const firstCopyCode = stepFloat.querySelector('.copy-code');
-                if(!firstCopyCode){
-                    stepClicked = false
+                if (stepImgVid && stepImgVid.classList.contains('step-vid') ) {
+                    let vid = stepImgVid.querySelector('video')
+                    if(vid){
+                        videoControls({vid,e})
+                    }
+                    return
                 }
-                if (
-                    stepImgVid &&
-                    stepImgVid.classList.contains('enlarge') &&
-                    firstCopyCode
-                ) {
-                    firstCopyCode.focus();
-                }
-
-                lastStep = stepFloat;
             });
 
             step.addEventListener('click', e => {
