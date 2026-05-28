@@ -107,8 +107,12 @@ export function initStepNavigation({ mainTargetDiv}){
                         return
                     }
                     if(key === 32){
+                        e.preventDefault()
                         return
+                    }
+                    if(key === 13){
                         toggleSingleImage(stepImgVid)
+                        return
                     }
                 }
                 if (key !== "enter") return;
