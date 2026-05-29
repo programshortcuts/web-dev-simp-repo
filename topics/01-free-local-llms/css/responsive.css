@@ -1,3 +1,9 @@
+@media screen and (min-width: 701px) {
+    .enlarge{
+        top: 10%;
+        transform: scale(4) !important;
+    }
+}
 @media screen and (max-width: 700px) {
     .side-bar-links-container > ul{
         margin: 0;
