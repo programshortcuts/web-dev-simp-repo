@@ -40,7 +40,7 @@
     /* max-height: 200px; */
     /* max-width: 450px; */
     transform: translate(-50%, -90%) ;
-    transform: scale(2.9);
+    transform: scale(2.2);
     z-index: 9999 !important;
 }
 .step-vid>video,
