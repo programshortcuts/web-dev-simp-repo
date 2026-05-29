@@ -93,7 +93,10 @@ export function initStepNavigation({ mainTargetDiv}){
             step.addEventListener("keydown", e => {
                 const key = e.key.toLowerCase();
                 const stepFloat = e.target.closest('.step-float');
-
+                if (e.target.hasAttribute('href')){
+                    open(e.target.href,'_blank')
+                    return
+                }
                 if (!stepFloat) return;
 
                 const stepImgVid = stepFloat.querySelector('.step-img, .step-vid');
