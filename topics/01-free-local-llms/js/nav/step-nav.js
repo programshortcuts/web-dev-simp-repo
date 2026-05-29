@@ -94,7 +94,11 @@ export function initStepNavigation({ mainTargetDiv}){
                 const key = e.key.toLowerCase();
                 const stepFloat = e.target.closest('.step-float');
                 if (e.target.hasAttribute('href')){
-                    open(e.target.href,'_blank')
+                    if(key == 'enter'){
+                        open(e.target.href,'_blank')
+                         
+                    }
+                    
                     return
                 }
                 if (!stepFloat) return;

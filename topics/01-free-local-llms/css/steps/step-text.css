@@ -13,7 +13,11 @@
     /* flex-grow: 1; */
     align-content: center;
 }
-
+.step-float {
+    margin: 1%;
+    padding: 2%;
+    min-width: 70vw;
+}
 .step-float>.step-txt {
     /* flex-shrink: 1; */
     flex-grow: 1;
@@ -29,10 +33,7 @@
     /* border: 1px solid red; */
     padding-left: 20%;
 }
-.step-float{
-    margin: 1%;
-    padding: 2%;
-}
+
 .step-float ul,
 .step-float ol{
     align-self: center;
