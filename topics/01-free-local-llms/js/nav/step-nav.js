@@ -99,12 +99,12 @@ export function initStepNavigation({ mainTargetDiv}){
                          
                     }
                     
-                    return
+                    // return
                 }
                 if (!stepFloat) return;
 
                 const stepImgVid = stepFloat.querySelector('.step-img, .step-vid');
-
+                changeTutorialLink(e);
                 if (stepImgVid.classList.contains('step-vid')) {
                     
                     const vid = stepImgVid.querySelector('video');
@@ -165,7 +165,7 @@ export function initStepNavigation({ mainTargetDiv}){
                 // =========================
                 // NORMAL ENTER
                 // =========================
-                changeTutorialLink(e);
+                
                 updateCurrentCopyCodes({ step: stepFloat });
                 stepClicked = true;
                 if (stepImgVid) {
