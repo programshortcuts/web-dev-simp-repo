@@ -122,7 +122,7 @@ document.addEventListener('keydown', (e) => {
 
     if (!steps.length) return;
 
-    // ignore media typing
+    // ignore typing inside media
     if (
         active?.tagName === 'VIDEO' ||
         active?.classList?.contains('copy-code')
@@ -135,28 +135,54 @@ document.addEventListener('keydown', (e) => {
     ) return;
 
     // =========================
-    // F = NEXT STEP
+    // GET CURRENT STEP SAFELY
+    // =========================
+    const activeStep = active?.closest?.('.step-float');
+
+    // sync index if we're inside a step
+    if (activeStep) {
+        const idx = steps.indexOf(activeStep);
+        if (idx !== -1) iSteps = idx;
+    }
+
+    // =========================
+    // F = NEXT
     // =========================
     if (key === 'f') {
 
-        syncCurrentStep();
-
-        iSteps = (iSteps + 1) % steps.length;
+        iSteps = activeStep
+            ? (iSteps + 1) % steps.length
+            : 0;
 
         steps[iSteps]?.focus();
         return;
     }
 
     // =========================
-    // A = PREVIOUS STEP
+    // A = PREVIOUS
     // =========================
     if (key === 'a') {
 
-        syncCurrentStep();
-
-        iSteps = (iSteps - 1 + steps.length) % steps.length;
+        iSteps = activeStep
+            ? (iSteps - 1 + steps.length) % steps.length
+            : steps.length - 1;
 
         steps[iSteps]?.focus();
+        return;
+    }
+
+    // =========================
+    // NUMBER KEYS (NEW FIX)
+    // =========================
+    if (key >= '1' && key <= '9') {
+
+        const num = parseInt(key, 10) - 1;
+
+        if (num < steps.length) {
+            iSteps = num;
+            steps[iSteps]?.focus();
+        }
+
         return;
     }
 });
