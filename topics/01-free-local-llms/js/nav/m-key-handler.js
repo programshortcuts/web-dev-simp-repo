@@ -1,5 +1,5 @@
 // m-key-handler.js
-import { lastStep,lastFocusedMainEl } from "./step-nav.js";
+import { lastStep } from "./step-nav.js";
 import { mainTargetDiv } from "./main-content-nav.js";
 export function handleMKey({e,focusZone}) {
     e.preventDefault();

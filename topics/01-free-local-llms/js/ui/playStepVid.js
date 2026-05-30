@@ -1,90 +1,99 @@
 // playStepVid.js
-let playing = false; 
-export function pauseAllVideos({ allVids }) {
-    if (!allVids || !allVids.forEach) return;
+
+// =========================
+// PAUSE ALL VIDEOS
+// =========================
+
+export function pauseAllVideos({ allVids = [] } = {}) {
+
+    if (!Array.isArray(allVids)) return;
+
     allVids.forEach(vid => {
-        vid.classList.remove("enlarge");
-        vid.classList.remove("first-vid-enlarge");
-        vid.style.border = "none";
-        if (!vid.paused) {
-            vid.pause();
-        }
+
+        if (!(vid instanceof HTMLVideoElement)) return;
+
+        vid.pause();
     });
 }
-export function videoControls({ vid, e }) {
-    if (!vid) return
-    let key = e.keyCode;
-    if (e.type == 'keydown') {
-        vidKeyCntrl({ vid, e, key })
+
+// =========================
+// MAIN CONTROLLER
+// =========================
+
+export function videoControls({ vid, e } = {}) {
+
+    if (!vid || !(vid instanceof HTMLVideoElement)) return;
+
+    const key = e?.key?.toLowerCase?.();
+
+    const isClick = e?.type === 'click';
+    const isKeydown = e?.type === 'keydown';
+
+    // Normalize behavior: same action source (click OR enter/space)
+    if (isClick) {
+
+        togglePlay(vid);
+        return;
     }
-    if (e.type == 'click') {
-        toggleVideoSizeClick({ vid, e })
+
+    if (!isKeydown) return;
+
+    // =========================
+    // ENTER → play/pause
+    // =========================
+    if (key === 'enter') {
+
+        e.preventDefault();
+        togglePlay(vid);
+        return;
+    }
+
+    // =========================
+    // SPACE → play/pause
+    // =========================
+    if (key === ' ') {
+
+        e.preventDefault();
+        togglePlay(vid);
+        return;
+    }
+
+    // =========================
+    // LEFT / RIGHT SEEK
+    // =========================
+    if (key === 'arrowleft') {
+
+        seek(vid, -0.5);
+        return;
+    }
+
+    if (key === 'arrowright') {
+
+        seek(vid, 0.5);
+        return;
     }
 }
-function vidKeyCntrl({ vid, e, key }) {
-    if (!vid) return
-    if (e.type == 'click') {
-        
+
+// =========================
+// TOGGLE PLAY
+// =========================
+
+function togglePlay(vid) {
+
+    if (vid.paused) {
+        vid.play();
     } else {
-
-        switch (key) {
-            case 13: // Enter
-            toggleImgSize(vid.parentElement)
-            
-                if (!e.target.classList.contains('enlarge')) {
-                    playing = true;
-                }
-                break;
-            case 32: // Space
-                e.preventDefault();
-                if (vid.currentTime === vid.duration) {
-                    vid.currentTime = 0;
-                    playing = false;
-                } else {
-                    playing = !playing;
-                }
-                break;
-            case 37: // Left arrow
-                vid.currentTime -= 0.5;
-                playing = true;
-                break;
-            case 39: // Right arrow
-                vid.currentTime += 0.5;
-                playing = true;
-                break;
-        }
+        vid.pause();
     }
-    playPauseVideo({ vid, playing });
 }
-export function toggleVideoSizeClick({ vid, e }) {
-    if(!vid) return
-    const stepVid = vid.parentElement
 
-    toggleImgSize(stepVid)
+// =========================
+// SEEK
+// =========================
 
-    if (!vid) return
+function seek(vid, amount) {
 
-    // START PLAYING when enlarged
-    if (stepVid.classList.contains('enlarge')) {
-        playing = true
-    } else {
-        playing = false
-    }
+    const next = vid.currentTime + amount;
 
-    playPauseVideo({ vid, playing })
-}
-// img or step-img / step-vid
-function toggleImgSize(stepImgVid){
-    if(!stepImgVid) return   
-    stepImgVid.classList.toggle('enlarge')
-}
-function playPauseVideo({ vid, playing }) {
-    if (!vid) return
-    if (vid) {
-        if (playing) {
-            vid.play();
-        } else {
-            vid.pause();
-        }
-    }
+    vid.currentTime = Math.max(0, next);
 }

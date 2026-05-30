@@ -1,64 +1,61 @@
 // toggle-img-sizes.js
 
-let allMedia = []
+let mediaCache = [];
 
+// =========================
+// CACHE (CALL AFTER INJECT)
+// =========================
+export function initMediaCache(root = document) {
+    mediaCache = [...root.querySelectorAll('.step-img, .step-vid')];
+}
+
+// alias for your old code (FIXES YOUR ERROR)
 export function refreshImages(root = document) {
-    allMedia = root.querySelectorAll('.step-img, .step-vid')
+    initMediaCache(root);
 }
 
+// =========================
+// RESET ALL ENLARGE STATES
+// =========================
 export function denlargeAllImages() {
-    allMedia.forEach(el => {
-        el.classList.remove('enlarge')
-    })
+    mediaCache.forEach(el => {
+        el.classList.remove('enlarge');
+    });
 }
 
-export function handleImgSizes({ e }) {
-
-    const key = e.key.toLowerCase()
-
-    if (key !== 'enter') return
-
-    const step = e.target.closest('.step-float')
-
-    if (!step) return
-
-    cycleMedia(step)
-}
-
+// =========================
+// CYCLE MEDIA INSIDE A STEP
+// =========================
 export function cycleMedia(step) {
 
-    const items = [
-        ...step.querySelectorAll('.step-img, .step-vid')
-    ]
+    if (!step) return;
 
-    if (!items.length) return
+    const items = [...step.querySelectorAll('.step-img, .step-vid')];
 
-    let index = Number(step.dataset.mediaIndex ?? -1)
+    if (!items.length) return;
 
-    // remove all enlarged first
-    items.forEach(el => {
-        el.classList.remove('enlarge')
-    })
+    // clear all first
+    items.forEach(el => el.classList.remove('enlarge'));
 
-    // next item
-    index++
+    let index = Number(step.dataset.mediaIndex ?? -1);
+    index++;
 
-    // reset cycle
     if (index >= items.length) {
-        step.dataset.mediaIndex = -1
-        return
+        step.dataset.mediaIndex = -1;
+        return;
     }
 
-    items[index].classList.add('enlarge')
-
-    step.dataset.mediaIndex = index
+    items[index].classList.add('enlarge');
+    step.dataset.mediaIndex = index;
 }
 
-export function clickToggleImgSize(target) {
+// =========================
+// CLICK TOGGLE SINGLE MEDIA
+// =========================
+export function clickToggleImgSize(e) {
 
-    const media = target.closest('.step-img, .step-vid')
+    const media = e.target.closest('.step-img, .step-vid');
+    if (!media) return;
 
-    if (!media) return
-
-    media.classList.toggle('enlarge')
+    media.classList.toggle('enlarge');
 }

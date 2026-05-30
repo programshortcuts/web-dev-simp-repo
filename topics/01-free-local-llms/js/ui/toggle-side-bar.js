@@ -1,32 +1,48 @@
 // toggle-side-bar.js
-export const sideBar = document.querySelector('.side-bar')
-export const sideBarBtn = document.querySelector('#sideBarBtn')
-export const navBarLessonTitle = document.querySelector('.nav-bar-lesson-title')
-export const mainContainer = document.querySelector('.main-container')
 
+export const sideBar = document.querySelector('.side-bar');
+export const sideBarBtn = document.querySelector('#sideBarBtn');
+export const navBarLessonTitle = document.querySelector('.nav-bar-lesson-title');
+export const mainContainer = document.querySelector('.main-container');
 
-export function initToggleSidebar({e}) {
-    [navBarLessonTitle, sideBarBtn].forEach(el => {
-        el.addEventListener('click', e => {
-            mainContainer?.classList.toggle('collapsed')
-        });
-    })
-    sideBarBtn.addEventListener('keydown', e => {
-        let key = e.key.toLowerCase()
-        if (key === 'enter') {
-            mainContainer?.classList.toggle('collapsed')
+// =========================
+// INIT SIDEBAR
+// =========================
+export function initToggleSidebar() {
+
+    if (!sideBar || !sideBarBtn || !navBarLessonTitle || !mainContainer) return;
+
+    // toggle from button click
+    sideBarBtn.addEventListener('click', toggleSidebar);
+
+    navBarLessonTitle.addEventListener('click', toggleSidebar);
+
+    // keyboard support
+    sideBarBtn.addEventListener('keydown', (e) => {
+        if (e.key.toLowerCase() === 'enter') {
+            e.preventDefault();
+            toggleSidebar();
         }
     });
-    navBarLessonTitle.addEventListener('keydown', e => {
-        let key = e.key.toLowerCase()
-        if (key === 'enter') {
-            mainContainer?.classList.toggle('collapsed')
+
+    navBarLessonTitle.addEventListener('keydown', (e) => {
+        if (e.key.toLowerCase() === 'enter') {
+            e.preventDefault();
+            toggleSidebar();
         }
     });
-    sideBar.addEventListener('click', e => {
-        if (e.target == sideBar) {
-            mainContainer.classList.toggle('collapsed')
+
+    // click outside sidebar to close
+    sideBar.addEventListener('click', (e) => {
+        if (e.target === sideBar) {
+            mainContainer.classList.add('collapsed');
         }
-    })
+    });
 }
 
+// =========================
+// CORE TOGGLE
+// =========================
+function toggleSidebar() {
+    mainContainer.classList.toggle('collapsed');
+}
