@@ -7,7 +7,7 @@ import { initStepNavigation } from "../nav/step-nav.js";
 import { removeLastStep } from "../nav/step-nav.js";
 import { handleSKeySideBarNav } from "./main-script.js";
 
-import { updateImgs } from "../ui/toggle-img-sizes.js";
+import { refreshImages } from "../ui/toggle-img-sizes.js";
 import { addCopyCode } from "../ui/copy-code.js";
 export const nxtBtn = document.querySelector('#endNxtBtn')
 export const prevBtn = document.querySelector('#prevBtn')
@@ -112,7 +112,7 @@ export function injectContent(href) {
             // Update nav lesson title if available
             const parser = new DOMParser();
             const doc = parser.parseFromString(html, 'text/html');
-            updateImgs()
+            refreshImages(mainTargetDiv)
             
             // Optional callback after injection
             if (typeof callback === "function") callback();
