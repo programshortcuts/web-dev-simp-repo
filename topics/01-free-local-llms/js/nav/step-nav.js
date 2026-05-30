@@ -89,6 +89,11 @@ export function initStepNavigation({ mainTargetDiv }) {
                 cycleMedia(stepFloat);
                 return;
             }
+            if (key === 'm' && e.target.classList.contains('copy-code')) {
+
+                step.focus()
+                return;
+            }
 
             if (key === 'enter') {
 
