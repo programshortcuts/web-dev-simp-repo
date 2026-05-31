@@ -84,23 +84,27 @@ export function initStepNavigation({ mainTargetDiv }) {
             changeTutorialLink(e);
 
             if (key === 'enter' && e.shiftKey) {
-
                 e.preventDefault();
 
-                const stepFloat = e.target.closest('.step-float');
+                const stepFloat =
+                    e.target.closest('.step-float') ||
+                    document.activeElement.closest('.step-float');
+
                 if (!stepFloat) return;
+
+                // DO NOT run on links
+                if (e.target.tagName === 'A') return;
 
                 const items = [...stepFloat.querySelectorAll('.step-img, .step-vid')];
                 if (!items.length) return;
 
-                // current index (same system as ENTER)
                 let index = Number(stepFloat.dataset.mediaIndex ?? -1);
-
-                // advance like cycleMedia does
                 index++;
 
-                if (index >= items.length) {
-                    // end behavior: reset everything
+                const activeItem = items[index];
+
+                // END → reset everything + return focus
+                if (!activeItem) {
                     denlargeAllImages();
                     pauseAllVideos({ allVids });
 
@@ -113,15 +117,18 @@ export function initStepNavigation({ mainTargetDiv }) {
                     return;
                 }
 
-                const target = items[index];
-
-                // IMPORTANT: fully reset before applying new state
+                // NORMAL CYCLE
                 denlargeAllImages();
                 pauseAllVideos({ allVids });
 
-                target.classList.add('enlarge');
+                activeItem.classList.add('enlarge');
 
                 stepFloat.dataset.mediaIndex = index;
+
+                // CRITICAL: always restore focus so F/A works again
+                requestAnimationFrame(() => {
+                    stepFloat.focus();
+                });
 
                 return;
             }
