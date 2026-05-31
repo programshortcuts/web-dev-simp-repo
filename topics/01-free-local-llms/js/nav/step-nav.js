@@ -28,6 +28,27 @@ export function initStepNavigation({ mainTargetDiv }) {
     // =========================
     allVids.forEach(vid => {
         vid.addEventListener('click', (e) => {
+
+            const stepFloat = vid.closest('.step-float');
+            if (!stepFloat) return;
+
+            const wrapper = vid.closest('.step-vid');
+            if (!wrapper) return;
+
+            const isAlreadyEnlarged = wrapper.classList.contains('enlarge');
+
+            // reset others always
+            denlargeAllImages();
+            pauseAllVideos({ allVids });
+
+            // TOGGLE behavior
+            if (!isAlreadyEnlarged) {
+                wrapper.classList.add('enlarge');
+            } else {
+                stepFloat.dataset.mediaIndex = -1;
+            }
+
+            // play/pause
             videoControls({ vid, e });
         });
     });
@@ -66,14 +87,41 @@ export function initStepNavigation({ mainTargetDiv }) {
 
                 e.preventDefault();
 
+                const stepFloat = e.target.closest('.step-float');
+                if (!stepFloat) return;
+
+                const items = [...stepFloat.querySelectorAll('.step-img, .step-vid')];
+                if (!items.length) return;
+
+                // current index (same system as ENTER)
+                let index = Number(stepFloat.dataset.mediaIndex ?? -1);
+
+                // advance like cycleMedia does
+                index++;
+
+                if (index >= items.length) {
+                    // end behavior: reset everything
+                    denlargeAllImages();
+                    pauseAllVideos({ allVids });
+
+                    stepFloat.dataset.mediaIndex = -1;
+
+                    requestAnimationFrame(() => {
+                        stepFloat.focus();
+                    });
+
+                    return;
+                }
+
+                const target = items[index];
+
+                // IMPORTANT: fully reset before applying new state
                 denlargeAllImages();
                 pauseAllVideos({ allVids });
 
-                stepFloat.dataset.mediaIndex = -1;
+                target.classList.add('enlarge');
 
-                requestAnimationFrame(() => {
-                    stepFloat.focus();
-                });
+                stepFloat.dataset.mediaIndex = index;
 
                 return;
             }
