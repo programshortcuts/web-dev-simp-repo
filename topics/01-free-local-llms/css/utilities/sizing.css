@@ -38,19 +38,21 @@
     width: 100%;
 }
 /* Default step images */
-.step-vid,
-.step-img {
-    position: relative;
-    float: right;
-    display: flex;
-    flex-direction: column;
-    max-height: 400px;
-    max-width: 350px;
-    min-height: 300px;
-    min-width: 250px;
+.step-float > .step-vid,
+.step-float > .step-img {
     
-    /* border: 1px solid blue  !important; */
-    /* z-index: 5 */
+    /* max-height: 400px; */
+    /* max-width: 300px; */
+    /* min-height: 200px; */
+    /* min-width: 200px; */
+    max-height: 200px;
+    max-width: 200px;
+}
+.step-float > .step-vid > video,
+.step-float > .step-img > img {
+    
+    /* min-height: 200px; */
+    /* min-width: 200px; */
 }
 
 .step-vid>video,

@@ -2,6 +2,7 @@
 import { videoControls, pauseAllVideos } from "../ui/playStepVid.js";
 import { cycleMedia, denlargeAllImages } from "../ui/toggle-img-sizes.js";
 import { changeTutorialLink } from "../ui/change-tutorial-link.js";
+import { lastClickedSideBarLink } from "./side-bar-nav.js";
 
 let steps = [];
 let allVids = [];
@@ -154,7 +155,7 @@ export function initStepNavigation({ mainTargetDiv }) {
 
                 e.preventDefault();
 
-                cycleMedia(stepFloat);
+                // cycleMedia(stepFloat);
 
                 stepFloat.querySelector('.copy-code')?.focus();
                 return;
@@ -181,7 +182,14 @@ document.addEventListener('keydown', (e) => {
     if (
         active?.tagName === 'VIDEO' ||
         active?.classList?.contains('copy-code')
-    ) return;
+    ){
+        console.log('here')
+        if(key === 's'){
+            lastClickedSideBarLink.focus()
+        }
+        return;
+    }
+    
 
     // sidebar safety
     if (

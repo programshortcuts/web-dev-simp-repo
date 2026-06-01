@@ -33,8 +33,8 @@
 
     z-index: 999999 !important;
 
-    max-width: 90vw;
-    max-height: 90vh;
+    max-width: 90vw !important;
+    max-height: 90vh !important;
 
     width: auto !important;
     height: auto !important;
@@ -78,10 +78,4 @@
 .step-img.enlarge,
 .step-vid.enlarge {
     isolation: isolate;
-}
-@media screen and(max-width: 700px) {
-    .step-img.enlarge,
-    .step-vid.enlarge {
-        transform: translate(-50%, -80%)  !important;
-    }
 }
