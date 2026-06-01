@@ -132,6 +132,7 @@ export function initStepNavigation({ mainTargetDiv }) {
                 });
 
                 return;
+
             }
 
             if (e.target.tagName === 'VIDEO') {
@@ -151,7 +152,7 @@ export function initStepNavigation({ mainTargetDiv }) {
                 return;
             }
 
-            if (key === 'enter') {
+            if (key === 'enter' && !e.shiftKey) {
 
                 const isLink = e.target.closest('a');
 

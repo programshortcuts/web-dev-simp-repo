@@ -35,6 +35,9 @@ export function handleMKey({e,focusZone}) {
             }  
         } else if(e.target.closest('a')) {
             lastStep.focus()
+        
+        } else if(e.target.closest('button')) {
+            lastStep.focus()
         } else {
 
             mainTargetDiv.focus()
