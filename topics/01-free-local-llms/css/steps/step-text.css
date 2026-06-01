@@ -1,13 +1,6 @@
+/* step-txt.css */
 
-#targetDiv>.main-container {
-    display: flex;
-    flex-direction: column;
-}
-/* steps.css */
-.steps-container {
-    display: flex;
-    flex-direction: column;
-}
+
 #navLessonTitle {
     display: flex;
     /* flex-grow: 1; */

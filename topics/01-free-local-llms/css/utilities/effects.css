@@ -22,8 +22,17 @@ body.dark-mode .step-float:active {
 #endNxtBtn:focus,
 #prevBtn:active,
 #prevBtn:focus {
+    /* background: darkgrey !important; */
+    /* background-color: rgb(118, 103, 103); */
+    background: darkgrey;
     box-shadow: 2px 2px 12px lawngreen;
-
+    
+}
+.dark-mode button#endNxtBtn,
+.dark-mode button#prevBtn {
+    /* color: var(--font-primary) !important; */
+    /* background-color: grey !important; */
+    /* background: black !important */
 }
 
 .highlight{

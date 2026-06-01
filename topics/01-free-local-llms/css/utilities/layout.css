@@ -1,6 +1,10 @@
 body {
     overflow-x: hidden;
 }
+.main-content-container {
+    /* display: flex; */
+    /* flex-direction: column; */
+}
 .lesson-btns-container{
     position: fixed;
     /* font-size: 20rem; */
@@ -8,17 +12,18 @@ body {
     align-items: flex-end;
     bottom: 0;    
     left: 20%;
-    height: 7vh;
     z-index: 2;
-    width: 80%;
+    width: 76%;
+    height: 5.6vh;
 }
 #endNxtBtn,#prevBtn{
-    /* background-color: blue; */
     width: 80%;
     height: 80%;
 }
 
 
-.side-bar ul>li>a {
-    display: inline-block;
+
+.steps-container {
+    display: flex;
+    flex-direction: column;
 }

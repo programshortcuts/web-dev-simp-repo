@@ -1,0 +1,4 @@
+/* side-bar.css */
+.side-bar ul>li>a {
+    display: inline-block;
+}

@@ -23,3 +23,6 @@ body{
     background-color: whitesmoke;
 }
 
+#endNxtBtn, #endNxtBtn, #prevBtn, #prevBtn{
+    background-color: var(--bcolor);
+}

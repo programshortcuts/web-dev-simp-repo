@@ -74,7 +74,7 @@ export function injectContent(href) {
                 mainTargetDiv.querySelector('.step-float');
 
             if (firstStep) {
-                firstStep.focus();
+                // firstStep.focus();
             }
 
             // =========================

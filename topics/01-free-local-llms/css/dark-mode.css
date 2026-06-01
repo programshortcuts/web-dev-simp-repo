@@ -80,13 +80,7 @@ h4 .dark-mode p {
 body.dark-mode .side-bar ul li a.highlight {
     color: black !important;
 }
-.dark-mode button#endNxtBtn,
-.dark-mode button#prevBtn {
-    /* color: var(--font-primary) !important; */
-    /* background-color: grey !important; */
-    background: darkgrey !important;
-    /* background: black !important */
-}
+
 body.dark-mode .highlight {
     color: black !important;
 }
