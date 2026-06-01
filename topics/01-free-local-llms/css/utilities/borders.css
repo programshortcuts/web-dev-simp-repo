@@ -25,3 +25,6 @@ aside.side-bar{
 .step-float {
     border: 2px solid whitesmoke
 }
+.step-vid {
+    border: 1px solid blue;
+}
