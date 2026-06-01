@@ -10,7 +10,9 @@
     max-height: 80px;
 
 }
-
+.step-float{
+    /* min-width: 70vw; */
+}
 .side-bar ul>li {
     width: 100%;
 }

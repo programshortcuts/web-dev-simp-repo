@@ -23,7 +23,19 @@ body {
 
 
 
+.step-float ul,
+.step-float ol{
+    align-self: center;
+}
+
+
 .steps-container {
     display: flex;
     flex-direction: column;
+}
+.step-float>.step-txt {
+    /* flex-shrink: 1; */
+    flex-grow: 1;
+    /* max-width: 50%; */
+    flex-basis: 50%;
 }
