@@ -3,6 +3,7 @@ import { videoControls, pauseAllVideos } from "../ui/playStepVid.js";
 import { cycleMedia, denlargeAllImages } from "../ui/toggle-img-sizes.js";
 import { changeTutorialLink } from "../ui/change-tutorial-link.js";
 import { lastClickedSideBarLink } from "./side-bar-nav.js";
+import { getFocusZone } from "./get-focus-zone.js";
 
 let steps = [];
 let allVids = [];
@@ -76,7 +77,7 @@ export function initStepNavigation({ mainTargetDiv }) {
         });
 
         step.addEventListener('keydown', (e) => {
-
+            
             const key = e.key.toLowerCase();
             const stepFloat = e.target.closest('.step-float');
 
@@ -86,7 +87,6 @@ export function initStepNavigation({ mainTargetDiv }) {
 
             if (key === 'enter' && e.shiftKey) {
                 e.preventDefault();
-
                 const stepFloat =
                     e.target.closest('.step-float') ||
                     document.activeElement.closest('.step-float');
@@ -94,7 +94,7 @@ export function initStepNavigation({ mainTargetDiv }) {
                 if (!stepFloat) return;
 
                 // DO NOT run on links
-                if (e.target.tagName === 'A') return;
+                // if (e.target.closest('a')) return;
 
                 const items = [...stepFloat.querySelectorAll('.step-img, .step-vid')];
                 if (!items.length) return;
@@ -145,64 +145,53 @@ export function initStepNavigation({ mainTargetDiv }) {
                 step.focus()
                 return;
             }
+            if (key === 'm' && e.target.closest('a')) {
+
+                step.focus()
+                return;
+            }
 
             if (key === 'enter') {
+
+                const isLink = e.target.closest('a');
+
+                // 🧠 RULE 1: LET LINKS BE LINKS
+                if (isLink) return;
 
                 e.preventDefault();
 
                 // =========================
-                // STEP-FLOAT HAS FOCUS
+                // STEP HAS FOCUS
                 // =========================
                 if (e.target === stepFloat) {
 
-                    const focusables = [
-                        ...stepFloat.querySelectorAll(`
-                a,
-                button:not([tabindex="-1"]),
-                input,
-                textarea,
-                select,
-                .copy-code,
-                [tabindex]:not([tabindex="-1"])
-            `)
-                    ].filter(el => el !== stepFloat);
+                    const focusables = [...stepFloat.querySelectorAll(`
+            a,
+            button:not([tabindex="-1"]),
+            input,
+            textarea,
+            select,
+            .copy-code,
+            [tabindex]:not([tabindex="-1"])
+        `)].filter(el => el !== stepFloat);
 
-                    // =========================
-                    // MOVE TO FIRST FOCUSABLE
-                    // =========================
                     if (focusables.length) {
-
                         focusables[0].focus();
                         return;
                     }
 
-                    // =========================
-                    // NO FOCUSABLES
-                    // TOGGLE MEDIA
-                    // =========================
                     cycleMedia(stepFloat);
                     return;
                 }
 
                 // =========================
-                // COPY CODE HAS FOCUS
+                // COPY CODE
                 // =========================
                 if (e.target.classList.contains('copy-code')) {
-
                     cycleMedia(stepFloat);
                     return;
                 }
 
-                // =========================
-                // LINKS KEEP NORMAL BEHAVIOR
-                // =========================
-                if (e.target.tagName === 'A') {
-                    return;
-                }
-
-                // =========================
-                // OTHER FOCUSABLES
-                // =========================
                 cycleMedia(stepFloat);
                 return;
             }
@@ -221,7 +210,12 @@ document.addEventListener('keydown', (e) => {
     const key = e.key.toLowerCase();
 
     const active = document.activeElement;
-
+    if (e.target.closest('a')) {
+        if (getFocusZone(e.target) === 'mainTargetDiv'){
+            return
+        }
+        // return; // let browser handle Enter, Cmd+Enter, etc.
+    }
     if (!steps.length) return;
 
     // ignore typing inside media

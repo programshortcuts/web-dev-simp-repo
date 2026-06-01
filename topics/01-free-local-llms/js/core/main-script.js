@@ -50,6 +50,12 @@ function setupGlobalKeyListener() {
     addEventListener('keydown', (e) => {
 
         if (!e.key) return;
+        const active = document.activeElement;
+
+        // LET REAL LINKS ALWAYS WORK
+        if (active?.closest('#mainTargetDiv a')) {
+            return; // DO NOT ROUTE ANYTHING
+        }
 
         const key = e.key.toLowerCase();
 

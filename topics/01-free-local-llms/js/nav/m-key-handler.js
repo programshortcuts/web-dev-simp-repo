@@ -14,13 +14,14 @@ export function handleMKey({e,focusZone}) {
         } else if(document.contains(mainTargetDiv)){
             mainTargetDiv.focus()
         }
+        return
     }
     // 2. Otherwise ALWAYS go to mainTargetDiv
     if (focusZone === 'mainTargetDiv'){
         if (e.target === lastStep){
             mainTargetDiv.focus()
-            mainTargetDiv.scrollIntoView({behavior:'instant',block:'start'});
-            window.scrollIntoView({
+            // mainTargetDiv.scrollIntoView({behavior:'instant',block:'start'});
+            document.body.scrollIntoView({
                 behavior: 'smooth',
                 block: 'start',
                 inline: 'nearest'
@@ -32,15 +33,19 @@ export function handleMKey({e,focusZone}) {
                 lastStep.focus()
                 return
             }  
+        } else if(e.target.closest('a')) {
+            lastStep.focus()
         } else {
+
             mainTargetDiv.focus()
-            window.scrollIntoView({
+            document.body.scrollIntoView({
                 behavior: 'smooth',
                 block: 'start',
                 inline: 'nearest'
             });
         }
-        // console.log(focusZone)
+        
+        return        
         
     }
 }

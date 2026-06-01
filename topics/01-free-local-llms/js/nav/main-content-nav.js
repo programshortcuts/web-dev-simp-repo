@@ -20,10 +20,17 @@ export const mainTargetDiv =
 export function mainContentNav({ e, focusZone }) {
 
     const key = e.key?.toLowerCase();
-    const active = document.activeElement;
 
     if (!key) return;
+    const active = document.activeElement;
 
+    // ONLY main content links
+    const mainLink = active?.closest?.('#mainTargetDiv a');
+
+    if (mainLink) {
+        // LET BROWSER HANDLE ENTER/CLICK NATURALLY
+        return;
+    }
     // =========================
     // DO NOT INTERFERE WITH MEDIA
     // =========================
