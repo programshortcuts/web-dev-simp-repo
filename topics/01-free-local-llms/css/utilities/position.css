@@ -1,9 +1,9 @@
+/* position.css */
 .body{
     position: relative;
 }
-.box a {
-    height: 100%;
-}
+
+
 .box.tutorialLink-darkModeBtn-container{
     position: fixed !important;
     top: 0;
@@ -15,4 +15,27 @@
 }
 .box.tutorialLink-darkModeBtn-container {
     z-index: 9999
+}
+.lesson-btns-container {
+    position: fixed;
+    bottom: 0;
+    left: 20%;
+    z-index: 2;
+}
+
+/* Default step images */
+.step-vid,
+.step-img {
+    position: relative;
+    float: right;
+    
+}
+
+.step-vid>video,
+.step-img>img {
+    width: 100%;
+    height: 100%;
+}
+.clear {
+    clear: both;
 }

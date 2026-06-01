@@ -1,41 +1,16 @@
-.clear {
-    clear: both;
-}
-.imgs-container {
-    display: flex;
-    width: 100%;
-    gap: 5%;
-}
-
-.imgs-container>* {
-    /* flex-basis: 50%; */
-    flex-grow: 1;
-    width: 100%;
-    /* width: 40%; */
-}
-
 /* Default step images */
 .step-vid,
 .step-img {
-    position: relative;
-    float: right;
-    display: flex;
-    flex-direction: column;
-    /* margin-right: 5%; */
-    /* margin-left: 10px; */
-    max-height: 400px;
-    max-width: 350px;
-    min-height: 300px;
-    min-width: 250px;
-    /* box-shadow: 0 0 1px 1px lightcyan; */
+    
     pointer-events: auto;
     transition: all 0.025s ease;
     touch-action: manipulation;
     /* border: 1px solid blue  !important; */
     /* z-index: 5 */
 }
-.step-vid > video,
-.step-img > img {
+
+.step-vid>video,
+.step-img>img {
     width: 100%;
     height: 100%;
 }

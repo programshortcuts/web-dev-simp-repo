@@ -1,18 +1,16 @@
 @import url('responsive.css');
-
+/* components */
 @import url('components/side-bar.css');
-/* @import url('steps.css'); */
 /* uis */
 @import url('ui/toggle-side-bar.css');
 @import url('ui/side-bar.css');
 @import url('ui/copyCode.css');
+@import url('ui/toggle-img-sizes.css');
 /* utilities -> header */
 @import url('utilities/header/grid.css');
 @import url('utilities/header/layout.css');
 /* utilities -> steps */
-@import url('steps/step-text.css');
 @import url('steps/code-containers.css');
-@import url('steps/imgSizes.css');
 /* utilities */
 @import url('utilities/borders.css');
 @import url('utilities/colors.css');
