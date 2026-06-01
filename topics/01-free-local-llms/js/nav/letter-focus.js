@@ -1,4 +1,4 @@
-// letter-focus.js
+ // letter-focus.js
 let lastLetterPressed = null;
 import { handleMKey } from "./m-key-handler.js";
 import { mainTargetDiv } from "./main-content-nav.js";
