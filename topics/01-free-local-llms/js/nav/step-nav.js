@@ -139,12 +139,7 @@ export function initStepNavigation({ mainTargetDiv }) {
                 return;
             }
 
-            if (key === 'enter' && e.target.classList.contains('copy-code')) {
-
-                e.preventDefault();
-                cycleMedia(stepFloat);
-                return;
-            }
+            
             if (key === 'm' && e.target.classList.contains('copy-code')) {
 
                 step.focus()
@@ -155,9 +150,60 @@ export function initStepNavigation({ mainTargetDiv }) {
 
                 e.preventDefault();
 
-                // cycleMedia(stepFloat);
+                // =========================
+                // STEP-FLOAT HAS FOCUS
+                // =========================
+                if (e.target === stepFloat) {
 
-                stepFloat.querySelector('.copy-code')?.focus();
+                    const focusables = [
+                        ...stepFloat.querySelectorAll(`
+                a,
+                button:not([tabindex="-1"]),
+                input,
+                textarea,
+                select,
+                .copy-code,
+                [tabindex]:not([tabindex="-1"])
+            `)
+                    ].filter(el => el !== stepFloat);
+
+                    // =========================
+                    // MOVE TO FIRST FOCUSABLE
+                    // =========================
+                    if (focusables.length) {
+
+                        focusables[0].focus();
+                        return;
+                    }
+
+                    // =========================
+                    // NO FOCUSABLES
+                    // TOGGLE MEDIA
+                    // =========================
+                    cycleMedia(stepFloat);
+                    return;
+                }
+
+                // =========================
+                // COPY CODE HAS FOCUS
+                // =========================
+                if (e.target.classList.contains('copy-code')) {
+
+                    cycleMedia(stepFloat);
+                    return;
+                }
+
+                // =========================
+                // LINKS KEEP NORMAL BEHAVIOR
+                // =========================
+                if (e.target.tagName === 'A') {
+                    return;
+                }
+
+                // =========================
+                // OTHER FOCUSABLES
+                // =========================
+                cycleMedia(stepFloat);
                 return;
             }
         });
