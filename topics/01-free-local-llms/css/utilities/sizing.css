@@ -37,3 +37,24 @@
 .imgs-container {
     width: 100%;
 }
+/* Default step images */
+.step-vid,
+.step-img {
+    position: relative;
+    float: right;
+    display: flex;
+    flex-direction: column;
+    max-height: 400px;
+    max-width: 350px;
+    min-height: 300px;
+    min-width: 250px;
+    
+    /* border: 1px solid blue  !important; */
+    /* z-index: 5 */
+}
+
+.step-vid>video,
+.step-img>img {
+    width: 100%;
+    height: 100%;
+}

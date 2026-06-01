@@ -1,92 +1,87 @@
-/* Default step images */
-.step-vid,
-.step-img {
-    
+/* =========================
+   BASE MEDIA BEHAVIOR
+========================= */
+
+.step-img,
+.step-vid {
+    position: relative;
     pointer-events: auto;
-    transition: all 0.025s ease;
+    transition: transform 0.1s ease, 
+                  opacity 0.1s ease;
     touch-action: manipulation;
-    /* border: 1px solid blue  !important; */
-    /* z-index: 5 */
 }
 
-.step-vid>video,
-.step-img>img {
+/* ensure media fills normal layout */
+.step-img img,
+.step-vid video {
     width: 100%;
-    height: 100%;
-}
-.enlarge,
-.enlarge {
-    /* not absolute, escape parent */
-    position: fixed;
-    pointer-events: auto;
-    top: 25%;
-    left: 30%;
-    /* bottom: 50%; */
-    /* width:  100%; */
-    /* height: 100%; */
-    /* max-height: 200px; */
-    /* max-width: 450px; */
-    transform: translate(-80%, -90%) ;
-    transform: scale(1.9);
-    z-index: 9999 !important;
-}
-.step-vid>video,
-.step-img>img {
-    /* position: absolute; */
-    width: 100%;
-    height: 100%;
-}
-.step-float .step-vid.enlarge video,
-.step-float .step-img.enlarge img{
-    position: absolute;
-    border: black 1px solid ;
-}                                        
-.step-img::after,
-.step-vid::after {
-    content: "";
+    height: auto;
     display: block;
-    clear: both;
 }
 
 
-/* Enlarged images always on top */
-.step-vid,
-.step-img {
-    /* z-index: inherit */
-}
-.step-vid{
-    /* position: relative; */
-    /* display: flex; */
-    /* flex-direction: column; */
-}
-.step-vid.enlarge .vid-cntrl-btns{
-    position: absolute;
+/* =========================
+   ENLARGED STATE (FOCUS MODE)
+========================= */
+
+.step-img.enlarge,
+.step-vid.enlarge {
+    position: fixed !important;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(1.05);
+
+    z-index: 999999 !important;
+
+    max-width: 90vw;
+    max-height: 90vh;
+
+    width: auto !important;
+    height: auto !important;
+
     display: flex;
-    width: 100%;
-    /* align-items: center; */
-    justify-content: space-around;
-    /* gap: 50%; */
-    bottom: 5%;
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(0, 0, 0, 0.85);
+    padding: 8px;
+    border-radius: 6px;
 }
-.vid-cntrl-btns > button{
-    background-color: rgb(0,0,0,0);
-    border-radius: 10%;
-    /* border: 1px solid whitesmoke; */
-    padding: 0 5%;
-} 
-.vid-cntrl-btns{ 
-    display: none;
+
+/* media inside enlarged state */
+.step-img.enlarge img,
+.step-vid.enlarge video {
+    max-width: 90vw;
+    max-height: 90vh;
+    width: auto;
+    height: auto;
+    object-fit: contain;
 }
-@media screen and (min-width: 700px) {
-    .enlarge{
-        /* position: fixed !important; */
-        /* top: 50% !important; */
-        /* left: 50% !important; */
-        /* transform: translate(-50%, -50%) scale(2); */
-        /* max-width: 50vw; */
-        /* max-height: 50vh; */
-        /* z-index: 9999 !important; */
-        /* DUDE This fixed it somehow,the double tap */
-        pointer-events: none;
+
+
+/* =========================
+   OPTIONAL: DARK BACKDROP EFFECT
+   (only visual, no logic)
+========================= */
+
+.step-img.enlarge::before,
+.step-vid.enlarge::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: -1;
+}
+/* =========================
+   SAFETY: prevent sidebar stacking issues
+========================= */
+.step-img.enlarge,
+.step-vid.enlarge {
+    isolation: isolate;
+}
+@media screen and(max-width: 700px) {
+    .step-img.enlarge,
+    .step-vid.enlarge {
+        transform: translate(-50%, -80%)  !important;
     }
 }

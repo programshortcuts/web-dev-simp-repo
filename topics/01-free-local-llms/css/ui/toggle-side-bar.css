@@ -1,4 +1,4 @@
-
+/* toggle-side-bar.css */
 main.main-container.collapsed .side-bar {
   width: var(--sidebar-collapsed-width)
 }
@@ -12,20 +12,7 @@ main.main-container.collapsed .side-bar .sidebar-links-ul {
   display: none;
 }
 
-main.main-container.collapsed #sideBarBtn {
-  max-height: fit-content;
-  position: fixed;
-  /* reset top */
-  transform: scale(2.5);
-  top: auto;
-  /* now bottom works */
-  bottom: 50%;
-  left: 20%;
-  margin-left: 5%;
-  z-index: 10;
-  /* keep it above everything */
-  /* keep it bottom-left of screen */
-}
+
 /* When main-container is collapsed, adjust its left position */
 
 main.main-container.collapsed #sideBarBtn {
