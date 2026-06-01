@@ -1,8 +1,17 @@
 @media screen and (min-width: 701px) {
-    .enlarge{
-        top: 10%;
-        left: 42% !important;
-        transform: scale(4) !important;
+    .step-img.enlarge,
+    .step-vid.enlarge {    
+        max-width:  80vw !important;
+        max-height: 80vh !important;
+    }
+    .img-container > .step-img.enlarge,
+    .img-container >.step-vid.enlarge {
+        transform: translate(-33%) !important;
+    }
+    .step-img.enlarge > img,
+    .step-vid.enlarge > video{    
+        max-width:  70vw !important;
+        max-height: 70vh !important;
     }
 }
 @media screen and (max-width: 700px) {
@@ -40,4 +49,9 @@
     .side-bar-links {
         margin-top: 50% !important;
     }
+        :root {
+            --sidebar-width: 100px !important;
+        }
 }
+
+

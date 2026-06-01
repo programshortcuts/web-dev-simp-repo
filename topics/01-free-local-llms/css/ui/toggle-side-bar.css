@@ -1,4 +1,7 @@
 /* toggle-side-bar.css */
+:root {
+  --sidebar-collapsed-width: 2.5%;
+}
 main.main-container.collapsed .side-bar {
   width: var(--sidebar-collapsed-width)
 }
