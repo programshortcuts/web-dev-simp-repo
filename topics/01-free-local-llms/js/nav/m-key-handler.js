@@ -20,13 +20,25 @@ export function handleMKey({e,focusZone}) {
         if (e.target === lastStep){
             mainTargetDiv.focus()
             mainTargetDiv.scrollIntoView({behavior:'instant',block:'start'});
+            window.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start',
+                inline: 'nearest'
+            });
             return
         } else
         if(e.target === mainTargetDiv){
             if(lastStep){
                 lastStep.focus()
                 return
-            } 
+            }  
+        } else {
+            mainTargetDiv.focus()
+            window.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start',
+                inline: 'nearest'
+            });
         }
         // console.log(focusZone)
         

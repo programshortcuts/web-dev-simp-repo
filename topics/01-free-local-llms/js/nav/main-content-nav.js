@@ -51,7 +51,8 @@ export function mainContentNav({ e, focusZone }) {
         nxtBtn?.focus?.();
         mainContainer?.scrollIntoView({
             behavior: 'smooth',
-            block: 'end'
+            block: 'end',
+            inline: 'end'
         });
 
         return;

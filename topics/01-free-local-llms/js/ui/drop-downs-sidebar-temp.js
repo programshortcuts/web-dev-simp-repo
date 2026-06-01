@@ -9,11 +9,14 @@ export function initDropDowns() {
         // --- Handle keyboard activation ---
         if (e.type === "keydown") {
 
-            const dropdown = e.target.closest(".drop-down");
+            const dropdown =
+                e.target.classList.contains("drop-down")
+                    ? e.target
+                    : null;
 
             if (
-                (e.key === "Enter" || e.key === " ") &&
-                dropdown
+                dropdown &&
+                (e.key === "Enter" || e.key === " ")
             ) {
 
                 e.preventDefault();

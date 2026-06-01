@@ -88,6 +88,7 @@ allSideBarLinks.forEach((el, i) => {
 
         if (key === 'm') {
             handleMKey({ e, focusZone: mainTargetDiv });
+            return
         }
     });
 
