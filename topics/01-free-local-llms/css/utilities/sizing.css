@@ -28,7 +28,6 @@
 .side-bar ul>li>ul>li>a {
     font-size: 90%;
 }
-
 #endNxtBtn,
 #prevBtn {
     width: 80%;
@@ -54,7 +53,6 @@
     /* min-height: 200px; */
     /* min-width: 200px; */
 }
-
 .step-vid>video,
 .step-img>img {
     width: 100%;
