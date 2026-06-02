@@ -14,7 +14,7 @@ export function handleMKey({e,focusZone}) {
         if(key === 'm'){
             if (lastStep) {
                 lastStep.focus()
-            } else if (document.contains(mainTargetDiv)) {
+            } else  {
                 mainTargetDiv.focus()
             }
         }

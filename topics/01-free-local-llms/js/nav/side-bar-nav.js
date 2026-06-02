@@ -64,6 +64,7 @@ function getParentTopLink(subLink) {
 allSideBarLinks.forEach((el, i) => {
     // CLICK
     el.addEventListener('click', e => {
+        removeAllHighlights(allSideBarLinks)
         e.preventDefault();
         lastClickedSideBarLink = el;
         injectContent(el.href);
@@ -95,18 +96,14 @@ allSideBarLinks.forEach((el, i) => {
 
     // FOCUS
     el.addEventListener('focus', () => {
+        removeAllHighlights(allSideBarLinks)
         lastFocusedSideBarLink = el;
         if (!suppressIndexUpdate) {
             iSideBarLinks = i;
         }
         el.classList.add('highlight')
     });
-    el.addEventListener('focusout', () => {
-        if(el.classList.contains('highlight')){
-            el.classList.remove('highlight')
-            
-        }
-    });
+    
 });
 
 /* =========================
@@ -209,3 +206,11 @@ sideBarBtn.addEventListener('focus', () => {
     // sideBar.scrollIntoView({ behavior: "smooth", block: "start",inline:'start' });
     scrollTo(0,0)
 });
+
+function removeAllHighlights(allSideBarLinks){
+    allSideBarLinks.forEach(el => {
+        if(el.classList.contains('highlight')){
+            el.classList.remove('highlight')
+        }
+    })
+}
