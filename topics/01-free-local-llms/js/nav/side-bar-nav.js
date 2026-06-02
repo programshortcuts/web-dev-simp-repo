@@ -87,6 +87,7 @@ allSideBarLinks.forEach((el, i) => {
         }
 
         if (key === 'm') {
+            
             handleMKey({ e, focusZone: mainTargetDiv });
             return
         }
@@ -144,7 +145,7 @@ export function sideBarNav({ e, focusZone }) {
 
     /* ---- M KEY ---- */
     if (key === 'm') {
-        handleMKey({ e, focusZone: mainTargetDiv });
+        handleMKey({ e, focusZone,mainTargetDiv });
         return;
     }
 
