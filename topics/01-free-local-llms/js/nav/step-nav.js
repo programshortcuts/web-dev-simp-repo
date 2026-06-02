@@ -45,6 +45,9 @@ export function initStepNavigation({ mainTargetDiv }) {
             denlargeAllImages();
             pauseAllVideos();
 
+            // IMPORTANT FIX
+            step.dataset.mediaIndex = -1;
+
             step.scrollIntoView({
                 behavior: 'smooth',
                 block: 'center'
