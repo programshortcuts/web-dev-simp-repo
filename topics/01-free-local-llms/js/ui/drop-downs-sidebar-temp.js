@@ -1,14 +1,17 @@
 // drop-downs-sidebar-temp.js
+import { mainTargetDiv } from "../nav/main-content-nav.js";
 export function initDropDowns() {
     document.addEventListener("click", handleToggle);
     document.addEventListener("keydown", handleToggle);
     hideTopicSnips()
     function handleToggle(e) {
         let link;
-
+        const key = e.key.toLowerCase()
         // --- Handle keyboard activation ---
         if (e.type === "keydown") {
-
+            if(key === 'm'){
+                mainTargetDiv.focus()
+            }
             const dropdown =
                 e.target.classList.contains("drop-down")
                     ? e.target

@@ -1,8 +1,12 @@
+#mainTargetDiv:focus,
+#mainTargetDiv:active {
+
+    box-shadow: 2px 1px 10px rgb(126, 139, 144);
+    border: 5px solid rgb(119, 153, 140);
+}
 .step-float:focus,
-/* .step-float:hover ,*/
 .step-float:active {
     box-shadow: 2px 2px 10px lightblue;
-    /* border: 2px solid rgb(119, 153, 140); */
     background-color: rgb(126, 139, 144);
     box-shadow: 2px 1px 10px rgb(116, 106, 60);
     outline: none
