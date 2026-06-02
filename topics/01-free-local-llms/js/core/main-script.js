@@ -5,7 +5,7 @@ import { getFocusZone } from "../nav/get-focus-zone.js";
 import { initDropDowns } from "../ui/drop-downs-sidebar-temp.js";
 
 import { initStepNavigation, lastStep } from "../nav/step-nav.js";
-
+import { initMediaClicks } from "../ui/toggle-img-sizes.js";
 import {
     initToggleSidebar,
     mainContainer,
@@ -35,7 +35,7 @@ function initMain() {
 
     initDropDowns();
     initToggleSidebar();
-
+    initMediaClicks()
     initStepNavigation({ mainTargetDiv });
 
     setupGlobalKeyListener();

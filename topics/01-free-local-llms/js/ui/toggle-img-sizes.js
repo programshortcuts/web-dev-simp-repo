@@ -52,10 +52,20 @@ export function cycleMedia(step) {
 // =========================
 // CLICK TOGGLE SINGLE MEDIA
 // =========================
-export function clickToggleImgSize(e) {
+// =========================
+// GLOBAL MEDIA CLICK
+// =========================
+export function initMediaClicks(root = document) {
 
-    const media = e.target.closest('.step-img, .step-vid');
-    if (!media) return;
+    root.addEventListener("click", e => {
 
-    media.classList.toggle('enlarge');
+        const media = e.target.closest(".step-img, .step-vid");
+
+        if (!media) return;
+
+        // prevent video controls from triggering enlarge
+        if (e.target.closest(".vid-cntrl-btns")) return;
+
+        media.classList.toggle("enlarge");
+    });
 }
