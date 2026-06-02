@@ -20,13 +20,16 @@ main.main-container.collapsed .side-bar .sidebar-links-ul {
 
 main.main-container.collapsed #sideBarBtn {
   max-height: fit-content;
-  position: fixed;
+  position: absolute;
   /* reset top */
   /* top: auto; */
   /* now bottom works */
-  bottom: 50px;
+  top: 76%;
+  left: 2.5%;
+  margin-left: 70%;
+  transform: scale(1.8);
   left: 0px;
-  z-index: 9999;
+  z-index: 9999 !important;
   /* keep it above everything */
   /* keep it bottom-left of screen */
 }

@@ -98,6 +98,13 @@ allSideBarLinks.forEach((el, i) => {
         if (!suppressIndexUpdate) {
             iSideBarLinks = i;
         }
+        el.classList.add('highlight')
+    });
+    el.addEventListener('focusout', () => {
+        if(el.classList.contains('highlight')){
+            el.classList.remove('highlight')
+            
+        }
     });
 });
 
