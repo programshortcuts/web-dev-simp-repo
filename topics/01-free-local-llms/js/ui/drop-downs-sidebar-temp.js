@@ -6,9 +6,12 @@ export function initDropDowns() {
     hideTopicSnips()
     function handleToggle(e) {
         let link;
-        const key = e.key.toLowerCase()
+        
+        
+        // console.log(typeof(e.key.toLowerCase()))
         // --- Handle keyboard activation ---
         if (e.type === "keydown") {
+            const key = e.key.toLowerCase()
             if(key === 'm'){
                 mainTargetDiv.focus()
             }

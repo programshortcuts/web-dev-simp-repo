@@ -59,7 +59,7 @@ export function initMediaClicks(root = document) {
 
     root.addEventListener("click", e => {
 
-        const media = e.target.closest(".step-img, .step-vid");
+        const media = e.target.closest(".step-img");
 
         if (!media) return;
 

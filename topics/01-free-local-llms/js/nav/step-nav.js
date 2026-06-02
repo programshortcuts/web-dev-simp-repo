@@ -1,5 +1,5 @@
 // step-nav.js
-import { videoControls, pauseAllVideos } from "../ui/playStepVid.js";
+import { pauseAllVideos } from "../ui/video-controls.js";
 import { cycleMedia, denlargeAllImages } from "../ui/toggle-img-sizes.js";
 import { changeTutorialLink } from "../ui/change-tutorial-link.js";
 import { lastClickedSideBarLink } from "./side-bar-nav.js";
@@ -28,32 +28,7 @@ export function initStepNavigation({ mainTargetDiv }) {
     // =========================
     // VIDEO (CLICK ONLY)
     // =========================
-    allVids.forEach(vid => {
-        vid.addEventListener('click', (e) => {
 
-            const stepFloat = vid.closest('.step-float');
-            if (!stepFloat) return;
-
-            const wrapper = vid.closest('.step-vid');
-            if (!wrapper) return;
-
-            const isAlreadyEnlarged = wrapper.classList.contains('enlarge');
-
-            // reset others always
-            denlargeAllImages();
-            pauseAllVideos({ allVids });
-
-            // TOGGLE behavior
-            if (!isAlreadyEnlarged) {
-                wrapper.classList.add('enlarge');
-            } else {
-                stepFloat.dataset.mediaIndex = -1;
-            }
-
-            // play/pause
-            videoControls({ vid, e });
-        });
-    });
 
     // =========================
     // STEP EVENTS
@@ -68,7 +43,7 @@ export function initStepNavigation({ mainTargetDiv }) {
             iSteps = index;
 
             denlargeAllImages();
-            pauseAllVideos({ allVids });
+            pauseAllVideos();
 
             step.scrollIntoView({
                 behavior: 'smooth',
@@ -107,7 +82,7 @@ export function initStepNavigation({ mainTargetDiv }) {
                 // END → reset everything + return focus
                 if (!activeItem) {
                     denlargeAllImages();
-                    pauseAllVideos({ allVids });
+                    pauseAllVideos();
 
                     stepFloat.dataset.mediaIndex = -1;
 
@@ -120,7 +95,7 @@ export function initStepNavigation({ mainTargetDiv }) {
 
                 // NORMAL CYCLE
                 denlargeAllImages();
-                pauseAllVideos({ allVids });
+                pauseAllVideos();
 
                 activeItem.classList.add('enlarge');
 
@@ -135,10 +110,7 @@ export function initStepNavigation({ mainTargetDiv }) {
 
             }
 
-            if (e.target.tagName === 'VIDEO') {
-                videoControls({ vid: e.target, e });
-                return;
-            }
+            
 
             
             if (key === 'm' && e.target.classList.contains('copy-code')) {

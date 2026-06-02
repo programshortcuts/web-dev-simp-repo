@@ -5,6 +5,14 @@ export function handleMKey({e,focusZone}) {
     e.preventDefault();
     e.stopPropagation();
     let key = e.key.toLowerCase()
+    if(focusZone == 'sideBar'){
+        if(lastStep){
+            lastStep.focus()
+        } else if(document.contains(mainTargetDiv)){
+            mainTargetDiv.focus()
+        }
+        return
+    }
     // 1. If there is a lastStep → ALWAYS go there
     // console.log(lastFocusedMainEl)
     // console.log('handle m key')

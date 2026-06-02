@@ -1,5 +1,6 @@
 // main-script.js
 // ===== Imports =====
+import { initAllVideos } from "../ui/video-controls.js";
 import { letterFocus } from "../nav/letter-focus.js";
 import { getFocusZone } from "../nav/get-focus-zone.js";
 import { initDropDowns } from "../ui/drop-downs-sidebar-temp.js";
@@ -37,7 +38,7 @@ function initMain() {
     initToggleSidebar();
     initMediaClicks()
     initStepNavigation({ mainTargetDiv });
-
+    initAllVideos(mainTargetDiv);
     setupGlobalKeyListener();
 }
 
@@ -49,15 +50,32 @@ function setupGlobalKeyListener() {
 
     addEventListener('keydown', (e) => {
 
-        if (!e.key) return;
         const active = document.activeElement;
 
-        // LET REAL LINKS ALWAYS WORK
-        if (active?.closest('#mainTargetDiv a')) {
-            return; // DO NOT ROUTE ANYTHING
-        }
-
         const key = e.key.toLowerCase();
+
+        // =========================
+        // GLOBAL M KEY
+        // =========================
+        if (key === 'm') {
+
+            e.preventDefault();
+            e.stopPropagation();
+
+            if (lastStep) {
+                lastStep.focus();
+            } else {
+                mainTargetDiv.focus();
+            }
+
+            return;
+        }
+        if (
+            active?.closest('#mainTargetDiv a') &&
+            key !== 'm'
+        ) {
+            return;
+        }
 
         let focusZone = getFocusZone({ e });
 

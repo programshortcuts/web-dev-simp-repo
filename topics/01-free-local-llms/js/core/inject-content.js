@@ -1,11 +1,11 @@
 // inject-content.js (CLEAN RESET ENGINE)
-
 import { allSideBarLinks, lastClickedSideBarLink, updateLastClicked, getHrefFromLink } from "../nav/side-bar-nav.js";
 import { mainTargetDiv } from "../nav/main-content-nav.js";
 import { initStepNavigation } from "../nav/step-nav.js";
 import { refreshImages, denlargeAllImages } from "../ui/toggle-img-sizes.js";
 import { addCopyCode } from "../ui/copy-code.js";
 import { mainContainer } from "../ui/toggle-side-bar.js";
+import { initAllVideos } from "../ui/video-controls.js";
 
 export const nxtBtn = document.querySelector('#endNxtBtn');
 export const prevBtn = document.querySelector('#prevBtn');
@@ -34,61 +34,7 @@ function highlightSidebar() {
     }
 }
 
-// =========================
-// CONTENT LOADER
-// =========================
 
-export function injectContent(href) {
-
-    fetch(href)
-        .then(res => {
-            if (!res.ok) throw new Error(res.status);
-            return res.text();
-        })
-        .then(html => {
-
-            // =========================
-            // 1. RESET STATE BEFORE INJECT
-            // =========================
-
-            denlargeAllImages();
-
-            mainTargetDiv.innerHTML = html;
-
-            scrollTo(0, 0);
-
-            // =========================
-            // 2. REINITIALIZE CORE SYSTEMS
-            // =========================
-
-            refreshImages(mainTargetDiv);
-            initStepNavigation({ mainTargetDiv });
-
-            addCopyCode();
-
-            // =========================
-            // 3. CLEAN FOCUS STATE
-            // =========================
-
-            const firstStep =
-                mainTargetDiv.querySelector('.step-float');
-
-            if (firstStep) {
-                // firstStep.focus();
-            }
-
-            // =========================
-            // 4. OPTIONAL CALLBACK HOOK
-            // =========================
-
-            if (typeof callback === "function") {
-                callback();
-            }
-        })
-        .catch(err => {
-            console.error('Failed to load content:', err);
-        });
-}
 
 // =========================
 // NEXT BUTTON
@@ -138,3 +84,59 @@ prevBtn?.addEventListener('click', e => {
         injectContent(href);
     }
 });
+
+// =========================
+// CONTENT LOADER
+// =========================
+
+export function injectContent(href) {
+
+    fetch(href)
+        .then(res => {
+            if (!res.ok) throw new Error(res.status);
+            return res.text();
+        })
+        .then(html => {
+
+            // =========================
+            // 1. RESET STATE BEFORE INJECT
+            // =========================
+
+            denlargeAllImages();
+
+            mainTargetDiv.innerHTML = html;
+
+            scrollTo(0, 0);
+
+            // =========================
+            // 2. REINITIALIZE CORE SYSTEMS
+            // =========================
+
+            refreshImages(mainTargetDiv);
+            addCopyCode();
+            initStepNavigation({ mainTargetDiv });
+            initAllVideos(mainTargetDiv)
+
+            // =========================
+            // 3. CLEAN FOCUS STATE
+            // =========================
+
+            const firstStep =
+                mainTargetDiv.querySelector('.step-float');
+
+            if (firstStep) {
+                // firstStep.focus();
+            }
+
+            // =========================
+            // 4. OPTIONAL CALLBACK HOOK
+            // =========================
+
+            if (typeof callback === "function") {
+                callback();
+            }
+        })
+        .catch(err => {
+            console.error('Failed to load content:', err);
+        });
+}
