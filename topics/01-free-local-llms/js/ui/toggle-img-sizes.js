@@ -1,18 +1,17 @@
 // toggle-img-sizes.js
 /* =========================
-   MEDIA STATE SYSTEM (CLEAN)
+   MEDIA SYSTEM (FINAL CLEAN VERSION)
 ========================= */
 
 let mediaCache = [];
 
 /* =========================
-   INIT CACHE
+   INIT
 ========================= */
 export function initMediaCache(root = document) {
     mediaCache = [...root.querySelectorAll('.step-img, .step-vid')];
 }
 
-/* alias for compatibility */
 export function refreshImages(root = document) {
     initMediaCache(root);
 }
@@ -30,7 +29,7 @@ export function denlargeAllImages() {
 }
 
 /* =========================
-   STEP-LEVEL CYCLING
+   STEP CYCLING
 ========================= */
 export function cycleMedia(step) {
     if (!step) return;
@@ -38,43 +37,42 @@ export function cycleMedia(step) {
     const items = [...step.querySelectorAll('.step-img, .step-vid')];
     if (!items.length) return;
 
-    // current index
     let index = Number(step.dataset.mediaIndex ?? -1);
     index++;
 
-    // reset if overflow
     if (index >= items.length) {
         items.forEach(el => el.classList.remove('enlarge'));
         step.dataset.mediaIndex = -1;
         return;
     }
 
-    // clear previous
     items.forEach(el => el.classList.remove('enlarge'));
 
-    // set new
     const active = items[index];
     active.classList.add('enlarge');
 
     step.dataset.mediaIndex = index;
 
-    // if it's a video, try play safely
     if (active.classList.contains('step-vid')) {
-        const vid = active.querySelector('video');
-        vid?.play();
+        active.querySelector('video')?.play();
     }
 }
 
 /* =========================
-   CLICK TOGGLE (MEDIA ONLY)
+   CLICK HANDLER (BULLETPROOF)
 ========================= */
 export function initMediaClicks(root = document) {
-    root.addEventListener('click', (e) => {
+
+    root.addEventListener("click", (e) => {
+
+        // 🚨 ABSOLUTE RULE: if ANY control is involved, STOP EVERYTHING
+        if (e.target.closest('.vid-cntrl-btns')) return;
+        if (e.target.closest('.playbtn')) return;
+        if (e.target.closest('.fwdBtn')) return;
+        if (e.target.closest('.rwdBtn')) return;
+
         const media = e.target.closest('.step-img, .step-vid');
         if (!media) return;
-
-        // ignore controls completely
-        if (e.target.closest('.playbtn, .fwdBtn, .rwdBtn')) return;
 
         const step = media.closest('.step-float');
         if (!step) return;
@@ -83,37 +81,34 @@ export function initMediaClicks(root = document) {
 
         const wasActive = media.classList.contains('enlarge');
 
-        // reset step first
         items.forEach(el => el.classList.remove('enlarge'));
         step.dataset.mediaIndex = -1;
 
-        // re-apply if not same
         if (!wasActive) {
             media.classList.add('enlarge');
             step.dataset.mediaIndex = items.indexOf(media);
-
-            const vid = media.querySelector('video');
-            vid?.play?.();
         }
-    });
+
+    }, true); // capture phase is REQUIRED
 }
 
 /* =========================
-   GLOBAL RESET ON OUTSIDE CLICK
+   OUTSIDE CLICK RESET
 ========================= */
-export function initGlobalMediaReset(root = document) {
+export function initGlobalMediaReset() {
     document.addEventListener('pointerdown', (e) => {
-        const isMedia = e.target.closest('.step-img, .step-vid');
-        const isControl = e.target.closest('.playbtn, .fwdBtn, .rwdBtn');
 
-        if (isMedia || isControl) return;
+        if (
+            e.target.closest('.step-img, .step-vid') ||
+            e.target.closest('.vid-cntrl-btns')
+        ) return;
 
         denlargeAllImages();
     });
 }
 
 /* =========================
-   OPTIONAL FOCUS RESET
+   FOCUS RESET
 ========================= */
 export function bindMainFocusReset(mainTargetDiv) {
     if (!mainTargetDiv) return;
