@@ -43,6 +43,14 @@ export function initStepNavigation({ mainTargetDiv }) {
             changeTutorialLink(e);
         });
 
+        step.addEventListener('pointerup', (e) => {
+            changeTutorialLink(e);
+        });
+
+        step.addEventListener('touchend', (e) => {
+            changeTutorialLink(e);
+        });
+
         step.addEventListener('keydown', (e) => handleStepKey(e, step, index));
     });
 
