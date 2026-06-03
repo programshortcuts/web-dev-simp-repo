@@ -42,9 +42,10 @@
    BUTTONS
 ========================= */
 
-.vid-cntrl-btns>button {
+.step-vid.enlarge .vid-cntrl-btns>button {
+
     flex: 1;
-    z-index: 9000;
+    
 
     background: transparent;
     color: white;
