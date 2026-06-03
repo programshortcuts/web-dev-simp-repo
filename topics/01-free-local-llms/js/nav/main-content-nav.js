@@ -38,7 +38,7 @@ export function mainContentNav({ e, focusZone }) {
         active?.tagName === 'VIDEO' ||
         active?.classList?.contains('copy-code');
 
-    if (isMedia) {
+    if (isMedia && key !== 't') {
         return;
     }
 
