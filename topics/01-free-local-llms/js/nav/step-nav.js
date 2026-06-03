@@ -39,6 +39,10 @@ export function initStepNavigation({ mainTargetDiv }) {
             });
         });
 
+        step.addEventListener('click', (e) => {
+            changeTutorialLink(e);
+        });
+
         step.addEventListener('keydown', (e) => handleStepKey(e, step, index));
     });
 
