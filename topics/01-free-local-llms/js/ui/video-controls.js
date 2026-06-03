@@ -21,18 +21,37 @@ function bindVideoControls(step) {
     const playBtn = step.querySelector('.playbtn');
     const fwdBtn = step.querySelector('.fwdBtn');
     const rwdBtn = step.querySelector('.rwdBtn');
-    if(vid){
 
-    }
+    vid.addEventListener('ended', () => {
+        resetVideoToPoster(vid);
+        syncPlayBtn(playBtn, vid);
+    });
+
+    vid.addEventListener('timeupdate', () => {
+        ensurePosterAtStart(vid, playBtn);
+    });
+
+    vid.addEventListener('seeked', () => {
+        ensurePosterAtStart(vid, playBtn);
+    });
     /* =========================
        PLAY / PAUSE
     ========================= */
     playBtn?.addEventListener('click', (e) => {
-        
         e.preventDefault();
         e.stopPropagation();
 
-        togglePlay(vid);
+        const wasPlaying = !vid.paused;
+
+        pauseAllVideos(document, vid);
+
+        if (wasPlaying) {
+            vid.pause();
+            syncPlayBtn(playBtn, vid);
+            return;
+        }
+
+        vid.play()?.catch(() => {});
         syncPlayBtn(playBtn, vid);
     });
     /* =========================
@@ -58,7 +77,21 @@ function bindVideoControls(step) {
             0,
             vid.currentTime - 5
         );
+
+        if (vid.currentTime <= 0.05) {
+            resetVideoToPoster(vid);
+            syncPlayBtn(playBtn, vid);
+        }
     });
+    const pauseOtherStepVideos = (e) => {
+        if (e.target.closest('.vid-cntrl-btns, .playbtn, .fwdBtn, .rwdBtn')) return;
+        pauseAllVideos();
+    };
+
+    step.addEventListener('click', pauseOtherStepVideos);
+    step.addEventListener('pointerup', pauseOtherStepVideos);
+    step.addEventListener('touchend', pauseOtherStepVideos);
+
     /* =========================
        KEYBOARD CONTROLS (STEP ONLY)
     ========================= */
@@ -80,6 +113,11 @@ function bindVideoControls(step) {
         if (e.key === 'ArrowLeft') {
             e.preventDefault();
             vid.currentTime = Math.max(0, vid.currentTime - 0.5);
+
+            if (vid.currentTime <= 0.05) {
+                resetVideoToPoster(vid);
+                syncPlayBtn(playBtn, vid);
+            }
             return;
         }
 
@@ -106,18 +144,48 @@ function togglePlay(vid) {
 
 function syncPlayBtn(btn, vid) {
     if (!btn) return;
-    btn.textContent = vid.paused ? '||' : '>';
+    btn.textContent = vid.paused ? '>' : '||';
+}
+
+function resetVideoToPoster(vid) {
+    if (!vid) return;
+
+    try {
+        vid.pause();
+        vid.currentTime = 0;
+        vid.load();
+    } catch (error) {
+        // ignore reset errors
+    }
+}
+
+function ensurePosterAtStart(vid, btn) {
+    if (!vid || vid.dataset.posterResetting === 'true') return;
+
+    if (vid.paused && vid.currentTime <= 0.05 && !vid.ended) {
+        vid.dataset.posterResetting = 'true';
+        resetVideoToPoster(vid);
+        syncPlayBtn(btn, vid);
+
+        setTimeout(() => {
+            delete vid.dataset.posterResetting;
+        }, 100);
+    }
 }
 
 /* =========================
    GLOBAL SAFETY PAUSE
 ========================= */
 
-export function pauseAllVideos(root = document) {
+export function pauseAllVideos(root = document, keepVideo = null) {
     const vids = root.querySelectorAll('video');
 
     vids.forEach((vid) => {
-        vid.pause();
+        if (vid === keepVideo) {
+            return;
+        }
+
+        resetVideoToPoster(vid);
 
         const step = vid.closest('.step-float');
         const btn = step?.querySelector('.playbtn');
