@@ -203,6 +203,11 @@ document.addEventListener('keydown', (e) => {
         if(key === 's'){
             lastClickedSideBarLink.focus()
         }
+        if (key === 't') {
+            console.log(tutorialLink)
+            tutorialLink.focus()
+            return;
+        }
         return;
     }
     

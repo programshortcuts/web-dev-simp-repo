@@ -83,12 +83,5 @@
     height: auto;
 }
 .step-vid.enlarge video {
-    /* width: 100%; */
-    /* height: auto; */
-}
-
-.step-vid.enlarge {
-
-} 
-.step-vid.enlarge {
+    pointer-events: none;
 }

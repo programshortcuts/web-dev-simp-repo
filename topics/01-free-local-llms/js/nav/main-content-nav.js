@@ -1,5 +1,5 @@
 // main-content-nav.js
-
+import { tutorialLink } from "../ui/change-tutorial-link.js";
 import { handleMKey } from "./m-key-handler.js";
 import {
     mainContainer,
@@ -70,6 +70,7 @@ export function mainContentNav({ e, focusZone }) {
         prevBtn?.focus?.();
         return;
     }
+    
 
     // =========================
     // HEADER / NAV SHORTCUTS
@@ -95,7 +96,10 @@ export function mainContentNav({ e, focusZone }) {
 
         return;
     }
-
+    if (key === 't') {
+        tutorialLink.focus()
+        return;
+    }
     // =========================
     // (IMPORTANT)
     // DO NOT HANDLE STEP NAV HERE ANYMORE
