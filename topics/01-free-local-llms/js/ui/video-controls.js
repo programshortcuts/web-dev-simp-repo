@@ -78,12 +78,10 @@ function bindVideoControls(step) {
         e.preventDefault();
         e.stopPropagation();
 
-        vid.currentTime = Math.max(
-            0,
-            vid.currentTime - 5
-        );
+        const nextTime = Math.max(0, vid.currentTime - 0.5);
+        vid.currentTime = nextTime;
 
-        if (vid.currentTime <= 0.05) {
+        if (nextTime <= 0.05) {
             resetVideoToPoster(vid);
             syncPlayBtn(playBtn, vid);
         }
