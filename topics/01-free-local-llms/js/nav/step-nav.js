@@ -42,7 +42,6 @@ export function initStepNavigation({ mainTargetDiv }) {
             lastStep = step;
             iSteps = index;
 
-            pauseAllVideos();
 
 
             step.scrollIntoView({
