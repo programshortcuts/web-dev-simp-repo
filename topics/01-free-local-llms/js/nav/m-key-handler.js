@@ -1,65 +1,38 @@
 // m-key-handler.js
 import { lastStep } from "./step-nav.js";
 import { mainTargetDiv } from "./main-content-nav.js";
-export function handleMKey({e,focusZone}) {
+
+export function handleMKey({ e, focusZone }) {
     e.preventDefault();
     e.stopPropagation();
-    let key = e.key.toLowerCase()
-    // 1. If there is a lastStep → ALWAYS go there
-    // console.log(lastFocusedMainEl)
-    // console.log('handle m key')
-    const sideBar = e.target.closest('.side-bar')
-    if(sideBar){
-        if(key === 'm'){
-            if (lastStep) {
-                lastStep.focus()
-            } else  {
-                mainTargetDiv.focus()
-            }
-        }
-        return
-    }
-    if(focusZone != 'mainTargetDiv'){
-        if(lastStep){
-            lastStep.focus()
-        } else if(document.contains(mainTargetDiv)){
-            mainTargetDiv.focus()
-        }
-        return
-    }
-    // 2. Otherwise ALWAYS go to mainTargetDiv
-    if (focusZone === 'mainTargetDiv'){
-        if (e.target === lastStep){
-            mainTargetDiv.focus()
-            // mainTargetDiv.scrollIntoView({behavior:'instant',block:'start'});
-            document.body.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start',
-                inline: 'nearest'
-            });
-            return
-        } else
-        if(e.target === mainTargetDiv){
-            if(lastStep){
-                lastStep.focus()
-                return
-            }  
-        } else if(e.target.closest('a')) {
-            lastStep.focus()
-        
-        } else if(e.target.closest('button')) {
-            lastStep.focus()
-        } else {
 
-            mainTargetDiv.focus()
-            document.body.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start',
-                inline: 'nearest'
-            });
+    const active = document.activeElement;
+
+    if (focusZone !== 'mainTargetDiv') {
+        if (lastStep && document.contains(lastStep)) {
+            lastStep.focus();
+        } else if (mainTargetDiv && document.contains(mainTargetDiv)) {
+            mainTargetDiv.focus();
         }
-        
-        return        
-        
+        return;
     }
+
+    if (active?.closest('.step-float')) {
+        mainTargetDiv?.focus();
+        return;
+    }
+
+    if (active === mainTargetDiv || active?.closest('#mainTargetDiv')) {
+        if (lastStep && document.contains(lastStep)) {
+            lastStep.focus();
+        }
+        return;
+    }
+
+    if (lastStep && document.contains(lastStep)) {
+        lastStep.focus();
+        return;
+    }
+
+    // mainTargetDiv?.focus();
 }

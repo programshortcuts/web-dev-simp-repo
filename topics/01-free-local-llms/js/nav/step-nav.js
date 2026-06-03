@@ -8,6 +8,8 @@ import { cycleMedia, denlargeAllImages } from "../ui/toggle-img-sizes.js";
 
 import { changeTutorialLink } from "../ui/change-tutorial-link.js";
 import { lastClickedSideBarLink } from "./side-bar-nav.js";
+import { mainTargetDiv } from "./main-content-nav.js";
+// import { mainTargetDiv } from "./main-content-nav.js";
 
 let steps = [];
 let currentIndex = 0;
@@ -98,9 +100,37 @@ function handleStepKey(e, step, index) {
     /* =========================
        M key (sidebar restore)
     ========================= */
+    /* =========================
+   M KEY
+========================= */
     if (key === 'm') {
-        const link = e.target.closest('a');
-        if (link) step.focus();
+        e.preventDefault();
+
+        const currentStep = e.target.closest('.step-float');
+        if (!currentStep) return;
+
+        currentStep.blur();
+
+        requestAnimationFrame(() => {
+            if (!mainTargetDiv) return;
+
+            // 1. focus it (optional but fine)
+            mainTargetDiv.setAttribute('tabindex', '-1');
+            mainTargetDiv.focus?.();
+
+            // 2. scroll it to top (THIS is the missing piece)
+            mainTargetDiv.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+
+            // fallback hard reset (important if container scroll is weird)
+            setTimeout(() => {
+                mainTargetDiv.scrollTop = 0;
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }, 0);
+        });
+
         return;
     }
 }

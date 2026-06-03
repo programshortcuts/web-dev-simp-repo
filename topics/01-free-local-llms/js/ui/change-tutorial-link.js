@@ -20,6 +20,5 @@ export function changeTutorialLink(e) {
     }
 
     tutorialLink.setAttribute('href', vidHref);
-    console.log(tutorialLink)   
     return tutorialLink;
 }

@@ -22,7 +22,7 @@ function bindVideoControls(step) {
     const fwdBtn = step.querySelector('.fwdBtn');
     const rwdBtn = step.querySelector('.rwdBtn');
     if(vid){
-        
+
     }
     /* =========================
        PLAY / PAUSE
@@ -106,7 +106,7 @@ function togglePlay(vid) {
 
 function syncPlayBtn(btn, vid) {
     if (!btn) return;
-    btn.textContent = vid.paused ? '>' : '||';
+    btn.textContent = vid.paused ? '||' : '>';
 }
 
 /* =========================
