@@ -1,47 +1,103 @@
 /* vid-cntrl-btn.css */
 /* =========================
-   VIDEO CONTROLS
+   STEP VIDEO WRAPPER
+========================= */
+
+.step-vid {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+/* =========================
+   VIDEO ELEMENT
+   (IMPORTANT: prevents click stealing)
+========================= */
+
+.step-vid video {
+    width: 100%;
+    display: block;
+
+    /* CRITICAL FIX:
+       video can NEVER block controls */
+    pointer-events: none;
+}
+
+/* =========================
+   CONTROLS CONTAINER
 ========================= */
 
 .vid-cntrl-btns {
-    display: flex;
-    justify-content: space-around;
-    width: 100%;
-    z-index: 8000;
-}
-
-/* normal mode */
-.step-vid .vid-cntrl-btns {
-    position: relative;
-}
-
-/* enlarged mode */
-.step-vid.enlarge .vid-cntrl-btns {
-    z-index: 9999;
-    position: relative;
+    position: absolute;
     left: 0;
+    right: 0;
     bottom: 0;
 
-    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
     padding: 0.5rem;
-    background: rgba(0, 0, 0, 0.5);
-    /* pointer-events: auto; */
+    gap: 0.5rem;
+
+    background: rgba(0, 0, 0, 0.45);
+
+    z-index: 10;
+
+    /* container ignores clicks */
+    pointer-events: none;
 }
 
-/* buttons */
+/* ONLY buttons are clickable */
 .vid-cntrl-btns>button {
-    flex: 1 1 33%;
-    
-    background: rgba(0, 0, 0, 0);
+    flex: 1;
+
+    background: transparent;
     color: white;
 
     border: none;
     border-radius: 6px;
 
     padding: 0.5rem 1rem;
+
     cursor: pointer;
-    
+
+    pointer-events: auto;
 }
-.step-float > .step-vid.enlarge .vid-cntrl-btns>button {
-    width: 30%;
+
+/* =========================
+   ENLARGED STATE
+   (VISUAL ONLY — NO INTERACTION LOGIC)
+========================= */
+
+.step-vid.enlarge {
+    z-index: 5;
+}
+
+/* slightly stronger overlay when enlarged */
+.step-vid.enlarge .vid-cntrl-btns {
+    background: rgba(0, 0, 0, 0.6);
+}
+
+/* optional: nicer scaling behavior */
+.step-vid.enlarge video {
+    transform: scale(1.02);
+}
+
+/* =========================
+   IMAGE + VIDEO BASE CONSISTENCY
+========================= */
+
+.step-img,
+.step-vid {
+    cursor: pointer;
+}
+
+/* =========================
+   STEP CONTAINER SAFETY
+========================= */
+
+.step-float {
+    position: relative;
 }

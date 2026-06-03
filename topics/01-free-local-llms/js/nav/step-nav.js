@@ -1,41 +1,35 @@
 // step-nav.js
+/* =========================
+   STEP NAVIGATION (CLEAN)
+========================= */
 
 import { pauseAllVideos } from "../ui/video-controls.js";
-import { cycleMedia,denlargeAllImages } from "../ui/toggle-img-sizes.js";
+import { cycleMedia, denlargeAllImages } from "../ui/toggle-img-sizes.js";
 
 import { changeTutorialLink } from "../ui/change-tutorial-link.js";
 import { lastClickedSideBarLink } from "./side-bar-nav.js";
-import { getFocusZone } from "./get-focus-zone.js";
 
 let steps = [];
-let allVids = [];
-
-let iSteps = 0;
+let currentIndex = 0;
 
 export let lastStep = null;
 
-// =========================
-// INIT
-// =========================
-export function initStepNavigation({ mainTargetDiv }) {
+/* =========================
+   INIT
+========================= */
 
+export function initStepNavigation({ mainTargetDiv }) {
     if (!mainTargetDiv) return;
 
     steps = [...mainTargetDiv.querySelectorAll('.step-float')];
-    allVids = [...mainTargetDiv.querySelectorAll('.step-vid > video')];
+    currentIndex = 0;
 
-    iSteps = 0;
-
-    // =========================
-    // STEP EVENTS
-    // =========================
     steps.forEach((step, index) => {
-
         step.setAttribute('tabindex', '0');
 
         step.addEventListener('focus', () => {
             lastStep = step;
-            iSteps = index;
+            currentIndex = index;
 
             step.scrollIntoView({
                 behavior: 'smooth',
@@ -43,130 +37,77 @@ export function initStepNavigation({ mainTargetDiv }) {
             });
         });
 
-        step.addEventListener('keydown', (e) => {
-
-            const key = e.key.toLowerCase();
-            const stepFloat = e.currentTarget;
-
-            if (!stepFloat) return;
-
-            changeTutorialLink(e);
-
-            const active = document.activeElement;
-
-            // =========================
-            // SHIFT + ENTER
-            // =========================
-            if (key === 'enter' && e.shiftKey) {
-                e.preventDefault();
-
-                const items = [...stepFloat.querySelectorAll('.step-img, .step-vid')];
-
-                if (!items.length) return;
-
-                let index = Number(stepFloat.dataset.mediaIndex ?? -1);
-                index++;
-
-                // END → RESET EVERYTHING + RETURN FOCUS TO STEP
-                if (!items[index]) {
-                    stepFloat.dataset.mediaIndex = -1;
-
-                    items.forEach(el => el.classList.remove('enlarge'));
-                    pauseAllVideos();
-
-                    denlargeAllImages?.(); // extra safety global reset
-
-                    requestAnimationFrame(() => {
-                        stepFloat.focus();
-                    });
-
-                    return;
-                }
-
-                // NORMAL CYCLE
-                stepFloat.dataset.mediaIndex = index;
-
-                items.forEach(el => el.classList.remove('enlarge'));
-                pauseAllVideos();
-
-                const activeMedia = items[index];
-
-                if (activeMedia.classList.contains('step-vid')) {
-                    activeMedia.classList.add('enlarge');
-                    activeMedia.querySelector('video')?.play();
-                } else {
-                    activeMedia.classList.add('enlarge');
-                }
-
-                return;
-            }
-
-            // =========================
-            // ENTER (STEP RULE)
-            // =========================
-            if (key === 'enter' && !e.shiftKey) {
-
-                e.preventDefault();
-
-                // CASE 1: STEP itself is focused
-                if (active === stepFloat) {
-
-                    const firstCopy = stepFloat.querySelector('.copy-code');
-
-                    if (firstCopy) {
-                        firstCopy.focus();
-                        return;
-                    }
-
-                    // no focusables → allow media cycle fallback
-                    cycleMedia(stepFloat);
-                    return;
-                }
-
-                // CASE 2: inside step (button/link/input/etc)
-                cycleMedia(stepFloat);
-                return;
-            }
-
-            // =========================
-            // M KEY
-            // =========================
-            if (key === 'm' && e.target.closest('a')) {
-                stepFloat.focus();
-                return;
-            }
-        });
+        step.addEventListener('keydown', (e) => handleStepKey(e, step, index));
     });
 
-    syncCurrentStep();
+    syncStep();
 }
 
-// =========================
-// GLOBAL NAV (F / A / NUMBERS)
-// =========================
-document.addEventListener('keydown', (e) => {
+/* =========================
+   KEY HANDLER (STEP ONLY)
+========================= */
 
+function handleStepKey(e, step, index) {
+    const key = e.key.toLowerCase();
+    const active = document.activeElement;
+
+    if (!step.contains(active)) return;
+
+    changeTutorialLink(e);
+
+    /* =========================
+       SHIFT + ENTER → cycle media
+    ========================= */
+    if (key === 'enter' && e.shiftKey) {
+        e.preventDefault();
+
+        cycleMedia(step);
+        return;
+    }
+
+    /* =========================
+       ENTER → step action / media fallback
+    ========================= */
+    if (key === 'enter' && !e.shiftKey) {
+        e.preventDefault();
+
+        const isDirectStepFocus = active === step;
+
+        if (isDirectStepFocus) {
+            cycleMedia(step);
+            return;
+        }
+
+        cycleMedia(step);
+        return;
+    }
+
+    /* =========================
+       M key (sidebar restore)
+    ========================= */
+    if (key === 'm') {
+        const link = e.target.closest('a');
+        if (link) step.focus();
+        return;
+    }
+}
+
+/* =========================
+   GLOBAL NAV (F / A / NUMBERS)
+========================= */
+
+document.addEventListener('keydown', (e) => {
     const key = e.key.toLowerCase();
     const active = document.activeElement;
 
     if (!steps.length) return;
 
-    const isTypingInsideMedia =
+    const isBlocked =
         active?.tagName === 'VIDEO' ||
         active?.classList?.contains('copy-code');
 
-    if (isTypingInsideMedia) {
-
-        if (key === 's') {
-            lastClickedSideBarLink?.focus();
-            return;
-        }
-
-        if (key === 't') {
-            tutorialLink?.focus();
-            return;
-        }
-
+    if (isBlocked) {
+        if (key === 's') lastClickedSideBarLink?.focus();
         return;
     }
 
@@ -178,66 +119,63 @@ document.addEventListener('keydown', (e) => {
     const activeStep = active?.closest?.('.step-float');
 
     if (activeStep) {
-        const idx = steps.indexOf(activeStep);
-        if (idx !== -1) iSteps = idx;
+        currentIndex = steps.indexOf(activeStep);
     }
 
-    // =========================
-    // NEXT (F)
-    // =========================
+    /* =========================
+       NEXT (F)
+    ========================= */
     if (key === 'f') {
-        iSteps = activeStep ? (iSteps + 1) % steps.length : 0;
-        steps[iSteps]?.focus();
+        currentIndex = (currentIndex + 1) % steps.length;
+        steps[currentIndex]?.focus();
         return;
     }
 
-    // =========================
-    // PREV (A)
-    // =========================
+    /* =========================
+       PREV (A)
+    ========================= */
     if (key === 'a') {
-        iSteps = activeStep
-            ? (iSteps - 1 + steps.length) % steps.length
-            : steps.length - 1;
+        currentIndex =
+            (currentIndex - 1 + steps.length) % steps.length;
 
-        steps[iSteps]?.focus();
+        steps[currentIndex]?.focus();
         return;
     }
 
-    // =========================
-    // NUMBER KEYS
-    // =========================
+    /* =========================
+       NUMBER KEYS
+    ========================= */
     if (key >= '1' && key <= '9') {
-
         const num = parseInt(key, 10) - 1;
 
         if (num < steps.length) {
-            iSteps = num;
-            steps[iSteps]?.focus();
+            currentIndex = num;
+            steps[currentIndex]?.focus();
         }
     }
 });
 
-// =========================
-// SYNC
-// =========================
-function syncCurrentStep() {
+/* =========================
+   SYNC
+========================= */
 
+function syncStep() {
     const active = document.activeElement;
     const step = active?.closest?.('.step-float');
 
     if (!step) {
-        iSteps = 0;
+        currentIndex = 0;
         return;
     }
 
-    const index = steps.indexOf(step);
-
-    if (index !== -1) {
-        iSteps = index;
-    }
+    const idx = steps.indexOf(step);
+    if (idx !== -1) currentIndex = idx;
 }
 
-// =========================
+/* =========================
+   EXPOSE
+========================= */
+
 export function getLastStep() {
     return lastStep;
 }

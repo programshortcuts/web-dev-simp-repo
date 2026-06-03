@@ -1,52 +1,33 @@
 /* position.css */
-/* =========================
-   GLOBAL LAYOUT
-========================= */
-
-body {
+.body{
     position: relative;
 }
-
-/* =========================
-   TOP RIGHT UI CONTAINER
-========================= */
-
-.box.tutorialLink-darkModeBtn-container {
+.box.tutorialLink-darkModeBtn-container{
     position: fixed !important;
     top: 0;
     right: 0;
     max-width: 200px !important;
-    z-index: 9998;
 }
-
-/* sidebar inherits stacking naturally */
+.box.tutorialLink-darkModeBtn-container {
+    z-index: 9998
+}
 .side-bar {
-    position: relative;
-    z-index: 1000;
+    z-index: inherit
 }
-
-/* =========================
-   BOTTOM NAV BUTTONS
-========================= */
-
 .lesson-btns-container {
     position: fixed;
     bottom: 0;
     left: 20%;
     z-index: 2;
 }
-
-/* =========================
-   STEP MEDIA BASE POSITIONING
-========================= */
-
-.step-float>.step-img,
-.step-float>.step-vid {
+/* Default step images */
+.step-float > .step-vid,
+.step-float > .step-img {
     position: relative;
     float: right;
+   
 }
 
-/* clearfix utility */
 .clear {
     clear: both;
 }
