@@ -2,7 +2,7 @@
 #mainTargetDiv:active {
 
     box-shadow: 2px 1px 10px rgb(126, 139, 144);
-    border: 5px solid rgb(119, 153, 140);
+    /* border: 5px solid rgb(119, 153, 140); */
 }
 .step-float:focus,
 .step-float:active {
