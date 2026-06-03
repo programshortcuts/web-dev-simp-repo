@@ -56,22 +56,27 @@ export function cycleMedia(step) {
 // =========================
 export function initMediaClicks(root = document) {
 
-    root.addEventListener("click", e => {
+    root.addEventListener("click", (e) => {
 
-        const media = e.target.closest(".step-img, .step-vid");
+        const media = e.target.closest('.step-img, .step-vid');
         if (!media) return;
 
         const step = media.closest('.step-float');
         if (!step) return;
 
-        // ALWAYS RESET FIRST
         const items = [...step.querySelectorAll('.step-img, .step-vid')];
-        items.forEach(el => el.classList.remove('enlarge'));
 
+        const wasActive = media.classList.contains('enlarge');
+
+        // always reset first
+        items.forEach(el => el.classList.remove('enlarge'));
         step.dataset.mediaIndex = -1;
 
-        // then apply clean toggle
-        media.classList.add("enlarge");
+        // ONLY re-apply if it WAS NOT active
+        if (!wasActive) {
+            media.classList.add('enlarge');
+            step.dataset.mediaIndex = items.indexOf(media);
+        }
     });
 }
 
@@ -88,6 +93,23 @@ export function bindMainFocusReset(mainTargetDiv) {
         mediaCache.forEach(el => {
             const step = el.closest('.step-float');
             if (step) step.dataset.mediaIndex = -1;
+        });
+    });
+}
+export function initGlobalMediaReset(root = document) {
+
+    document.addEventListener('pointerdown', (e) => {
+
+        const media = e.target.closest('.step-img, .step-vid');
+
+        // CASE 1: clicked media → allow normal handling
+        if (media) return;
+
+        // CASE 2: clicked anywhere else → HARD RESET EVERYTHING
+        denlargeAllImages();
+
+        document.querySelectorAll('.step-float').forEach(step => {
+            step.dataset.mediaIndex = -1;
         });
     });
 }

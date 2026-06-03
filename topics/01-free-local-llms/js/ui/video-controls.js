@@ -24,18 +24,18 @@ function bindVideoControls(step) {
     -------------------------
     */
 
-    stepVid.addEventListener('pointerup', e => {
-        const clickedControls = e.target.closest(
-            '.playbtn, .fwdBtn, .rwdBtn'
-        );
+    // stepVid.addEventListener('pointerup', e => {
+    //     const clickedControls = e.target.closest(
+    //         '.playbtn, .fwdBtn, .rwdBtn'
+    //     );
 
-        if (clickedControls) return;
+    //     if (clickedControls) return;
 
-        e.preventDefault();
-        e.stopPropagation();
+    //     e.preventDefault();
+    //     e.stopPropagation();
 
-        toggleEnlarge(stepVid, vid);
-    });
+    //     toggleEnlarge(stepVid, vid);
+    // });
 
     /*
     -------------------------
