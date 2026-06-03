@@ -1,6 +1,5 @@
 // toggle-img-sizes.js
 let mediaCache = [];
-import  { mainTargetDiv } from "../nav/main-content-nav.js";
 
 // =========================
 // CACHE (CALL AFTER INJECT)
@@ -73,5 +72,22 @@ export function initMediaClicks(root = document) {
 
         // then apply clean toggle
         media.classList.add("enlarge");
+    });
+}
+
+export function bindMainFocusReset(mainTargetDiv) {
+
+    if (!mainTargetDiv) return;
+
+    mainTargetDiv.addEventListener('focusin', () => {
+
+        // reset all media when entering main area
+        denlargeAllImages();
+
+        // reset indexes too (important)
+        mediaCache.forEach(el => {
+            const step = el.closest('.step-float');
+            if (step) step.dataset.mediaIndex = -1;
+        });
     });
 }

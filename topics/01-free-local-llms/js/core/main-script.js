@@ -1,5 +1,6 @@
 // main-script.js
 // ===== Imports =====
+import { bindMainFocusReset } from "../ui/toggle-img-sizes.js";
 import { initAllVideos } from "../ui/video-controls.js";
 import { letterFocus } from "../nav/letter-focus.js";
 import { getFocusZone } from "../nav/get-focus-zone.js";
@@ -40,6 +41,7 @@ function initMain() {
     initStepNavigation({ mainTargetDiv });
     initAllVideos(mainTargetDiv);
     setupGlobalKeyListener();
+    bindMainFocusReset(mainTargetDiv)
 }
 
 // =========================

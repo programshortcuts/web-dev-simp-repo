@@ -1,7 +1,8 @@
 // step-nav.js
 
 import { pauseAllVideos } from "../ui/video-controls.js";
-import { cycleMedia, denlargeAllImages } from "../ui/toggle-img-sizes.js";
+import { cycleMedia,denlargeAllImages } from "../ui/toggle-img-sizes.js";
+
 import { changeTutorialLink } from "../ui/change-tutorial-link.js";
 import { lastClickedSideBarLink } from "./side-bar-nav.js";
 import { getFocusZone } from "./get-focus-zone.js";
@@ -14,7 +15,7 @@ let iSteps = 0;
 export let lastStep = null;
 
 // =========================
-// INIT (RUN ON EVERY INJECT)
+// INIT
 // =========================
 export function initStepNavigation({ mainTargetDiv }) {
 
@@ -23,13 +24,7 @@ export function initStepNavigation({ mainTargetDiv }) {
     steps = [...mainTargetDiv.querySelectorAll('.step-float')];
     allVids = [...mainTargetDiv.querySelectorAll('.step-vid > video')];
 
-    // reset index safely on reload
     iSteps = 0;
-
-    // =========================
-    // VIDEO (CLICK ONLY)
-    // =========================
-
 
     // =========================
     // STEP EVENTS
@@ -39,11 +34,8 @@ export function initStepNavigation({ mainTargetDiv }) {
         step.setAttribute('tabindex', '0');
 
         step.addEventListener('focus', () => {
-
             lastStep = step;
             iSteps = index;
-
-
 
             step.scrollIntoView({
                 behavior: 'smooth',
@@ -52,37 +44,37 @@ export function initStepNavigation({ mainTargetDiv }) {
         });
 
         step.addEventListener('keydown', (e) => {
-            
+
             const key = e.key.toLowerCase();
-            const stepFloat = e.target.closest('.step-float');
+            const stepFloat = e.currentTarget;
 
             if (!stepFloat) return;
 
             changeTutorialLink(e);
+
+            const active = document.activeElement;
+
+            // =========================
+            // SHIFT + ENTER
+            // =========================
             if (key === 'enter' && e.shiftKey) {
                 e.preventDefault();
 
-                const stepFloat =
-                    e.target.closest('.step-float') ||
-                    document.activeElement.closest('.step-float');
-
-                if (!stepFloat) return;
-
                 const items = [...stepFloat.querySelectorAll('.step-img, .step-vid')];
+
                 if (!items.length) return;
 
-                // get current index safely
                 let index = Number(stepFloat.dataset.mediaIndex ?? -1);
                 index++;
 
-                // END OF CYCLE → HARD RESET (IMPORTANT)
+                // END → RESET EVERYTHING + RETURN FOCUS TO STEP
                 if (!items[index]) {
                     stepFloat.dataset.mediaIndex = -1;
 
-                    // 🔥 single source reset (IMPORTANT FIX)
                     items.forEach(el => el.classList.remove('enlarge'));
-
                     pauseAllVideos();
+
+                    denlargeAllImages?.(); // extra safety global reset
 
                     requestAnimationFrame(() => {
                         stepFloat.focus();
@@ -94,84 +86,79 @@ export function initStepNavigation({ mainTargetDiv }) {
                 // NORMAL CYCLE
                 stepFloat.dataset.mediaIndex = index;
 
-                // 🔥 ALWAYS RESET FIRST (prevents stuck state)
                 items.forEach(el => el.classList.remove('enlarge'));
-
                 pauseAllVideos();
 
-                const active = items[index];
+                const activeMedia = items[index];
 
-                // APPLY ONLY ONE STATE OWNER
-                if (active.classList.contains('step-vid')) {
-                    const vid = active.querySelector('video');
-                    active.classList.add('enlarge');
-                    vid?.play();
+                if (activeMedia.classList.contains('step-vid')) {
+                    activeMedia.classList.add('enlarge');
+                    activeMedia.querySelector('video')?.play();
                 } else {
-                    active.classList.add('enlarge');
+                    activeMedia.classList.add('enlarge');
                 }
 
-                requestAnimationFrame(() => {
-                    stepFloat.focus();
-                });
+                return;
             }
+
+            // =========================
+            // ENTER (STEP RULE)
+            // =========================
             if (key === 'enter' && !e.shiftKey) {
-                if (key === 'enter' && !e.shiftKey) {
 
-                    const stepFloat = e.target.closest('.step-float');
-                    if (!stepFloat) return;
+                e.preventDefault();
 
-                    e.preventDefault();
+                // CASE 1: STEP itself is focused
+                if (active === stepFloat) {
 
-                    // ALWAYS treat ENTER as MEDIA CONTROL ONLY
+                    const firstCopy = stepFloat.querySelector('.copy-code');
+
+                    if (firstCopy) {
+                        firstCopy.focus();
+                        return;
+                    }
+
+                    // no focusables → allow media cycle fallback
                     cycleMedia(stepFloat);
                     return;
                 }
-            }
-            
-            if (key === 'm' && e.target.classList.contains('copy-code')) {
-                step.focus()
+
+                // CASE 2: inside step (button/link/input/etc)
+                cycleMedia(stepFloat);
                 return;
             }
+
+            // =========================
+            // M KEY
+            // =========================
             if (key === 'm' && e.target.closest('a')) {
-                step.focus()
+                stepFloat.focus();
                 return;
             }
-            
         });
     });
 
-    // IMPORTANT: always re-sync index on inject
     syncCurrentStep();
 }
 
 // =========================
-// GLOBAL NAV (F / A)
+// GLOBAL NAV (F / A / NUMBERS)
 // =========================
 document.addEventListener('keydown', (e) => {
 
     const key = e.key.toLowerCase();
-
     const active = document.activeElement;
-    if (e.target.closest('a')) {
-        if (getFocusZone(e.target) === 'mainTargetDiv'){
-            return
-        }
-        // return; // let browser handle Enter, Cmd+Enter, etc.
-    }
+
     if (!steps.length) return;
 
-    // ignore typing inside media
-
-    // only block step navigation keys inside media typing contexts
     const isTypingInsideMedia =
         active?.tagName === 'VIDEO' ||
         active?.classList?.contains('copy-code');
 
     if (isTypingInsideMedia) {
 
-        // allow ONLY sidebar shortcut escape keys if needed
-        if (key === 's' && lastClickedSideBarLink) {
-            lastClickedSideBarLink.focus();
+        if (key === 's') {
+            lastClickedSideBarLink?.focus();
             return;
         }
 
@@ -180,44 +167,34 @@ document.addEventListener('keydown', (e) => {
             return;
         }
 
-        return; // block other navigation keys
+        return;
     }
 
-    // sidebar safety
     if (
         active?.closest?.('.side-bar') ||
         active?.id === 'sideBarBtn'
     ) return;
 
-    // =========================
-    // GET CURRENT STEP SAFELY
-    // =========================
     const activeStep = active?.closest?.('.step-float');
 
-    // sync index if we're inside a step
     if (activeStep) {
         const idx = steps.indexOf(activeStep);
         if (idx !== -1) iSteps = idx;
     }
 
     // =========================
-    // F = NEXT
+    // NEXT (F)
     // =========================
     if (key === 'f') {
-
-        iSteps = activeStep
-            ? (iSteps + 1) % steps.length
-            : 0;
-
+        iSteps = activeStep ? (iSteps + 1) % steps.length : 0;
         steps[iSteps]?.focus();
         return;
     }
 
     // =========================
-    // A = PREVIOUS
+    // PREV (A)
     // =========================
     if (key === 'a') {
-
         iSteps = activeStep
             ? (iSteps - 1 + steps.length) % steps.length
             : steps.length - 1;
@@ -227,7 +204,7 @@ document.addEventListener('keydown', (e) => {
     }
 
     // =========================
-    // NUMBER KEYS (NEW FIX)
+    // NUMBER KEYS
     // =========================
     if (key >= '1' && key <= '9') {
 
@@ -237,18 +214,15 @@ document.addEventListener('keydown', (e) => {
             iSteps = num;
             steps[iSteps]?.focus();
         }
-
-        return;
     }
 });
 
 // =========================
-// FORCE SYNC (IMPORTANT FIX)
+// SYNC
 // =========================
 function syncCurrentStep() {
 
     const active = document.activeElement;
-
     const step = active?.closest?.('.step-float');
 
     if (!step) {

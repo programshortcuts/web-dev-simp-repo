@@ -19,9 +19,6 @@ function bindVideoControls(step) {
     step.dataset.videoBound = 'true'
 
     // make sure video itself is focusable
-    // if (!vid.hasAttribute('tabindex')) {
-    //     vid.setAttribute('tabindex', '0')
-    // }
 
     /* ------------------------- CLICK VIDEO
     -------------------------
@@ -108,22 +105,13 @@ function bindVideoControls(step) {
         /*
 ENTER
 */
-        if (
-            key === 'enter' &&
-            !e.shiftKey
-        ) {
+        if (key === 'enter' && !e.shiftKey) {
 
-            // IMPORTANT:
-            // if no copy-codes,
-            // let step-nav handle enlarge
-            if (!hasCopyCodes) {
-                return
-            }
+            if (!hasCopyCodes) return
 
             e.preventDefault()
 
             togglePlay(vid)
-
             updatePlayBtn(playBtn, vid)
 
             return
@@ -132,24 +120,7 @@ ENTER
 SHIFT + ENTER
 */
 
-        if (
-            key === 'enter' &&
-            e.shiftKey
-        ) {
-
-            // IMPORTANT:
-            // if no copy-codes,
-            // let step-nav handle enlarge
-            if (!hasCopyCodes) {
-                return
-            }
-
-            e.preventDefault()
-
-            toggleEnlarge(stepVid, vid)
-
-            return
-        }
+        
 
         /*
 LEFT
