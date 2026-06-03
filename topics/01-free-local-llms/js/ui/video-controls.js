@@ -91,38 +91,6 @@ function bindVideoControls(step) {
             return;
         }
     });
-    step.addEventListener('click', (e) => {
-        console.log(e.target)
-        if (e.target.closest('.vid-cntrl-btns, .playbtn, .fwdBtn, .rwdBtn')) return;
-        const key = e.key.toLowerCase();
-        const isInside = step.contains(document.activeElement);
-        if (!isInside) return;
-
-        // SPACE = play/pause
-        if (key === ' ') {
-            e.preventDefault();
-            togglePlay(vid);
-            syncPlayBtn(playBtn, vid);
-            return;
-        }
-
-        // LEFT = back
-        if (e.key === 'ArrowLeft') {
-            e.preventDefault();
-            vid.currentTime = Math.max(0, vid.currentTime - 0.5);
-            return;
-        }
-
-        // RIGHT = forward
-        if (e.key === 'ArrowRight') {
-            e.preventDefault();
-            vid.currentTime = Math.min(
-                vid.duration || Infinity,
-                vid.currentTime + 0.5
-            );
-            return;
-        }
-    });
 }
 
 /* =========================

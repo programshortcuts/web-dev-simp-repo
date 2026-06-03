@@ -58,6 +58,12 @@ export function cycleMedia(step) {
     }
 }
 
+function isControlClick(e) {
+    return (e.composedPath?.() || []).some((node) => {
+        return node instanceof Element && node.matches?.('.vid-cntrl-btns, .playbtn, .fwdBtn, .rwdBtn');
+    });
+}
+
 /* =========================
    CLICK HANDLER (BULLETPROOF)
 ========================= */
@@ -65,11 +71,8 @@ export function initMediaClicks(root = document) {
 
     root.addEventListener("click", (e) => {
 
-        // 🚨 ABSOLUTE RULE: if ANY control is involved, STOP EVERYTHING
-        if (e.target.closest('.vid-cntrl-btns')) return;
-        if (e.target.closest('.playbtn')) return;
-        if (e.target.closest('.fwdBtn')) return;
-        if (e.target.closest('.rwdBtn')) return;
+        // Ignore all video controls so clicking them only affects the video.
+        if (isControlClick(e)) return;
 
         const media = e.target.closest('.step-img, .step-vid');
         if (!media) return;
@@ -87,9 +90,13 @@ export function initMediaClicks(root = document) {
         if (!wasActive) {
             media.classList.add('enlarge');
             step.dataset.mediaIndex = items.indexOf(media);
+
+            if (media.classList.contains('step-vid')) {
+                media.querySelector('video')?.play().catch(() => {});
+            }
         }
 
-    }, true); // capture phase is REQUIRED
+    });
 }
 
 /* =========================
@@ -100,7 +107,7 @@ export function initGlobalMediaReset() {
 
         if (
             e.target.closest('.step-img, .step-vid') ||
-            e.target.closest('.vid-cntrl-btns')
+            isControlClick(e)
         ) return;
 
         denlargeAllImages();
@@ -113,7 +120,11 @@ export function initGlobalMediaReset() {
 export function bindMainFocusReset(mainTargetDiv) {
     if (!mainTargetDiv) return;
 
-    mainTargetDiv.addEventListener('focusin', () => {
+    mainTargetDiv.addEventListener('focusin', (e) => {
+        if (e.target instanceof Element && e.target.closest('.vid-cntrl-btns, .playbtn, .fwdBtn, .rwdBtn')) {
+            return;
+        }
+
         denlargeAllImages();
     });
 }

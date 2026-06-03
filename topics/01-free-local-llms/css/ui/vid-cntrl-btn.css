@@ -25,9 +25,12 @@
 ========================= */
 
 .vid-cntrl-btns {
+    position: relative;
+    z-index: 2;
     display: flex;
     justify-content: space-around;
     align-items: center;
+    pointer-events: auto;
 
     width: 100%;
 
@@ -42,10 +45,11 @@
    BUTTONS
 ========================= */
 
-.step-vid.enlarge .vid-cntrl-btns>button {
-
+.vid-cntrl-btns>button {
     flex: 1;
-    
+    position: relative;
+    z-index: 3;
+    pointer-events: auto;
 
     background: transparent;
     color: white;
