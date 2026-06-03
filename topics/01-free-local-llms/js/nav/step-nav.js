@@ -51,6 +51,15 @@ function handleStepKey(e, step, index) {
     const key = e.key.toLowerCase();
     const active = document.activeElement;
 
+    function getFirstFocusableChild(targetStep) {
+        return [...targetStep.querySelectorAll(
+            'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"]), [contenteditable="true"]'
+        )].find((el) => {
+            if (el.matches('a, img, video, audio') || el.hasAttribute('disabled')) return false;
+            return !el.closest('.vid-cntrl-btns');
+        });
+    }
+
     if (!step.contains(active)) return;
 
     changeTutorialLink(e);
@@ -74,8 +83,12 @@ function handleStepKey(e, step, index) {
         const isDirectStepFocus = active === step;
 
         if (isDirectStepFocus) {
-            cycleMedia(step);
-            return;
+            const firstFocusableChild = getFirstFocusableChild(step);
+
+            if (firstFocusableChild) {
+                firstFocusableChild.focus();
+                return;
+            }
         }
 
         cycleMedia(step);

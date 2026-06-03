@@ -21,7 +21,9 @@ function bindVideoControls(step) {
     const playBtn = step.querySelector('.playbtn');
     const fwdBtn = step.querySelector('.fwdBtn');
     const rwdBtn = step.querySelector('.rwdBtn');
-
+    if(vid){
+        
+    }
     /* =========================
        PLAY / PAUSE
     ========================= */

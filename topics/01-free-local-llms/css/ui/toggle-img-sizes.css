@@ -73,17 +73,21 @@
     isolation: isolate;
 }
 .step-vid.enlarge {
-    
     position: fixed !important;
-        z-index: 8000 !important;
-        display: flex;
-    width: 90 !important;
-    transform: translate(-50%, -50%) scale(1.05);
+    z-index: 8000 !important;
+    display: flex;
     flex-direction: column;
-    
     width: min(90vw, 900px) !important;
-    
+    max-width: min(90vw, 900px) !important;
     height: auto;
+    transform: translate(-50%, -50%) scale(1.05) !important;
+}
+
+.step-float > .step-vid.enlarge,
+.imgs-container > .step-vid.enlarge {
+    width: min(90vw, 900px) !important;
+    max-width: min(90vw, 900px) !important;
+    transform: translate(-50%, -50%) scale(1.05) !important;
 }
 .step-vid.enlarge video {
     pointer-events: none;

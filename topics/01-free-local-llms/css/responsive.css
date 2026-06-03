@@ -4,9 +4,10 @@
         max-width:  80vw !important;
         max-height: 80vh !important;
     }
-    .img-container > .step-img.enlarge,
-    .img-container >.step-vid.enlarge {
-        transform: translate(-33%) !important;
+    .imgs-container > .step-img.enlarge,
+    .imgs-container > .step-vid.enlarge,
+    .step-float > .step-vid.enlarge {
+        transform: translate(-50%, -50%) scale(1.05) !important;
     }
     .step-img.enlarge > img,
     .step-vid.enlarge > video{    
