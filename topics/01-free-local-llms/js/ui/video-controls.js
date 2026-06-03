@@ -209,17 +209,14 @@ HELPERS
 
 function toggleEnlarge(stepVid, vid) {
 
-    function toggleEnlarge(stepVid, vid) {
+    const isEnlarged = stepVid.classList.contains('enlarge');
 
-        const isEnlarged = stepVid.classList.contains('enlarge');
-
-        if (isEnlarged) {
-            stepVid.classList.remove('enlarge');
-            vid.pause();
-        } else {
-            stepVid.classList.add('enlarge');
-            vid.play();
-        }
+    if (isEnlarged) {
+        stepVid.classList.remove('enlarge');
+        vid.pause();
+    } else {
+        stepVid.classList.add('enlarge');
+        vid.play();
     }
 }
 
