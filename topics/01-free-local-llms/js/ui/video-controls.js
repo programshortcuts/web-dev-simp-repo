@@ -27,16 +27,18 @@ function bindVideoControls(step) {
     -------------------------
     */
 
-    stepVid.addEventListener('click', e => {
+    stepVid.addEventListener('pointerup', e => {
         const clickedControls = e.target.closest(
-            '.playBtn, .fwdBtn, .rwdBtn'
-        )
-        // don't toggle enlarge when clicking controls
-        if (clickedControls) return
-        e.stopPropagation()
+            '.playbtn, .fwdBtn, .rwdBtn'
+        );
 
-        toggleEnlarge(stepVid, vid)
-    })
+        if (clickedControls) return;
+
+        e.preventDefault();
+        e.stopPropagation();
+
+        toggleEnlarge(stepVid, vid);
+    });
 
     /*
     -------------------------
