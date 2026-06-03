@@ -51,7 +51,6 @@ function setupGlobalKeyListener() {
     addEventListener('keydown', (e) => {
 
         const active = document.activeElement;
-        
 
         const key = e.key.toLowerCase();
 

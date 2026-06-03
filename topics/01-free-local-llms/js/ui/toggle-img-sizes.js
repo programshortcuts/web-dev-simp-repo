@@ -1,6 +1,6 @@
 // toggle-img-sizes.js
-
 let mediaCache = [];
+import  { mainTargetDiv } from "../nav/main-content-nav.js";
 
 // =========================
 // CACHE (CALL AFTER INJECT)
@@ -59,13 +59,19 @@ export function initMediaClicks(root = document) {
 
     root.addEventListener("click", e => {
 
-        const media = e.target.closest(".step-img");
-
+        const media = e.target.closest(".step-img, .step-vid");
         if (!media) return;
 
-        // prevent video controls from triggering enlarge
-        if (e.target.closest(".vid-cntrl-btns")) return;
+        const step = media.closest('.step-float');
+        if (!step) return;
 
-        media.classList.toggle("enlarge");
+        // ALWAYS RESET FIRST
+        const items = [...step.querySelectorAll('.step-img, .step-vid')];
+        items.forEach(el => el.classList.remove('enlarge'));
+
+        step.dataset.mediaIndex = -1;
+
+        // then apply clean toggle
+        media.classList.add("enlarge");
     });
 }

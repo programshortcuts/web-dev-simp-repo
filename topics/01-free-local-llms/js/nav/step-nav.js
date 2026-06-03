@@ -1,4 +1,5 @@
 // step-nav.js
+
 import { pauseAllVideos } from "../ui/video-controls.js";
 import { cycleMedia, denlargeAllImages } from "../ui/toggle-img-sizes.js";
 import { changeTutorialLink } from "../ui/change-tutorial-link.js";
@@ -42,7 +43,7 @@ export function initStepNavigation({ mainTargetDiv }) {
             lastStep = step;
             iSteps = index;
 
-            
+
 
             step.scrollIntoView({
                 behavior: 'smooth',
@@ -51,41 +52,37 @@ export function initStepNavigation({ mainTargetDiv }) {
         });
 
         step.addEventListener('keydown', (e) => {
+            
             const key = e.key.toLowerCase();
             const stepFloat = e.target.closest('.step-float');
-            if(e.target != lastStep){
-                console.log('eher')
-                denlargeAllImages()
-            }
+
             if (!stepFloat) return;
 
             changeTutorialLink(e);
-
             if (key === 'enter' && e.shiftKey) {
                 e.preventDefault();
+
                 const stepFloat =
                     e.target.closest('.step-float') ||
                     document.activeElement.closest('.step-float');
 
                 if (!stepFloat) return;
 
-                // DO NOT run on links
-                // if (e.target.closest('a')) return;
-
                 const items = [...stepFloat.querySelectorAll('.step-img, .step-vid')];
                 if (!items.length) return;
 
+                // get current index safely
                 let index = Number(stepFloat.dataset.mediaIndex ?? -1);
                 index++;
 
-                const activeItem = items[index];
-
-                // END → reset everything + return focus
-                if (!activeItem) {
-                    ;
-                    pauseAllVideos();
-
+                // END OF CYCLE → HARD RESET (IMPORTANT)
+                if (!items[index]) {
                     stepFloat.dataset.mediaIndex = -1;
+
+                    // 🔥 single source reset (IMPORTANT FIX)
+                    items.forEach(el => el.classList.remove('enlarge'));
+
+                    pauseAllVideos();
 
                     requestAnimationFrame(() => {
                         stepFloat.focus();
@@ -95,80 +92,51 @@ export function initStepNavigation({ mainTargetDiv }) {
                 }
 
                 // NORMAL CYCLE
-                ;
-                pauseAllVideos();
-
-                activeItem.classList.add('enlarge');
-
                 stepFloat.dataset.mediaIndex = index;
 
-                // CRITICAL: always restore focus so F/A works again
+                // 🔥 ALWAYS RESET FIRST (prevents stuck state)
+                items.forEach(el => el.classList.remove('enlarge'));
+
+                pauseAllVideos();
+
+                const active = items[index];
+
+                // APPLY ONLY ONE STATE OWNER
+                if (active.classList.contains('step-vid')) {
+                    const vid = active.querySelector('video');
+                    active.classList.add('enlarge');
+                    vid?.play();
+                } else {
+                    active.classList.add('enlarge');
+                }
+
                 requestAnimationFrame(() => {
                     stepFloat.focus();
                 });
-
-                return;
-
             }
             if (key === 'enter' && !e.shiftKey) {
+                if (key === 'enter' && !e.shiftKey) {
 
-                const isLink = e.target.closest('a');
+                    const stepFloat = e.target.closest('.step-float');
+                    if (!stepFloat) return;
 
-                // 🧠 RULE 1: LET LINKS BE LINKS
-                if (isLink) return;
+                    e.preventDefault();
 
-                e.preventDefault();
-
-                // =========================
-                // STEP HAS FOCUS
-                // =========================
-                if (e.target === stepFloat) {
-
-                    const focusables = [...stepFloat.querySelectorAll(`
-            a,
-            button:not([tabindex="-1"]),
-            input,
-            textarea,
-            select,
-            .copy-code,
-            [tabindex]:not([tabindex="-1"])
-        `)].filter(el => el !== stepFloat);
-
-                    if (focusables.length) {
-                        focusables[0].focus();
-                        return;
-                    }
-
+                    // ALWAYS treat ENTER as MEDIA CONTROL ONLY
                     cycleMedia(stepFloat);
                     return;
                 }
-
-                // =========================
-                // COPY CODE
-                // =========================
-                if (e.target.classList.contains('copy-code')) {
-                    cycleMedia(stepFloat);
-                    return;
-                }
-
-                cycleMedia(stepFloat);
-                return;
             }
             
-
-            
             if (key === 'm' && e.target.classList.contains('copy-code')) {
-
                 step.focus()
                 return;
             }
             if (key === 'm' && e.target.closest('a')) {
-
                 step.focus()
                 return;
             }
-
-        
+            
         });
     });
 
@@ -193,21 +161,27 @@ document.addEventListener('keydown', (e) => {
     if (!steps.length) return;
 
     // ignore typing inside media
-    if (
+
+    // only block step navigation keys inside media typing contexts
+    const isTypingInsideMedia =
         active?.tagName === 'VIDEO' ||
-        active?.classList?.contains('copy-code')
-    ){
-        if(key === 's'){
-            lastClickedSideBarLink.focus()
-        }
-        if (key === 't') {
-            console.log(tutorialLink)
-            tutorialLink.focus()
+        active?.classList?.contains('copy-code');
+
+    if (isTypingInsideMedia) {
+
+        // allow ONLY sidebar shortcut escape keys if needed
+        if (key === 's' && lastClickedSideBarLink) {
+            lastClickedSideBarLink.focus();
             return;
         }
-        return;
+
+        if (key === 't') {
+            tutorialLink?.focus();
+            return;
+        }
+
+        return; // block other navigation keys
     }
-    
 
     // sidebar safety
     if (

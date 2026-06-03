@@ -19,9 +19,9 @@ function bindVideoControls(step) {
     step.dataset.videoBound = 'true'
 
     // make sure video itself is focusable
-    if (!vid.hasAttribute('tabindex')) {
-        vid.setAttribute('tabindex', '0')
-    }
+    // if (!vid.hasAttribute('tabindex')) {
+    //     vid.setAttribute('tabindex', '0')
+    // }
 
     /* ------------------------- CLICK VIDEO
     -------------------------
@@ -211,14 +211,24 @@ HELPERS
 
 function toggleEnlarge(stepVid, vid) {
 
+    const step = stepVid.closest('.step-float');
+    if (!step) return;
+
+    const items = [...step.querySelectorAll('.step-img, .step-vid')];
+
     const isEnlarged = stepVid.classList.contains('enlarge');
 
-    if (isEnlarged) {
-        stepVid.classList.remove('enlarge');
-        vid.pause();
-    } else {
+    // ALWAYS RESET STEP FIRST
+    items.forEach(el => el.classList.remove('enlarge'));
+
+    if (!isEnlarged) {
         stepVid.classList.add('enlarge');
         vid.play();
+        step.dataset.mediaIndex =
+            items.indexOf(stepVid);
+    } else {
+        step.dataset.mediaIndex = -1;
+        vid.pause();
     }
 }
 
