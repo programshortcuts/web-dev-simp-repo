@@ -181,6 +181,14 @@ document.addEventListener('keydown', (e) => {
        NEXT (F)
     ========================= */
     if (key === 'f') {
+        const isMainTargetFocused = active === mainTargetDiv;
+
+        if (isMainTargetFocused) {
+            currentIndex = 0;
+            steps[currentIndex]?.focus();
+            return;
+        }
+
         currentIndex = (currentIndex + 1) % steps.length;
         steps[currentIndex]?.focus();
         return;
