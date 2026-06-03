@@ -8,7 +8,6 @@ export function initAllVideos(root = document) {
 }
 
 function bindVideoControls(step) {
-
     const stepVid = step.querySelector('.step-vid')
     const vid = step.querySelector('video')
 
@@ -24,21 +23,16 @@ function bindVideoControls(step) {
         vid.setAttribute('tabindex', '0')
     }
 
-    /*
-    -------------------------
-    CLICK VIDEO
+    /* ------------------------- CLICK VIDEO
     -------------------------
     */
 
     stepVid.addEventListener('click', e => {
-
         const clickedControls = e.target.closest(
             '.playBtn, .fwdBtn, .rwdBtn'
         )
-
         // don't toggle enlarge when clicking controls
         if (clickedControls) return
-
         e.stopPropagation()
 
         toggleEnlarge(stepVid, vid)
@@ -62,6 +56,7 @@ function bindVideoControls(step) {
 
         updatePlayBtn(playBtn, vid)
     })
+    
 
     fwdBtn?.addEventListener('click', e => {
 
@@ -195,8 +190,9 @@ SPACE
 
             e.preventDefault()
             e.stopPropagation()
-
             togglePlay(vid)
+            const stepVid = e.target.closest('.step-vid')
+            const playBtn = stepVid.querySelector('.playbtn')
 
             updatePlayBtn(playBtn, vid)
 
@@ -213,15 +209,17 @@ HELPERS
 
 function toggleEnlarge(stepVid, vid) {
 
-    stepVid.classList.toggle('enlarge')
+    function toggleEnlarge(stepVid, vid) {
 
-    if (stepVid.classList.contains('enlarge')) {
+        const isEnlarged = stepVid.classList.contains('enlarge');
 
-        vid.play()
-
-    } else {
-
-        vid.pause()
+        if (isEnlarged) {
+            stepVid.classList.remove('enlarge');
+            vid.pause();
+        } else {
+            stepVid.classList.add('enlarge');
+            vid.play();
+        }
     }
 }
 

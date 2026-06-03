@@ -73,6 +73,7 @@
     isolation: isolate;
 }
 .step-vid.enlarge {
+    
     position: fixed !important;
         z-index: 9000 !important;
         display: flex;
@@ -86,4 +87,5 @@
 }
 .step-vid.enlarge video {
     pointer-events: none;
+        touch-action: none;
 }

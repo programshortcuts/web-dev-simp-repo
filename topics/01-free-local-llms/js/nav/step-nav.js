@@ -42,11 +42,8 @@ export function initStepNavigation({ mainTargetDiv }) {
             lastStep = step;
             iSteps = index;
 
-            denlargeAllImages();
             pauseAllVideos();
 
-            // IMPORTANT FIX
-            step.dataset.mediaIndex = -1;
 
             step.scrollIntoView({
                 behavior: 'smooth',
@@ -84,7 +81,7 @@ export function initStepNavigation({ mainTargetDiv }) {
 
                 // END → reset everything + return focus
                 if (!activeItem) {
-                    denlargeAllImages();
+                    ;
                     pauseAllVideos();
 
                     stepFloat.dataset.mediaIndex = -1;
@@ -97,7 +94,7 @@ export function initStepNavigation({ mainTargetDiv }) {
                 }
 
                 // NORMAL CYCLE
-                denlargeAllImages();
+                ;
                 pauseAllVideos();
 
                 activeItem.classList.add('enlarge');

@@ -9,7 +9,6 @@ export function handleMKey({e,focusZone}) {
     // console.log(lastFocusedMainEl)
     // console.log('handle m key')
     const sideBar = e.target.closest('.side-bar')
-    console.log(sideBar)
     if(sideBar){
         if(key === 'm'){
             if (lastStep) {
