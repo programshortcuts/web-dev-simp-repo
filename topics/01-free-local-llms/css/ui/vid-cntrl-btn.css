@@ -35,9 +35,10 @@
     width: 100%;
 
     margin-top: 0.5rem;
-    padding: 0.5rem;
+    /* padding: 0.5rem; */
 
-    background: rgba(0, 0, 0, 0.5);
+    /* background: rgba(0, 0, 0, 0.5); */
+    background-color: black;
     border-radius: 6px;
 }
 
@@ -51,9 +52,10 @@
     z-index: 3;
     pointer-events: auto;
 
-    background: transparent;
+    /* background: transparent; */
+    /* background-color: var(--bg-clr); */
     color: white;
-
+    background-color: black;
     border: none;
     border-radius: 6px;
 
