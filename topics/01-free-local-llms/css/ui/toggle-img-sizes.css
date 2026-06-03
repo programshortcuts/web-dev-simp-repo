@@ -73,7 +73,9 @@
     isolation: isolate;
 }
 .step-vid.enlarge {
-    flex-direction: column;
+    position: fixed !important;
+        z-index: 9000 !important;
+        display: flex;
     width: 90 !important;
     transform: translate(-50%, -50%) scale(1.05);
     flex-direction: column;
