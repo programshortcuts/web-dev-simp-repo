@@ -29,8 +29,8 @@ body {overflow-x: hidden;}
 }
 
 /* Default step images */
-.step-float>.step-vid,
-.step-float>.step-img {
+.step-vid,
+.step-img {
     display: flex;
     flex-direction: column;
 }

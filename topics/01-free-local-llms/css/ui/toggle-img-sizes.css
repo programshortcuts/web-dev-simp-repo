@@ -1,14 +1,28 @@
 /* toggle-img-sizes.css */
 /* =========================
+   BASE MEDIA BEHAVIOR
+========================= */
+.step-img,
+.step-vid {
+    position: relative;
+    pointer-events: auto;
+    transition: transform 0.1s ease,
+        opacity 0.1s ease;
+    touch-action: manipulation;
+}
+/* =========================
    ENLARGED STATE (FOCUS MODE)
 ========================= */
+.step-img.enlarge{
+        transform: translate(-50%, -50%) scale(1.05);
+}
 .step-img.enlarge,
 .step-vid.enlarge {
     position: fixed !important;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%) scale(1.05);
-    z-index: 999999 !important;
+    z-index: 9000 !important;
     max-width: 90vw;
     max-height: 90vh;
     width: auto !important;
@@ -30,17 +44,7 @@
     height: auto;
     object-fit: contain;
 }
-/* =========================
-   BASE MEDIA BEHAVIOR
-========================= */
-.step-img,
-.step-vid {
-    position: relative;
-    pointer-events: auto;
-    transition: transform 0.1s ease, 
-                  opacity 0.1s ease;
-    touch-action: manipulation;
-}
+
 /* ensure media fills normal layout */
 .step-img img,
 .step-vid video {
@@ -68,4 +72,23 @@
 .step-vid.enlarge {
     isolation: isolate;
 }
+.step-vid.enlarge {
+    flex-direction: column;
+    width: 90 !important;
+    transform: translate(-50%, -50%) scale(1.05);
+    flex-direction: column;
+    
+    width: min(90vw, 900px) !important;
+    
+    height: auto;
+}
+.step-vid.enlarge video {
+    /* width: 100%; */
+    /* height: auto; */
+}
 
+.step-vid.enlarge {
+
+}
+.step-vid.enlarge {
+}
