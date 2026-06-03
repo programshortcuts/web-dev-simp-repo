@@ -27,6 +27,11 @@ function bindVideoControls(step) {
         syncPlayBtn(playBtn, vid);
     });
 
+    vid.addEventListener('play', () => {
+        pauseAllVideos(document, vid);
+        syncPlayBtn(playBtn, vid);
+    });
+
     vid.addEventListener('timeupdate', () => {
         ensurePosterAtStart(vid, playBtn);
     });
@@ -151,9 +156,13 @@ function resetVideoToPoster(vid) {
     if (!vid) return;
 
     try {
+        const wasPlaying = !vid.paused;
         vid.pause();
         vid.currentTime = 0;
         vid.load();
+        if (wasPlaying) {
+            vid.pause();
+        }
     } catch (error) {
         // ignore reset errors
     }

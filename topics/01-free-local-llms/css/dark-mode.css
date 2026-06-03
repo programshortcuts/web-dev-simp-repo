@@ -88,3 +88,6 @@ body.dark-mode .highlight {
     border: 1px solid white !important;
     color: var(--bg-primary) !important;
 }
+.dark-mode .page-header{
+    background-color: var(--bg-primary);
+}
