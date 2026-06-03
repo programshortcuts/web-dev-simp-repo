@@ -42,7 +42,7 @@ export function initStepNavigation({ mainTargetDiv }) {
             lastStep = step;
             iSteps = index;
 
-
+            
 
             step.scrollIntoView({
                 behavior: 'smooth',
@@ -51,10 +51,12 @@ export function initStepNavigation({ mainTargetDiv }) {
         });
 
         step.addEventListener('keydown', (e) => {
-            
             const key = e.key.toLowerCase();
             const stepFloat = e.target.closest('.step-float');
-
+            if(e.target != lastStep){
+                console.log('eher')
+                denlargeAllImages()
+            }
             if (!stepFloat) return;
 
             changeTutorialLink(e);
@@ -108,21 +110,6 @@ export function initStepNavigation({ mainTargetDiv }) {
                 return;
 
             }
-
-            
-
-            
-            if (key === 'm' && e.target.classList.contains('copy-code')) {
-
-                step.focus()
-                return;
-            }
-            if (key === 'm' && e.target.closest('a')) {
-
-                step.focus()
-                return;
-            }
-
             if (key === 'enter' && !e.shiftKey) {
 
                 const isLink = e.target.closest('a');
@@ -167,6 +154,21 @@ export function initStepNavigation({ mainTargetDiv }) {
                 cycleMedia(stepFloat);
                 return;
             }
+            
+
+            
+            if (key === 'm' && e.target.classList.contains('copy-code')) {
+
+                step.focus()
+                return;
+            }
+            if (key === 'm' && e.target.closest('a')) {
+
+                step.focus()
+                return;
+            }
+
+        
         });
     });
 
@@ -195,7 +197,6 @@ document.addEventListener('keydown', (e) => {
         active?.tagName === 'VIDEO' ||
         active?.classList?.contains('copy-code')
     ){
-        console.log('here')
         if(key === 's'){
             lastClickedSideBarLink.focus()
         }
