@@ -79,7 +79,7 @@ function handleStepKey(e, step, index) {
     ========================= */
     if (key === 'enter' && !e.shiftKey) {
         e.preventDefault();
-
+        changeTutorialLink(e)
         const isDirectStepFocus = active === step;
 
         if (isDirectStepFocus) {
