@@ -13,10 +13,28 @@
     .step-float>.step-img {
         margin-left: 5%;
         
+        
+
     }
     
 }
-@media screen and (max-width: 1240px) {
+@media screen and (min-width: 1250px) {
+    .step-float>.step-vid,
+    .step-float>.step-img {
+        max-height: 600px;
+        max-width: 600px;
+        
+    }
+}
+@media screen and (max-width: 1250px) {
+    .step-float>.step-vid,
+    .step-float>.step-img {
+        max-height: 350px;
+        max-width:  350px;
+        
+    }
+}
+@media screen and (max-width: 1000px) {
     .step-float>.step-vid,
     .step-float>.step-img {
         max-height: 300px;
