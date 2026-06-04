@@ -51,6 +51,7 @@
 }
 @media screen and (max-width: 700px) {
     
+    
     .side-bar-links-container > ul{
         margin: 0;
         margin-left: 15% !important;
@@ -85,9 +86,15 @@
     .side-bar-links {
         margin-top: 50% !important;
     }
-        :root {
-            --sidebar-width: 100px !important;
-        }
+    ul.side-bar-links>li {
+        margin-bottom: 10% !important;
+    }
+
+    ul.side-bar-links>li {
+        margin-bottom: 10% !important;
+        margin-top: 25% !important;
+    }
+    
 }
 
 

@@ -40,6 +40,23 @@ function highlightSidebar() {
 // NEXT BUTTON
 // =========================
 
+nxtBtn?.addEventListener('keydown', e => {
+    const key = e.key.toLowerCase();
+
+    if (key === 'a') {
+
+        e.preventDefault();
+        e.stopPropagation();
+
+        const steps = document.querySelectorAll('.step-float, .step');
+
+        if (steps.length) {
+            steps[steps.length - 1].focus();
+        }
+
+        return;
+    }
+});
 nxtBtn?.addEventListener('click', e => {
 
     e.preventDefault();
@@ -63,7 +80,23 @@ nxtBtn?.addEventListener('click', e => {
 // =========================
 // PREV BUTTON
 // =========================
+prevBtn?.addEventListener('keydown', e => {
+    const key = e.key.toLowerCase();
 
+    if (key === 'a') {
+
+        e.preventDefault();
+        e.stopPropagation();
+
+        const steps = document.querySelectorAll('.step-float, .step');
+
+        if (steps.length) {
+            steps[steps.length - 1].focus();
+        }
+
+        return;
+    }
+});
 prevBtn?.addEventListener('click', e => {
 
     e.preventDefault();
