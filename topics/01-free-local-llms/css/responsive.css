@@ -91,7 +91,17 @@
 }
 
 
+@media screen and (max-width: 641px) {
+    :root {
+            --sidebar-width: 120px !important;
+    
+        }
+    }
 @media screen and (max-width: 519px) {
+    :root {
+            --sidebar-width: 100px !important;
+    
+        }
     .step-float > .step-txt>p:first-of-type{
         padding-top: 10% !important;
         padding-left: 2%;
