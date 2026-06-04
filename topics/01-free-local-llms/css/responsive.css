@@ -56,3 +56,9 @@
 }
 
 
+@media screen and (max-width: 519px) {
+    .step-float > .step-txt>p:first-of-type{
+        padding-top: 10% !important;
+        padding-left: 2%;
+    }
+}
