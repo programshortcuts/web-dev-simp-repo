@@ -2,14 +2,6 @@
     --sidebar-width: 120px;
     --main-content-width: calc(100% - var(--sidebar-width));
 }
-.side-bar a.topic{
-    text-decoration: none;    
-}
-.side-bar h3{
-    border-bottom: 1px solid blue;
-    width: 50%;
-    
-}
 .side-bar {
     width: var(--sidebar-width);
     position: sticky;
@@ -20,6 +12,15 @@
     /* overflow: hidden; */
     /* height: calc(100vh - var(--header-height, 80px)); */
 }
+.side-bar a.topic{
+    text-decoration: none;    
+}
+.side-bar h3{
+    border-bottom: 1px solid blue;
+    width: 50%;
+    
+}
+
 #sideBarBtn {
     position: absolute;
     top: 0px;

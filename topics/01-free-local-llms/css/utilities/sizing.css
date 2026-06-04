@@ -37,16 +37,7 @@
     width: 100%;
 }
 /* Default step images */
-.step-float > .step-vid,
-.step-float > .step-img {
-    
-    /* max-height: 400px; */
-    /* max-width: 300px; */
-    /* min-height: 200px; */
-    /* min-width: 200px; */
-    max-height: 200px;
-    max-width: 200px;
-}
+
 .step-float > .step-vid > video,
 .step-float > .step-img > img {
     
