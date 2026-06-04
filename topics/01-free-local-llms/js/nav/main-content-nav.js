@@ -1,4 +1,5 @@
 // main-content-nav.js
+import { denlargeAllImages } from "../ui/toggle-img-sizes.js";
 import { tutorialLink } from "../ui/change-tutorial-link.js";
 import { handleMKey } from "./m-key-handler.js";
 import {
@@ -18,9 +19,7 @@ export const mainTargetDiv =
 // =========================
 
 export function mainContentNav({ e, focusZone }) {
-
     const key = e.key?.toLowerCase();
-
     if (!key) return;
     const active = document.activeElement;
 
@@ -105,4 +104,7 @@ export function mainContentNav({ e, focusZone }) {
     // DO NOT HANDLE STEP NAV HERE ANYMORE
     // =========================
     // Step system is fully handled inside step-nav.js
+    if(key === 'escape'){
+        denlargeAllImages()
+    }
 }
