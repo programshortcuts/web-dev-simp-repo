@@ -106,5 +106,11 @@
         padding-top: 10% !important;
         padding-left: 2%;
     }
-    
+    ul.side-bar-links > li {
+        margin-bottom: 10% !important;
+    }   
+    ul.side-bar-links > li {
+        margin-bottom: 10% !important;
+        margin-top: 25% !important;
+    }   
 }
