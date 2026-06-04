@@ -128,3 +128,11 @@ export function bindMainFocusReset(mainTargetDiv) {
         denlargeAllImages();
     });
 }
+
+export function initEscapeReset() {
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            denlargeAllImages();
+        }
+    });
+}

@@ -1,5 +1,6 @@
 // main-script.js
 // ===== Imports =====
+import { initEscapeReset } from "../ui/toggle-img-sizes.js";
 import { bindMainFocusReset } from "../ui/toggle-img-sizes.js";
 import { initAllVideos } from "../ui/video-controls.js";
 import { letterFocus } from "../nav/letter-focus.js";
@@ -110,4 +111,5 @@ function setupGlobalKeyListener() {
                 break;
         }
     });
+    initEscapeReset()
 }
