@@ -2,12 +2,6 @@
     --font-clr: rgba(19, 106, 211, 0.679);
     --border-clr: rgba(19, 106, 211, 0.679);
 }
-.page-header.grid {
-}
-.box {
-    border-right:  3px solid var(--border-clr);
-    border-bottom: 3px solid var(--border-clr);
-}
 .box.tutorialLink-darkModeBtn-container {
     border: none !important;
 }

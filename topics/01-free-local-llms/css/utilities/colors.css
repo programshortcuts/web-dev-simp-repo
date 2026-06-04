@@ -6,6 +6,10 @@
 body{
     background-color: rgba(76, 89, 105,.3);
 }
+.page-header,
+.side-bar{
+    background-color: rgba(76, 89, 105, .3);
+}
 
 .nav-bar-lesson-title{
     background-color: var(--bcolor);
