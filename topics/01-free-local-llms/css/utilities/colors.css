@@ -30,3 +30,7 @@ body{
 #endNxtBtn, #endNxtBtn, #prevBtn, #prevBtn{
     background-color: var(--bcolor);
 }
+.step-content .b,
+.step-txt .b{
+    color: rgb(66,167,267);
+}

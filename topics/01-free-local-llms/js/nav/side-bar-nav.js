@@ -4,6 +4,7 @@ import { changeTutorialLink } from "../ui/change-tutorial-link.js";
 import { sideBar, sideBarBtn } from "../ui/toggle-side-bar.js";
 import { injectContent } from "../core/inject-content.js";
 import { mainTargetDiv } from "./main-content-nav.js";
+import { lastStep } from "./step-nav.js";
 
 /* =========================
    STATE
@@ -167,6 +168,7 @@ export function sideBarNav({ e, focusZone }) {
 
     /* ---- S KEY ---- */
     if (key === 's') {
+        
         if (isSubLink(activeEl)) {
             const parent = getParentTopLink(activeEl);
             if (parent) {
@@ -174,9 +176,12 @@ export function sideBarNav({ e, focusZone }) {
                 iSideBarLinks = allSideBarLinks.indexOf(parent);
                 return;
             }
+        } else {
+
+            sideBarBtn.focus();
+            return;
         }
-        sideBarBtn.focus();
-        return;
+        
     }
 
     /* ---- T KEY ---- */
@@ -190,6 +195,9 @@ export function sideBarNav({ e, focusZone }) {
    SIDEBAR BUTTON
 ========================= */
 sideBarBtn.addEventListener('keydown', e => {
+    if (e.key.toLowerCase() === 's') {
+        lastClickedSideBarLink.focus()
+    }
     if (e.key.toLowerCase() === 'm') {
         mainTargetDiv.focus();
     }
