@@ -1,11 +1,12 @@
 // side-bar-nav.js
+import { denlargeAllImages } from "../ui/toggle-img-sizes.js";
+import { pauseAllVideos } from "../ui/video-controls.js";
 import { handleMKey } from "./m-key-handler.js";
 import { changeTutorialLink } from "../ui/change-tutorial-link.js";
 import { sideBar, sideBarBtn } from "../ui/toggle-side-bar.js";
 import { injectContent } from "../core/inject-content.js";
 import { mainTargetDiv } from "./main-content-nav.js";
 import { lastStep } from "./step-nav.js";
-import { denlargeAllImages } from "../ui/toggle-img-sizes.js";
 /* =========================
    STATE
 ========================= */
@@ -99,6 +100,7 @@ allSideBarLinks.forEach((el, i) => {
     el.addEventListener('focus', () => {
         removeAllHighlights(allSideBarLinks)
         denlargeAllImages()
+        pauseAllVideos()
         lastFocusedSideBarLink = el;
         if (!suppressIndexUpdate) {
             iSideBarLinks = i;
