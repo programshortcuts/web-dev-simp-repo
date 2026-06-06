@@ -65,6 +65,8 @@ function handleStepKey(e, step, index) {
     const key = e.key.toLowerCase();
     const active = document.activeElement;
 
+    console.log(e.target)
+    if(e.target.tagName == 'A') open(e.target.href, '_blank')
     function getFirstFocusableChild(targetStep) {
         return [...targetStep.querySelectorAll(
             'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"]), [contenteditable="true"]'
