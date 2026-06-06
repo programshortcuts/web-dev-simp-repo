@@ -1,5 +1,6 @@
 // main-script.js
 // ===== Imports =====
+import { letterNav } from "../nav/letter-nav.js";
 import { initEscapeReset } from "../ui/toggle-img-sizes.js";
 import { bindMainFocusReset } from "../ui/toggle-img-sizes.js";
 import { initAllVideos } from "../ui/video-controls.js";
@@ -24,7 +25,8 @@ import {
 import { mainContentNav, mainTargetDiv } from "../nav/main-content-nav.js";
 
 export const navBarLessonTitle = document.querySelector('#navBarLessonTitle');
-
+export const pageWrapper = document.querySelector('.page-wrapper')
+let isLetterNavEnabled = false
 // =========================
 // INIT
 // =========================
@@ -52,11 +54,19 @@ function initMain() {
 function setupGlobalKeyListener() {
 
     addEventListener('keydown', (e) => {
-
-        const active = document.activeElement;
-
+        let focusZone = getFocusZone({ e });
         const key = e.key.toLowerCase();
 
+        // if(key == 'x' && 
+        //     e.shiftKey && e.metaKey
+        // ) {
+        //     isLetterNavEnabled = !isLetterNavEnabled
+        // }
+        // if(isLetterNavEnabled){
+        //     lettterNav({e})
+        // }
+        
+        const active = document.activeElement;
         // =========================
         // GLOBAL M KEY
         // =========================
@@ -80,7 +90,6 @@ function setupGlobalKeyListener() {
             return;
         }
 
-        let focusZone = getFocusZone({ e });
 
         // force header override
         const headerKeys = ['b', 'c', 'd', 'e', 'h', 'p', 'n'];
