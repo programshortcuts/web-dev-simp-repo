@@ -65,7 +65,6 @@ function handleStepKey(e, step, index) {
     const key = e.key.toLowerCase();
     const active = document.activeElement;
 
-    console.log(e.target)
     if(e.target.tagName == 'A') open(e.target.href, '_blank')
     function getFirstFocusableChild(targetStep) {
         return [...targetStep.querySelectorAll(
@@ -158,13 +157,71 @@ document.addEventListener('keydown', (e) => {
     const active = document.activeElement;
 
     if (!steps.length) return;
+    /* =========================
+       COPY CODE NAVIGATION
+    ========================= */
 
-    const isBlocked =
-        active?.tagName === 'VIDEO' ||
-        active?.classList?.contains('copy-code');
+    const activeCopyCode =
+        active?.classList?.contains('copy-code')
+            ? active
+            : null;
 
-    if (isBlocked) {
-        if (key === 's') lastClickedSideBarLink?.focus();
+    if (activeCopyCode) {
+
+        const parentStep =
+            activeCopyCode.closest('.step-float');
+
+        const copyCodes = [
+            ...parentStep.querySelectorAll('.copy-code')
+        ];
+
+        const currentCodeIndex =
+            copyCodes.indexOf(activeCopyCode);
+
+        if (key === 'f') {
+            e.preventDefault();
+
+            const nextIndex =
+                (currentCodeIndex + 1) %
+                copyCodes.length;
+
+            copyCodes[nextIndex]?.focus();
+            return;
+        }
+
+        if (key === 'a') {
+            e.preventDefault();
+
+            const prevIndex =
+                (currentCodeIndex - 1 + copyCodes.length) %
+                copyCodes.length;
+
+            copyCodes[prevIndex]?.focus();
+            return;
+        }
+
+        if (key === 's') {
+            e.preventDefault();
+            lastClickedSideBarLink?.focus();
+            return;
+        }
+
+        return;
+    }
+
+    /* =========================
+       VIDEO BLOCK
+    ========================= */
+
+    const isVideo =
+        active?.tagName === 'VIDEO';
+
+    if (isVideo) {
+
+        if (key === 's') {
+            lastClickedSideBarLink?.focus();
+        }
+
         return;
     }
 

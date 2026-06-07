@@ -1,5 +1,7 @@
 // main-script.js
+// THIS CODE IS ALL over ThE Place, fix, make more like tech-with-tim!
 // ===== Imports =====
+const popupLetterNav = document.querySelector('#popupLetterNav')
 import { letterNav } from "../nav/letter-nav.js";
 import { initEscapeReset } from "../ui/toggle-img-sizes.js";
 import { bindMainFocusReset } from "../ui/toggle-img-sizes.js";
@@ -56,15 +58,25 @@ function setupGlobalKeyListener() {
     addEventListener('keydown', (e) => {
         let focusZone = getFocusZone({ e });
         const key = e.key.toLowerCase();
+// LETTER NAV is WORKING PERFECT, but this is awfule name for code where there is also letterFocus
+        if(key == 'x' && e.shiftKey && e.metaKey) {
+            isLetterNavEnabled = !isLetterNavEnabled
+            
+            popupLetterNav.innerText = `letter navigation : ${isLetterNavEnabled}`
+            popupLetterNav.classList.add('animate')
+            document.querySelector('.page-wrapper').classList.toggle('nav-mode-colors')
+            setTimeout(() => {
+                popupLetterNav.classList.remove('animate')
+                console.log('remove')
+            }, 1000);
+            
+            return
+        }
+        if(isLetterNavEnabled){
 
-        // if(key == 'x' && 
-        //     e.shiftKey && e.metaKey
-        // ) {
-        //     isLetterNavEnabled = !isLetterNavEnabled
-        // }
-        // if(isLetterNavEnabled){
-        //     lettterNav({e})
-        // }
+            letterNav({e:e})
+            return
+        }
         
         const active = document.activeElement;
         // =========================
