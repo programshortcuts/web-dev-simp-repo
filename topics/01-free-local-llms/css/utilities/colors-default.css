@@ -1,5 +1,6 @@
 .b {color: blue;}
-.gr {color: green;}
+.gr {color: green !important;}
+/* .gr-bor {border: 3px solid green !important;} */
 .g{color: gold;}
 .m {color: magenta;}
 .o {color: orange;}
