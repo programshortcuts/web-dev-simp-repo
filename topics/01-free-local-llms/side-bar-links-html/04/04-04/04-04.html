@@ -8,6 +8,11 @@
         <div tabindex="0" class="step-float" data-video="https://www.youtube.com/watch?v=UngVdAsQEiU" 
         data-timestamp="1643">
             <h4>1. Connect Model is 'models' tab in settings</h4>
+            <div class="step-txt ">
+                <p>
+                    click gear for settings, then + button
+                </p>
+            </div>
             <div class="step-vid ">
                 <video preload="none" playsinline webkit-playsinline poster="side-bar-links-html/04/04-04/images/01.png"
                     src="side-bar-links-html/04/04-04/images/01.mov"></video>
@@ -17,16 +22,31 @@
                     <button class="rwdBtn">>></button>
                 </div>
             </div>
-            <div class="step-txt ">
-                <p>
-                    click gear for settings, then + button
-                </p>
-            </div>
         </div>
         <!-- 2. -->
         <div tabindex="0" class="step-float" data-video="https://www.youtube.com/watch?v=UngVdAsQEiU" 
             data-timestamp="1652">
             <h4>2</h4>
+            <div class="step-txt">
+                <h4>2.</h4>
+                <p>
+                    Choose <sup>LM Studio </sup> for provider
+                </p>
+                <p>
+                    Often models from
+                    <a rel="noopener noreferrer" target="_blank" href="https://huggingface.co/models">
+                        huggingface
+                    </a> like,
+                </p>
+                <div class="code-container">
+                    <code tabindex="0" class="copy-code">
+                                    Qwen2.5-Coder-1.5B-Instruct-GGUF</code>
+                </div>
+                <p>
+                    won't show, choose any, and a <code>config.yaml</code> file will open, where,
+                    you setup you model from <sup>LM Studio</sup>
+                </p>
+            </div>
             <div class="imgs-container">
                 <div class="step-img">
                     <img loading="lazy" src="side-bar-links-html/04/04-04/images/02.png" alt="">
@@ -41,26 +61,7 @@
                     </div>
                 </div>
             </div>
-            <div  class="step-txt">
-                <h4>2.</h4>
-                <p>
-                    Choose <sup>LM Studio </sup> for provider
-                </p>
-                <p>
-                    Often models from 
-                    <a rel="noopener noreferrer" target="_blank" href="https://huggingface.co/models">
-                        huggingface
-                    </a> like,
-                </p>
-                <div class="code-container">
-                    <code tabindex="0" class="copy-code">
-                        Qwen2.5-Coder-1.5B-Instruct-GGUF</code>
-                </div>
-                <p>
-                    won't show, choose any, and a <code>config.yaml</code> file will open, where, 
-                    you setup you model from <sup>LM Studio</sup>
-                </p>
-            </div>
+            
             
         </div>
         <!-- 3. -->
@@ -70,7 +71,7 @@
             <div class="step-txt ">
                 
                 <p>
-                    Create any name for <code>-name</code>, in our case we're naming it 
+                    Create any name for <code>-name</code>, in our case we're naming it <span class="o">Autocomplete</span>
                 </p>
                 <p></p>
                 <div class="code-container">
@@ -111,8 +112,7 @@
     - autocomplete</pre>
                 </div>
                 <div class="code-container">
-                    <pre tabindex="0" class="copy-code">
-- name : Autocomplete
+                    <pre tabindex="0" class="copy-code">- name : Autocomplete
 provider: lmstudio
 <span class="o">roles</span>:
     - autocomplete
@@ -149,8 +149,12 @@ apiBase: http://127.0.0.1:1234/v1
                     Now autocomplete shows up in the models tab of 'Continue' settings/configurations,
                 </p>
                 <p>
-                    <span class="r">**IMportant</span>
+                    You can see model working in LM Studio while autocommplete w
                 </p>
+                <p>
+                    <span class="r">**Important</span>
+                </p>
+                <!-- pleas -->
             </div>
         
         </div>
