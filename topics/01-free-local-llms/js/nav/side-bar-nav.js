@@ -211,9 +211,11 @@ sideBarBtn.addEventListener('keydown', e => {
         allSideBarLinks[0].focus()
         // mainTargetDiv.focus();
     }
-    if (isNaN(e.key)){
-        iSideBarLinks = parseInt(e.key.toLowerCase)
-        allSideBarLinks[iSideBarLinks -1].focus()
+    if (!isNaN(e.key)){
+        const firstSideBarParents = document.querySelectorAll('.side-bar-links > li > a');
+        const intLet = parseInt(e.key.toLowerCase())
+        firstSideBarParents[intLet - 1].focus()
+
     }
 });
 
