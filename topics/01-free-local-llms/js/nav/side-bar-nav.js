@@ -211,6 +211,10 @@ sideBarBtn.addEventListener('keydown', e => {
         allSideBarLinks[0].focus()
         // mainTargetDiv.focus();
     }
+    if (isNaN(e.key)){
+        iSideBarLinks = parseInt(e.key.toLowerCase)
+        allSideBarLinks[iSideBarLinks -1].focus()
+    }
 });
 
 sideBarBtn.addEventListener('focus', () => {
