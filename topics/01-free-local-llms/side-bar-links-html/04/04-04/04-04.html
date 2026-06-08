@@ -65,21 +65,94 @@
         </div>
         <!-- 3. -->
         <div tabindex="0" class="step-float" data-video="https://www.youtube.com/watch?v=UngVdAsQEiU" 
-            data-timestamp="1670">
+            data-timestamp="1701">
             <h4>3. <code>config.yaml</code> setup</h4>
-            <div class="step-img">
-                <img loading="lazy" src="side-bar-links-html/04/04-04/images/03.png" alt="">
-            </div>
             <div class="step-txt ">
+                
                 <p>
-                    Create any name for <code>-name</code>, in our case we'
+                    Create any name for <code>-name</code>, in our case we're naming it 
+                </p>
+                <p></p>
+                <div class="code-container">
+                    <code tabindex="0" class="copy-code">
+                        Autocomplete</code>
+                </div>
+                <p>
+                    <code>provider</code>, in our case is <sup>LM Studio</sup>
+                </p>
+                <div class="code-container">
+                    <code tabindex="0" class="copy-code">
+                        lmstudio</code>
+                </div>
+                <p>
+                    The <span class="t">first image</span>, in this step , shows the model name that should be 
+                    copied and inserted into <code class="t">model</code>
+                </p>
+                <div class="code-container">
+                    <code tabindex="0" class="copy-code">
+                        qwen2.5-coder-1.5b-instruct</code>
+                </div>
+                <p>
+                    get the <code class="b">apiBase</code> from same widow in lm studio as name to copy, 
+                     Add the <code>GET v1 base</code> api <span class="r">endpoint</span> to the end of server
+                     address
+                </p>
+                <div class="code-container">
+                    <code tabindex="0" class="copy-code">
+                        <span class="r">http://127.0.0.1:1234</span>/<span class="r">v1</span></code>
+                </div>
+                <p>
+                    Finally , add <span class="b">roles</span> of model in program we connect, which in vs code is 
+                    'autocomplete'
                 </p>
                 <div class="code-container">
                     <pre tabindex="0" class="copy-code">
-- name : 'giveName'
+<span class="b">roles</span>:
+    - autocomplete</pre>
+                </div>
+                <div class="code-container">
+                    <pre tabindex="0" class="copy-code">
+- name : Autocomplete
+provider: lmstudio
+<span class="o">roles</span>:
+    - autocomplete
+<span class="b">model</span>: <span class="o">qwen2.5-coder-1.5b-instruct</span>
+apiBase: http://127.0.0.1:1234/v1
                     </pre>
                 </div>
             </div>
+            <div class="imgs-container">
+                <div class="step-img">
+                    <img loading="lazy" src="side-bar-links-html/04/04-04/images/03.png" alt="">
+                </div>
+                <div class="step-img">
+                    <img loading="lazy" src="side-bar-links-html/04/04-04/images/03-b.png" alt="">
+                </div>
+            </div>
+        </div>
+        <!-- 4 -->
+        <div tabindex="0" class="step-float" data-video="https://www.youtube.com/watch?v=UngVdAsQEiU" 
+        data-timestamp="1798">
+            <h4>4</h4>
+            <div class="step-vid ">
+                <video preload="none" playsinline webkit-playsinline poster="side-bar-links-html/04/04-04/images/04.png"
+                src="side-bar-links-html/04/04-04/images/04.mov"></video>
+                <div class="vid-cntrl-btns">
+                    <button class="fwdBtn">&lt;&lt;</button>
+                    <button class="playbtn">></button>
+                    <button class="rwdBtn">>></button>
+                </div>
+            </div>
+            <div class="step-txt">
+                <h4>4.</h4>
+                <p>
+                    Now autocomplete shows up in the models tab of 'Continue' settings/configurations,
+                </p>
+                <p>
+                    <span class="r">**IMportant</span>
+                </p>
+            </div>
+        
         </div>
     </div>
 </div>
