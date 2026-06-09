@@ -103,6 +103,10 @@
             --sidebar-width: 120px !important;
     
         }
+        .content-boxes {
+            display: flex;
+            flex-direction: column;
+        }
     }
 @media screen and (max-width: 519px) {
     :root {

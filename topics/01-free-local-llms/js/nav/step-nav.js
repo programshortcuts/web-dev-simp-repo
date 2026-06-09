@@ -275,7 +275,12 @@ document.addEventListener('keydown', (e) => {
         if (num < steps.length) {
             currentIndex = num;
             steps[currentIndex]?.focus();
+        } 
+        if(num >= steps.length) {
+            currentIndex = steps.length - 1;
+            steps[currentIndex]?.focus();
         }
+           return;
     }
 });
 
