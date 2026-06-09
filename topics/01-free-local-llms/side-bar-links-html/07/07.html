@@ -6,41 +6,142 @@
     <div class="steps-container">
         <!-- 1.-->
         <div tabindex="0" class="step-float" data-video="https://www.youtube.com/watch?v=UngVdAsQEiU" 
-            data-timestamp="2100">
+            data-timestamp="2300">
             <h4>1 Install </h4>
             <div class="content-boxes">
                 <div class="step-txt ">
-                    Go to 
+                    Go to <a rel="noopener noreferrer" target="_blank" href="https://pi.dev/">https://pi.dev/</a>
+                    use curl command
+                    
                 </div>
+                <img src="/side-bar-links-html/07/images/pi-dev-site-img.png" alt="">
             </div>
-        </div>
-        <!-- 2. -->
-        <div tabindex="0" class="step-float" data-video="https://www.youtube.com/watch?v=UngVdAsQEiU" 
-            data-timestamp="2000">
-            <h4>2. Add Models</h4>
             <div class="step-vid ">
-                <video preload="none" playsinline webkit-playsinline poster="side-bar-links-html/05/images/02.png"
-                src="side-bar-links-html/05/images/02.mov"></video>
+                <video preload="none" playsinline webkit-playsinline poster="side-bar-links-html/07/images/01.png"
+                src="side-bar-links-html/07/images/01.mov"></video>
                 <div class="vid-cntrl-btns">
                     <button tabindex="-1" class="fwdBtn">&lt;&lt;</button>
                     <button tabindex="-1" class="playbtn">></button>
                     <button tabindex="-1" class="rwdBtn">>></button>
                 </div>
             </div>
-            <div class="step-txt ">
+        </div>
+        <!-- 2. -->
+        <div tabindex="0" class="step-float" data-video="https://www.youtube.com/watch?v=UngVdAsQEiU" 
+            data-timestamp="2340">
+            <h4>2.</h4>
+            <div class="content-boxes">
+                <div  class="step-txt ">
+                    <p>
+                        You won't have models, 
+                    </p>
+                    <p>
+                        To use a model in pi you need to visit 
+                        <a rel="noopener noreferrer" target="_blank" href="https://pi.dev/docs/latest/models#:~:text=%C2%B7-,Add%20custom%20providers%20and%20models%20(Ollama%2C%20vLLM%2C%20LM%20Studio%2C%20proxies)%20via,.,-Table%20of%20Contents
+                        ">https://pi.dev/docs/latest/models</a>
+                        copy the directory 
+                    </p>
+                    
+                    <div class="code-container">
+                        <code tabindex="0" class="copy-code">
+                        ~/.pi/agent/models.json
+                        </code>
+                    </div>
+                    <p>
+                        paste it into command pallete <sup>⌘ + ⇧ + p</sup> to open the file 
+                    </p>
+                </div>
+                <img src="side-bar-links-html/07/images/pi-dev-site-img-2.png" alt="">
+            </div>
+            <div class="imgs-container">
+                <div class="step-vid ">
+                    <video preload="none" playsinline webkit-playsinline poster="side-bar-links-html/07/images/02.png"
+                        src="side-bar-links-html/07/images/02.mov"></video>
+                    <div class="vid-cntrl-btns">
+                        <button tabindex="-1" class="fwdBtn">&lt;&lt;</button>
+                        <button tabindex="-1" class="playbtn">></button>
+                        <button tabindex="-1" class="rwdBtn">>></button>
+                    </div>
+                </div>
+                <div class="step-vid ">
+                    <video preload="none" playsinline webkit-playsinline poster="side-bar-links-html/07/images/02-b.png"
+                        src="side-bar-links-html/07/images/02-b.mov"></video>
+                    <div class="vid-cntrl-btns">
+                        <button tabindex="-1" class="fwdBtn">&lt;&lt;</button>
+                        <button tabindex="-1" class="playbtn">></button>
+                        <button tabindex="-1" class="rwdBtn">>></button>
+                    </div>
+                </div>
                 
-                <p>
-                   Select models from bottom of chat, click the gear icon then click the + add models button
-                </p>
-                <h5>STOP</h5>
-                <p>
-                    <span class="r">LOOKS like it is deprecated</span>
-                </p>
-                <p>
-                    use <sup>PI</sup> in next lesson instead, doesn't need internet
-                </p>        
             </div>
         </div>
+        <!-- 3. -->
+        <div tabindex="0" class="step-float" data-video="https://www.youtube.com/watch?v=UngVdAsQEiU" 
+        data-timestamp="2356">
+            <h4>3.</h4>
+            <div class="step-vid ">
+                <video preload="none" playsinline webkit-playsinline poster="side-bar-links-html/07/images/03.png"
+                src="side-bar-links-html/07/images/03.mov"></video>
+                <div class="vid-cntrl-btns">
+                    <button class="fwdBtn">&lt;&lt;</button>
+                    <button class="playbtn">></button>
+                    <button class="rwdBtn">>></button>
+                </div>
+            </div>
+            
+            <div  class="step-txt ">
+                <p>
+                  Very Similiar to everything else,    
+                </p>
+                <p>
+                    name it, give it base url <span class="r">(with endpoint v1)</span>, 
+                </p>
+                <p>
+                    The key you typed when setting up, I did <sup>'key'</sup>
+                </p>
+                <p>
+                    mode name in <code>id</code>
+                </p>
+                <p>
+                    context legnth from lm studio in <code>contextWidow</code>
+                </p>
+                <p>
+                    (make sure model has text, and imgs), and them to array <code>input</code>
+                </p>
+                <div class="code-container">
+                    <code tabindex="0" class="copy-code">
+{
+    "providers": {
+        "lmstudio": {
+            "baseUrl": "http://127.0.0.1:1234/v1",
+            "api": "openai-completions",
+            "apiKey": "key",
+            "input": ["text","img"],
+            "models": [
+                {
+                    "id": "qwen3.6-35b-a3b"
+                }
+            ]
+        }
+    }
+}
+                    </code>
+                    <p>
+                        <span class="r">This didn't load right</span>
+                        I had to create a new file in 
+                    </p>
+                    <div class="code-container">
+                        <code tabindex="0" class="copy-code">
+                            /Users/tt/.pi/agent/models.json</code>
+                    </div>
+                    <p>
+                        and paste in the above code to for it to work , all done, go work,
+                    </p>
+                    
+                </div>
+            </div>
+        </div>
+
         
         
 
