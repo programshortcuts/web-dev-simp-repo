@@ -280,7 +280,7 @@ document.addEventListener('keydown', (e) => {
             currentIndex = steps.length - 1;
             steps[currentIndex]?.focus();
         }
-           return;
+       return;
     }
 });
 
