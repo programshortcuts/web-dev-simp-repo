@@ -4,53 +4,7 @@
         </header>
         <div class="steps-container">
             <h3 id="targetHeaderh3">01-01 Shortcuts </h3>
-            <div tabindex="0" class="step-float" data-video="https: //www.youtube.com/watch?v=UngVdAsQEiU"
-                data-timestamp="617">
-                <div class="imgs-container">
 
-                    <div class="step-img">
-                        <img loading="lazy" src="images/01.png" alt="">
-                    </div>
-                    <div class="step-img">
-                        <img loading="lazy" src="images/02.png" alt="">
-                    </div>
-                    <div class="step-img">
-                        <img loading="lazy" src="images/03.png" alt="">
-                    </div>
-
-                </div>
-
-                <div class="step-txt ">
-                    <h4>1</h4>
-                    <p class="pt-20">
-                        ⌘ + ⇧ + M - 'Models Search'
-                    </p>
-                    <p class="pt-20">
-                        ⌘ + 3 - 'My Models'
-                    </p>
-                    <p class="pt-20">
-                        ⌘ + 1 - 'Chat'
-                    </p>
-                    <p>
-                        I NEED TO TRY THESE MODELS
-                    </p>
-                    <div class="code-container">
-                        <code tabindex="0" class="copy-code">
-                        Qwen2.5-Coder-7B-Instruct</code>
-                    </div>
-                    <div class="code-container">
-                        <code tabindex="0" class="copy-code">
-                        Qwen3-Coder-30B-A3B </code>
-                    </div>
-                    <p>
-                        (if available in LM Studio)
-                    </p>
-                    <div class="code-container">
-                        <code tabindex="0" class="copy-code">
-                        DeepSeek-Coder-V2-Lite</code>
-                    </div>
-                </div>
-            </div>
             <div tabindex="0" class="step-float" data-video="https://www.youtube.com/watch?v=UngVdAsQEiU"
                 data-timestamp="2090">
                 <h4>1 Install </h4>
@@ -58,42 +12,91 @@
                     <div class="step-txt ">
 
                         <p>
-                            THIS IS THE JSON THAT WORKS
+                            THESE are THE JSONs THAT WORKS
                         </p>
-                        <div class="code-container">
-                            <pre tabindex="0" class="copy-code">
-[
-    {
-        "name": "LM Studio Local",
-        "vendor": "customendpoint",
-        "apiKey": "${input:chat.lm.secret.-24f31728}",
-        "apiType": "chat-completions",
-        "models": [
+                        <p>
+                            THESE ARE THE ONLY models that is working
+                        </p>
+                        <div class="code-containers-wrapper">
+                            <div class="code-container">
+                                <code tabindex="0" class="copy-code">
+                                qwen3.6-35b-a3b</code>
+                                <div class="code-container">
+                                    <pre tabindex="0" class="copy-code">
+        [
             {
-                "id": "qwen/qwen3.6-35b-a3b",
-                "name": "qwen3.6-35b-a3b",
-                "url": "http://127.0.0.1:1234/v1",
-                "toolCalling": true,
-                "vision": true,
-                "maxInputTokens": 32768,
-                "maxOutputTokens": 16000
+                "name": "LM Studio Local",
+                "vendor": "customendpoint",
+                "apiKey": "${input:chat.lm.secret.-24f31728}",
+                "apiType": "chat-completions",
+                "models": [
+                    {
+                        "id": "qwen/qwen3.6-35b-a3b",
+                        "name": "qwen3.6-35b-a3b",
+                        "url": "http://127.0.0.1:1234/v1",
+                        "toolCalling": true,
+                        "vision": true,
+                        "maxInputTokens": 32768,
+                        "maxOutputTokens": 16000
+                    }
+                ]
             }
-        ]
-    }
-]</pre>
+        ]</pre>
+                                </div>
+                            </div>
+                            <div class="code-container">
+                                <div class="code-container">
+                                    <code tabindex="0" class="copy-code">
+                                        gemma-3-12b</code>
+                                </div>
+
+                                <pre tabindex="0" class="copy-code">
+    [
+        {
+            "name": "LM Studio Local",
+            "vendor": "customendpoint",
+            "apiKey": "${input:chat.lm.secret.-7debc4ad}",
+            "apiType": "chat-completions",
+            "models": [
+                {
+                    "id": "google/gemma-3-12b",
+                    "name": "Gemma-3-12b",
+                    "url": "http://127.0.0.1:1234/v1/",
+                    "toolCalling": true,
+                    "vision": true,
+                    "maxInputTokens": 32768,
+                    "maxOutputTokens": 16384
+                }
+            ]
+        }
+    ]</pre>
+                            </div>
+
                         </div>
                         <p>
-                            This is the only model that is working
+                            <span class="r">** Remember</span>
+                            if it's not hugging face, it DOES NOT need <code class="r">goooge/</code> in
+                            <code>model: gemma-3-12b</code>
                         </p>
+                        <sup class="r">** Spacing IS CRUCIAL IN .yaml</sup>
                         <div class="code-container">
-                            <code tabindex="0" class="copy-code">
-                            qwen3.6-35b-a3b</code>
+                            <pre tabindex="0" class="copy-code">
+name: Local Config
+version: 1.0.0
+schema: v1
+
+models:
+  - name: Gemma-3-12b
+    provider: lmstudio
+    model: gemma-3-12b
+    capabilities:
+      - tool_use
+      - vision
+    apiBase: http://127.0.0.1:1234/v1
+
+</pre>
                         </div>
 
-
-                        <div class="step-img">
-                            <img loading="lazy" src="side-bar-links-html/06/images/01-b.png" alt="">
-                        </div>
                     </div>
                 </div>
 
@@ -139,6 +142,37 @@
                 <p>
                     Create nav mode using ⌘ + ⇧ + x
                 </p>
+            </div>
+            <div tabindex="0" class="step-float" data-video="https: //www.youtube.com/watch?v=UngVdAsQEiU"
+                data-timestamp="617">
+                <div class="imgs-container">
+
+                    <div class="step-img">
+                        <img loading="lazy" src="images/01.png" alt="">
+                    </div>
+                    <div class="step-img">
+                        <img loading="lazy" src="images/02.png" alt="">
+                    </div>
+                    <div class="step-img">
+                        <img loading="lazy" src="images/03.png" alt="">
+                    </div>
+
+                </div>
+
+                <div class="step-txt ">
+                    <h4>1</h4>
+                    <p class="pt-20">
+                        ⌘ + ⇧ + M - 'Models Search'
+                    </p>
+                    <p class="pt-20">
+                        ⌘ + 3 - 'My Models'
+                    </p>
+                    <p class="pt-20">
+                        ⌘ + 1 - 'Chat'
+                    </p>
+
+
+                </div>
             </div>
         </div>
 
