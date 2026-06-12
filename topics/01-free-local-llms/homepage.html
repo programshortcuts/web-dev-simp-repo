@@ -1,11 +1,10 @@
-
 <div id="targetDiv">
     <div class="main-container">
         <header>
         </header>
         <div class="steps-container">
             <h3 id="targetHeaderh3">01-01 Shortcuts </h3>
-            <div tabindex="0" class="step-float" data-video="https: //www.youtube.com/watch?v=UngVdAsQEiU" 
+            <div tabindex="0" class="step-float" data-video="https: //www.youtube.com/watch?v=UngVdAsQEiU"
                 data-timestamp="617">
                 <div class="imgs-container">
 
@@ -20,17 +19,17 @@
                     </div>
 
                 </div>
-                    
-                <div  class="step-txt ">
+
+                <div class="step-txt ">
                     <h4>1</h4>
                     <p class="pt-20">
                         ⌘ + ⇧ + M - 'Models Search'
                     </p>
                     <p class="pt-20">
-                     ⌘ + 3 - 'My Models'
+                        ⌘ + 3 - 'My Models'
                     </p>
                     <p class="pt-20">
-                     ⌘ + 1 - 'Chat'
+                        ⌘ + 1 - 'Chat'
                     </p>
                     <div class="code-container">
                         <code tabindex="0" class="copy-code">
@@ -38,22 +37,70 @@
                     </div>
                 </div>
             </div>
-            <div tabindex="0" class="step-float" data-video="https://www.youtube.com/watch?v=UngVdAsQEiU" 
+            <div tabindex="0" class="step-float" data-video="https://www.youtube.com/watch?v=UngVdAsQEiU"
+                data-timestamp="2090">
+                <h4>1 Install </h4>
+                <div class="content-boxes">
+                    <div class="step-txt ">
+
+                        <p>
+                            THIS IS THE JSON THAT WORKS
+                        </p>
+                        <div class="code-container">
+                            <pre tabindex="0" class="copy-code">
+[
+    {
+        "name": "LM Studio Local",
+        "vendor": "customendpoint",
+        "apiKey": "${input:chat.lm.secret.-24f31728}",
+        "apiType": "chat-completions",
+        "models": [
+            {
+                "id": "qwen/qwen3.6-35b-a3b",
+                "name": "qwen3.6-35b-a3b",
+                "url": "http://127.0.0.1:1234/v1",
+                "toolCalling": true,
+                "vision": true,
+                "maxInputTokens": 32768,
+                "maxOutputTokens": 16000
+            }
+        ]
+    }
+]</pre>
+                        </div>
+                        <p>
+                            This is the only model that is working
+                        </p>
+                        <div class="code-container">
+                            <code tabindex="0" class="copy-code">
+                            qwen3.6-35b-a3b</code>
+                        </div>
+
+
+                        <div class="step-img">
+                            <img loading="lazy" src="side-bar-links-html/06/images/01-b.png" alt="">
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            <div tabindex="0" class="step-float" data-video="https://www.youtube.com/watch?v=UngVdAsQEiU"
                 data-timestamp="">
-                
-                <div  class="step-txt ">
+
+                <div class="step-txt ">
                     <h4></h4>
                     <p>
                         <span class="r">** Important</span>
-                        putting this 
+                        putting this
                     </p>
                     <div class="code-container">
                         <code tabindex="0" class="copy-code">
                             settings.json</code>
                     </div>
                     <p>
-                        press ⌘ + ⇧ + P for 'command pallat' and type settings.json, paste the following in there, so 
-                        VS code Snippets still work 
+                        press ⌘ + ⇧ + P for 'command pallat' and type settings.json, paste the following in there, so
+                        VS code Snippets still work
                     </p>
                     <div class="code-container">
                         <pre tabindex="0" class="copy-code">

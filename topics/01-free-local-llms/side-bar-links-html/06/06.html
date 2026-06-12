@@ -5,7 +5,7 @@
     </header>
     <div class="steps-container">
         <!-- 1.-->
-        <div tabindex="0" class="step-float" data-video="https://www.youtube.com/watch?v=UngVdAsQEiU" 
+        <div tabindex="0" class="step-float" data-video="https://www.youtube.com/watch?v=UngVdAsQEiU"
             data-timestamp="2090">
             <h4>1 Install </h4>
             <div class="content-boxes">
@@ -14,35 +14,70 @@
                         Install Vs Code Insiders
                         from <a rel="noopener noreferrer" target="_blank"
                             href="https://code.visualstudio.com/insiders/">https://code.visualstudio.com/insiders/</a>
-                        it's a beta version, unstable, seems great for testing agents, BUT, <span class="r">You have to be connected to
+                        it's a beta version, unstable, seems great for testing agents, BUT, <span class="r">You have to
+                            be connected to
                             the
                             internet</span>
                     </p>
                     <p>
                         <span class="r">LOOKS like it is deprecated</span>
                     </p>
+                    <p>
+                        THIS IS THE JSON THAT WORKS
+                    </p>
+                    <div class="code-container">
+                        <pre tabindex="0" class="copy-code">
+[
+    {
+        "name": "LM Studio Local",
+        "vendor": "customendpoint",
+        "apiKey": "${input:chat.lm.secret.-24f31728}",
+        "apiType": "chat-completions",
+        "models": [
+            {
+                "id": "qwen/qwen3.6-35b-a3b",
+                "name": "qwen3.6-35b-a3b",
+                "url": "http://127.0.0.1:1234/v1",
+                "toolCalling": true,
+                "vision": true,
+                "maxInputTokens": 32768,
+                "maxOutputTokens": 16000
+            }
+        ]
+    }
+]</pre>
+                    </div>
+                    <p>
+                        This is the only model that is working
+                    </p>
+                    <div class="code-container">
+                        <code tabindex="0" class="copy-code">
+                            qwen3.6-35b-a3b</code>
+                    </div>
+
+
                     <div class="step-img">
                         <img loading="lazy" src="side-bar-links-html/06/images/01-b.png" alt="">
                     </div>
                 </div>
                 <img src="side-bar-links-html/06/images/vs-code-insiders-logo.png" alt="">
             </div>
-            
-            
+
+
         </div>
         <!-- 2. -->
-        <div tabindex="0" class="step-float" data-video="https://www.youtube.com/watch?v=UngVdAsQEiU" 
+        <div tabindex="0" class="step-float" data-video="https://www.youtube.com/watch?v=UngVdAsQEiU"
             data-timestamp="2090">
             <div class="step-vid ">
                 <video preload="none" playsinline webkit-playsinline poster="side-bar-links-html/06/images/02.png"
-                src="side-bar-links-html/06/images/02.mov"></video>
+                    src="side-bar-links-html/06/images/02.mov"></video>
                 <div class="vid-cntrl-btns">
                     <button tabindex="-1" class="fwdBtn">&lt;&lt;</button>
                     <button tabindex="-1" class="playbtn">></button>
                     <button tabindex="-1" class="rwdBtn">>></button>
                 </div>
             </div>
-            <div  class="step-txt ">
+            <div class="step-txt ">
                 <h4>2</h4>
                 <p>
                     Select models from bottom of chat, click the gear icon then click the + add models button
@@ -53,27 +88,27 @@
             </div>
         </div>
         <!-- 3. -->
-        <div tabindex="0" class="step-float" data-video="https://www.youtube.com/watch?v=UngVdAsQEiU" 
-        data-timestamp="2150">
-        <h4>3. </h4>
-        <div class="step-txt ">
-            <div class="code-container">
-                <code tabindex="0" class="copy-code">
+        <div tabindex="0" class="step-float" data-video="https://www.youtube.com/watch?v=UngVdAsQEiU"
+            data-timestamp="2150">
+            <h4>3. </h4>
+            <div class="step-txt ">
+                <div class="code-container">
+                    <code tabindex="0" class="copy-code">
                 </code>
-            </div>
-            <p>
+                </div>
+                <p>
                     copy correct model name, for <code>id</code>
                     then give in name for <code>name</code>
                 </p>
                 <p>
-                    copy the correct info from LLM, 
+                    copy the correct info from LLM,
                     make sure url container <code>/v1</code> endpoint
                 </p>
                 <p>
-                    copy the context length from llm model and put it in 
+                    copy the context length from llm model and put it in
                     <code>maxInputTokens</code>
                 </p>
-                
+
             </div>
             <div class="imgs-container">
                 <div class="step-img">
@@ -82,13 +117,13 @@
                 <div class="step-img">
                     <img loading="lazy" src="side-bar-links-html/06/images/03-b.png" alt="">
                 </div>
-            
+
             </div>
         </div>
         <!-- 4. -->
-        <div tabindex="0" class="step-float" data-video="https://www.youtube.com/watch?v=UngVdAsQEiU" 
-        data-timestamp="2220">
-        <h4>4</h4>
+        <div tabindex="0" class="step-float" data-video="https://www.youtube.com/watch?v=UngVdAsQEiU"
+            data-timestamp="2220">
+            <h4>4</h4>
             <div class="step-vid ">
                 <video preload="none" playsinline webkit-playsinline poster="side-bar-links-html/06/images/04.png"
                     src="side-bar-links-html/06/images/04.mov"></video>
@@ -99,7 +134,7 @@
                 </div>
             </div>
             <div class="step-txt ">
-                
+
                 <p>
                     Select the model in options. Dope , your good to go, but, this will only work with internet,
                 </p>
@@ -109,9 +144,9 @@
             </div>
         </div>
 
-        
-        
-        
+
+
+
 
     </div>
 </div>
