@@ -1,6 +1,7 @@
 /* popup-letterNav.css */
 #popupLetterNav {
     opacity: 0 !important;
+    position: absolute;
 }
 
 #popupLetterNav.animate {

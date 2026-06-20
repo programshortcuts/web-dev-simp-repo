@@ -12,7 +12,7 @@
     <script type="module" src="../../js-index/dropTopics-topic-resource.js" defer></script>
     <meta http-equiv="Content-Security-Policy" content="
         default-src 'self';
-        script-src 'self'  'unsafe-inline';
+        script-src 'self'  ;
         style-src  'self' https://cdn.jsdelivr.net;
         font-src 'self' https://unpkg.com data:;
         img-src 'self' data:;
@@ -24,7 +24,7 @@
 </head>
 <body class="dark-mode">
     <div class="page-wrapper">
-        <span id="popupLetterNav"></span>
+        
         <header class="page-header grid">
             <div class="box back-link-container">
                 <a id="backLink" href="../../index.html" class="nav-link">&larr; Back (ai)</a>
@@ -33,7 +33,7 @@
                 <a id="homePageLink" href="https://programshortcuts.github.io/tyler-tomani-2026/" class="nav-link">Home (homepage)</a>
             </div>
             <div class="box codeCmdShortcuts-container">
-                <a id="codeComShortcutsLink" href="#" class="nav-link" target="_blank">
+                <a rel="noopener noreferrer" id="codeComShortcutsLink" href="https://programshortcuts.github.io/code-cmds-shorts-repo/" class="nav-link" target="_blank">
                     code Cmd Shortcuts
                 </a>
             </div>
@@ -156,8 +156,8 @@
                     <button tabindex="0" id="prevBtn">previous (P)</button>
                 </div>
             </div>
-        </main>
-        
+        </main> 
     </div>
+    <span id="popupLetterNav"></span>
 </body>
 </html>
